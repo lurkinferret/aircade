@@ -430,6 +430,8 @@ a.choice.slim small { display: none; }
   .pop { animation-duration: .01s; }
 }
 
+.slab { display: none; position: absolute; left: 5%; top: 5%; min-width: 1.25em; padding: 1px 4px; border-radius: 6px; background: #1b2a38; color: #fff; font: 800 .8rem/1.2 var(--font-body, inherit); text-align: center; pointer-events: none; }
+body.cblabels .slab { display: block; }
 /* Keyboard hints */
 .keys { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: .8rem; color: var(--muted); }
 .keys span { white-space: nowrap; }
@@ -449,6 +451,8 @@ kbd { font: 700 .75rem/1 ui-monospace, Menlo, Consolas, monospace; padding: 2px 
 .bkbox { width: 100%; box-sizing: border-box; font: 500 .8rem/1.35 ui-monospace, Menlo, Consolas, monospace; padding: 8px 10px; border: 2px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); resize: vertical; word-break: break-all; }
 .bkbox:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
 .bksub { margin: 8px 0 0; }
+.shareday { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; padding: 12px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); }
+.shareday h3 { margin: 0; font-size: 1rem; }
 .bkprev { display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 2px dashed var(--accent); border-radius: 12px; }
 .abtn.ghost { background: var(--surface); color: var(--ink); border: 2px solid var(--line); }
 .setprev { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
@@ -468,11 +472,11 @@ body.cbshapes .cbm { display: block; }
 :root[data-motion="reduce"] .card .in, :root[data-motion="reduce"] .hole .c, :root[data-motion="reduce"] .gem, :root[data-motion="reduce"] .gem .g { transition: none; }
 :root[data-motion="reduce"] .pop { animation-duration: .01s; }
 /* Dook Dash, embedded. Everything below is scoped under .dd. */
-.dd { position: relative; display: flex; justify-content: center; padding: 10px; border-radius: 14px; background: var(--ink); font: 400 16px/1.5 var(--body); color: var(--text); -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
+.dd { position: relative; display: flex; justify-content: center; padding: 10px; border-radius: 14px; background: var(--ink); font: 400 calc(16px * var(--ts, 1))/1.5 var(--body); color: var(--text); -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
 .dd .stage { margin: 0 auto; }
 /* Title and game-over screens: centre when they fit, scroll from the top when they do not. */
 .dd .ov:not(.shop) { justify-content: flex-start; overflow-y: auto; overscroll-behavior: contain; padding-block: 16px 40px; gap: 10px; }
-.dd .ov:not(.shop) .keys { font-size: 11px; line-height: 1.5; }
+.dd .ov:not(.shop) .keys { font-size: calc(11px * var(--ts, 1)); line-height: 1.5; }
 .dd .ov:not(.shop) > :first-child { margin-top: auto; }
 .dd .ov:not(.shop) > :last-child { margin-bottom: auto; }
 .dd .ov:not(.shop) > * { flex: none; }
@@ -484,22 +488,22 @@ body.cbshapes .cbm { display: block; }
 .dd * { box-sizing: border-box; }
 .dd .stage { position: relative; border-radius: 12px; width: min(100%, 400px, calc((100svh - 140px) * 0.6)); overflow: hidden; background: #1b1430; }
 .dd #game { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; touch-action: none; }
-.dd .hud { position: absolute; inset: 0 0 auto 0; padding: 10px 12px; display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; pointer-events: none; font: 700 14px/1 var(--mono); }
+.dd .hud { position: absolute; inset: 0 0 auto 0; padding: 10px 12px; display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; pointer-events: none; font: 700 calc(14px * var(--ts, 1))/1 var(--mono); }
 .dd .hud .c { color: var(--sock); text-align: right; }
-.dd .hawkbar { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .12em; color: var(--muted); }
+.dd .hawkbar { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: calc(10px * var(--ts, 1)); letter-spacing: .12em; color: var(--muted); }
 .dd .hawkbar .track { flex: 1; height: 6px; background: rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.18); }
 .dd .hawkbar .fill { display: block; height: 100%; width: 0; background: var(--hawk); }
-.dd .dance { grid-column: 1 / -1; justify-self: center; color: var(--ink); background: var(--sock); padding: 4px 10px; font-size: 11px; letter-spacing: .1em; }
+.dd .dance { grid-column: 1 / -1; justify-self: center; color: var(--ink); background: var(--sock); padding: 4px 10px; font-size: calc(11px * var(--ts, 1)); letter-spacing: .1em; }
 .dd .hud[hidden], .dd .ov[hidden], .dd .dance[hidden] { display: none !important; }
 .dd .ov { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; background: rgba(22,18,29,.66); }
 .dd .ov h2 { font: 400 2rem/1.05 var(--display); color: var(--sock); margin: 0; }
 .dd .ov p { margin: 0; max-width: 26ch; }
-.dd .ov .stats { font: 700 13px/1.5 var(--mono); color: var(--muted); }
+.dd .ov .stats { font: 700 calc(13px * var(--ts, 1))/1.5 var(--mono); color: var(--muted); }
 .dd .ov .big { font: 700 2.2rem/1 var(--mono); }
 .dd .btn { font: 400 1.1rem/1 var(--display); background: var(--sock); color: var(--ink); border: 0; padding: 14px 28px; border-radius: 6px; }
-.dd .keys { font: 500 12px/1.6 var(--mono); color: var(--muted); }
+.dd .keys { font: 500 calc(12px * var(--ts, 1))/1.6 var(--mono); color: var(--muted); }
 .dd .boosts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-.dd .chip { font: 700 11px/1 var(--mono); letter-spacing: .08em; padding: 4px 8px; color: var(--ink); }
+.dd .chip { font: 700 calc(11px * var(--ts, 1))/1 var(--mono); letter-spacing: .08em; padding: 4px 8px; color: var(--ink); }
 .dd .c-dance { background: var(--sock); }
 .dd .c-magnet { background: #ff6b74; }
 .dd .c-shield { background: #58d6c6; }
@@ -507,54 +511,54 @@ body.cbshapes .cbm { display: block; }
 .dd .ghost { background: transparent; color: var(--sock); border: 2px solid var(--sock); padding: 10px 22px; }
 .dd .ov.shop { justify-content: flex-start; gap: 10px; padding: 16px 14px 18px; overflow-y: auto; background: rgba(22,18,29,.96); }
 .dd .ov.shop h2 { font-size: 1.6rem; }
-.dd .wallet { font: 700 13px/1 var(--mono); color: var(--sock); }
+.dd .wallet { font: 700 calc(13px * var(--ts, 1))/1 var(--mono); color: var(--sock); }
 .dd .shoplist { width: 100%; display: grid; gap: 8px; }
 .dd .row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; text-align: left; background: var(--soil); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
-.dd .row .nm { font: 700 14px/1.2 var(--body); }
-.dd .row .ds { font: 400 12px/1.35 var(--body); color: var(--muted); }
-.dd .row .vl { font: 500 11px/1.4 var(--mono); color: var(--teal); margin-top: 3px; }
-.dd .lv { font: 700 11px/1 var(--mono); color: var(--sock); margin-left: 8px; }
+.dd .row .nm { font: 700 calc(14px * var(--ts, 1))/1.2 var(--body); }
+.dd .row .ds { font: 400 calc(12px * var(--ts, 1))/1.35 var(--body); color: var(--muted); }
+.dd .row .vl { font: 500 calc(11px * var(--ts, 1))/1.4 var(--mono); color: var(--teal); margin-top: 3px; }
+.dd .lv { font: 700 calc(11px * var(--ts, 1))/1 var(--mono); color: var(--sock); margin-left: 8px; }
 .dd .pip { width: 16px; height: 5px; background: var(--line); }
 .dd .pip.on { background: var(--sock); }
-.dd .buy { font: 700 12px/1 var(--mono); background: var(--sock); color: var(--ink); border: 0; border-radius: 6px; padding: 10px 12px; min-width: 104px; }
+.dd .buy { font: 700 calc(12px * var(--ts, 1))/1 var(--mono); background: var(--sock); color: var(--ink); border: 0; border-radius: 6px; padding: 10px 12px; min-width: 104px; }
 .dd .buy:disabled { background: var(--line); color: var(--muted); }
 .dd .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; max-width: 270px; }
 .dd .menu .btn { padding: 11px 6px; font-size: 1rem; }
-.dd .goalmsg { font: 700 12px/1.45 var(--mono); color: var(--teal); }
+.dd .goalmsg { font: 700 calc(12px * var(--ts, 1))/1.45 var(--mono); color: var(--teal); }
 .dd .ov.shop h3 { font: 400 1rem/1.2 var(--display); color: var(--sock); margin: 0; text-align: left; }
-.dd .optgroup { font: 700 11px/1 var(--mono); letter-spacing: .12em; color: var(--muted); text-transform: uppercase; text-align: left; margin: 4px 0 -2px; }
+.dd .optgroup { font: 700 calc(11px * var(--ts, 1))/1 var(--mono); letter-spacing: .12em; color: var(--muted); text-transform: uppercase; text-align: left; margin: 4px 0 -2px; }
 .dd .optgrid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.dd .opt { position: relative; font: 700 13px/1.2 var(--body); color: var(--text); background: var(--soil); border: 1px solid var(--line); border-radius: 8px; padding: 10px 8px; min-height: 52px; text-align: center; }
-.dd .opt small { display: block; font: 500 11px/1.3 var(--mono); color: var(--muted); margin-top: 3px; }
+.dd .opt { position: relative; font: 700 calc(13px * var(--ts, 1))/1.2 var(--body); color: var(--text); background: var(--soil); border: 1px solid var(--line); border-radius: 8px; padding: 10px 8px; min-height: 52px; text-align: center; }
+.dd .opt small { display: block; font: 500 calc(11px * var(--ts, 1))/1.3 var(--mono); color: var(--muted); margin-top: 3px; }
 .dd .opt.on { border-color: var(--sock); }
 .dd .opt.on small { color: var(--sock); }
 .dd .opt:disabled { opacity: .5; }
 .dd .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .dd .prev { width: 132px; height: 150px; flex: none; }
 .dd .goal { width: 100%; text-align: left; background: var(--soil); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
-.dd .goal .gt { display: flex; justify-content: space-between; gap: 10px; font: 700 13px/1.3 var(--body); }
-.dd .goal .rw { font: 700 12px/1.3 var(--mono); color: var(--sock); white-space: nowrap; }
+.dd .goal .gt { display: flex; justify-content: space-between; gap: 10px; font: 700 calc(13px * var(--ts, 1))/1.3 var(--body); }
+.dd .goal .rw { font: 700 calc(12px * var(--ts, 1))/1.3 var(--mono); color: var(--sock); white-space: nowrap; }
 .dd .goal .bar { height: 6px; background: var(--line); margin: 8px 0 4px; }
 .dd .goal .bar i { display: block; height: 100%; background: var(--teal); }
-.dd .goal .gp { font: 500 11px/1 var(--mono); color: var(--muted); }
+.dd .goal .gp { font: 500 calc(11px * var(--ts, 1))/1 var(--mono); color: var(--muted); }
 .dd .goal.done { border-color: var(--teal); }
 .dd .goal.done .rw { color: var(--teal); }
-.dd .paper { width: 100%; text-align: left; font: 400 12.5px/1.5 var(--body); color: var(--text); }
+.dd .paper { width: 100%; text-align: left; font: 400 calc(12.5px * var(--ts, 1))/1.5 var(--body); color: var(--text); }
 .dd .paper h3 { margin: 18px 0 6px; }
-.dd .paper h4 { font: 700 11px/1.3 var(--mono); letter-spacing: .08em; color: var(--teal); text-transform: uppercase; margin: 10px 0 4px; }
+.dd .paper h4 { font: 700 calc(11px * var(--ts, 1))/1.3 var(--mono); letter-spacing: .08em; color: var(--teal); text-transform: uppercase; margin: 10px 0 4px; }
 .dd .paper p { margin: 0 0 8px; max-width: none; }
 .dd .paper ul { margin: 0 0 8px; padding-left: 18px; }
 .dd .paper li { margin-bottom: 3px; }
 .dd .paper dl { margin: 0 0 8px; display: grid; grid-template-columns: minmax(96px, 36%) 1fr; gap: 4px 10px; }
 .dd .paper dt { font-weight: 700; }
 .dd .paper dd { margin: 0; color: var(--muted); }
-.dd .paper pre { margin: 0 0 8px; font: 500 11px/1.45 var(--mono); color: var(--muted); white-space: pre; overflow-x: auto; }
+.dd .paper pre { margin: 0 0 8px; font: 500 calc(11px * var(--ts, 1))/1.45 var(--mono); color: var(--muted); white-space: pre; overflow-x: auto; }
 .dd .ov.shop .btn.back { flex: none; }
 .dd .menu .wide { grid-column: 1 / -1; }
-.dd .stat { width: 100%; display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; background: var(--soil); border: 1px solid var(--line); border-radius: 8px; font: 700 13px/1.3 var(--body); text-align: left; }
-.dd .stat b { font: 700 13px/1.3 var(--mono); color: var(--sock); white-space: nowrap; }
+.dd .stat { width: 100%; display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; background: var(--soil); border: 1px solid var(--line); border-radius: 8px; font: 700 calc(13px * var(--ts, 1))/1.3 var(--body); text-align: left; }
+.dd .stat b { font: 700 calc(13px * var(--ts, 1))/1.3 var(--mono); color: var(--sock); white-space: nowrap; }
 .dd .ov.shop { z-index: 6; }
-.dd .mute { position: absolute; left: 10px; bottom: 8px; z-index: 5; background: none; border: 0; padding: 6px; color: var(--teal); font: 500 12px/1 var(--mono); }
+.dd .mute { position: absolute; left: 10px; bottom: 8px; z-index: 5; background: none; border: 0; padding: 6px; color: var(--teal); font: 500 calc(12px * var(--ts, 1))/1 var(--mono); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -1092,7 +1096,7 @@ body.cbshapes .cbm { display: block; }
     <div class="setlist">
       <div class="setrow">
         <h3>Sound effects</h3>
-        <p>Small beeps for sock pairs, gem clears, Pop-Up Pals taps, coins and Dook Dash. The sounds are generated, so nothing is downloaded.</p>
+        <p>Small beeps for every game, plus coins and Dook Dash. The sounds are generated, so nothing is downloaded.</p>
         <div class="seg" role="group" aria-label="Sound effects"><button type="button" id="set-sound-on" aria-pressed="true">On</button><button type="button" id="set-sound-off" aria-pressed="false">Off</button></div>
         <label for="set-vol"><b>Volume</b> <span id="set-vol-n">70</span>%</label>
         <input type="range" id="set-vol" min="0" max="100" step="5" value="70">
@@ -1105,7 +1109,7 @@ body.cbshapes .cbm { display: block; }
       </div>
       <div class="setrow">
         <h3>Text size</h3>
-        <p>Scales the arcade&rsquo;s own text. Dook Dash&rsquo;s screen draws its text at a fixed size.</p>
+        <p>Scales the arcade&rsquo;s text, including Dook Dash&rsquo;s menus, meters and shop. The big countdown and pop-ups drawn on Dook Dash&rsquo;s track stay the same size.</p>
         <div class="seg" role="group" aria-label="Text size"><button type="button" data-text="100" aria-pressed="true">Normal</button><button type="button" data-text="115" aria-pressed="false">Large</button><button type="button" data-text="130" aria-pressed="false">Extra large</button></div>
       </div>
       <div class="setrow">
@@ -1125,10 +1129,16 @@ body.cbshapes .cbm { display: block; }
         <div class="btnrow"><button class="abtn" type="button" id="bk-check">Check code</button></div>
         <div class="bkprev" id="bk-prev" hidden>
           <dl class="srows" id="bk-rows"></dl>
-          <p class="tip" id="bk-warn">Using this code replaces everything saved in this browser: scores, coins, items, badges, quests and Dook Dash. It cannot be undone, so make a code of your current progress first if you might want it.</p>
-          <div class="btnrow"><button class="abtn" type="button" id="bk-go">Replace my progress</button><button class="abtn ghost" type="button" id="bk-cancel">Cancel</button></div>
+          <p class="tip"><b>Merge</b> combines the code with what is saved here and keeps the higher value of each item: best scores, levels cleared, stars, coins, stats and streaks. Items and badges from either side are kept. Coins are not added together, so none are counted twice. Sock Match best moves keep the lower number, since fewer is better. Names, equipped items and settings stay as they are here.</p>
+          <p class="tip" id="bk-warn"><b>Replace</b> throws away everything saved in this browser and uses the code instead. It cannot be undone. Make a code of your current progress first if you might want it.</p>
+          <div class="btnrow"><button class="abtn" type="button" id="bk-merge">Merge both</button><button class="abtn ghost" type="button" id="bk-go">Replace my progress</button><button class="abtn ghost" type="button" id="bk-cancel">Cancel</button></div>
         </div>
         <p class="msg" id="bk-msg" aria-live="polite"></p>
+      </div>
+      <div class="setrow">
+        <h3>Sock card labels</h3>
+        <p>Puts a letter in the corner of every Sock Match card, one letter per kind of sock. Matching pairs share a letter, so you can match by letter as well as by colour and pattern.</p>
+        <div class="seg" role="group" aria-label="Sock card labels"><button type="button" id="set-labels-off" aria-pressed="true">Off</button><button type="button" id="set-labels-on" aria-pressed="false">On</button></div>
       </div>
       <div class="setrow">
         <h3>Restore defaults</h3>
@@ -1148,6 +1158,13 @@ body.cbshapes .cbm { display: block; }
     <div class="btnrow"><button class="abtn" id="quest-all" type="button" hidden>Claim all</button></div>
     <div class="achlist" id="quest-body"></div>
     <p class="tip" id="quest-note"></p>
+    <div class="shareday">
+      <h3>Share today</h3>
+      <p class="tip">A short summary of today&rsquo;s quests and daily boards. There is no account or server: copy it and paste it anywhere to compare with friends.</p>
+      <textarea class="bkbox" id="share-text" rows="6" readonly aria-label="Today&rsquo;s result as text" spellcheck="false"></textarea>
+      <div class="btnrow"><button class="abtn" type="button" id="share-copy">Copy text</button><button class="abtn ghost copyres" type="button" id="copy-daily" data-g="daily" data-label="Copy picture">Copy picture</button></div>
+      <p class="msg" id="share-msg" aria-live="polite"></p>
+    </div>
   </section>
 
   <section class="panel" id="ach" hidden>
@@ -1187,12 +1204,12 @@ body.cbshapes .cbm { display: block; }
       <table>
         <thead><tr><th>Game</th><th>Behavior borrowed</th><th>Core loop</th><th>Numbers that set difficulty</th></tr></thead>
         <tbody>
-          <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at 6, 8 or 10 pairs, levels that grow to 10 pairs, and a daily board seeded from the date. Three stars at 1.8 moves per pair or fewer, two at 2.6. Decoys cost 2 moves, a golden pair gives 2 back, and from level 2 a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost 15 and 5 coins.</td></tr>
+          <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at 6, 8 or 10 pairs, levels that grow to 10 pairs, and a daily board seeded from the date. Three stars at 1.8 moves per pair or fewer, two at 2.6. Decoys cost 2 moves, a golden pair gives 2 back, and from level 2 a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost <span data-wp="sock-reveal">15</span> and <span data-wp="sock-freeze">5</span> coins.</td></tr>
           <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from 170 to 380 px/s over the first 60 s. 3 lives, up to 5. The tunnel changes every 400 m, with a checkpoint every 500 m. From 600 m, and every 700 m after, a giant vacuum starts a boss chase of 7 flagged-lane attacks, growing to 12. Each warning lasts 1.2 s and shortens with every attack and every chase, to a floor of 0.6 s. Three missions at a time pay 10 to 25 coins each.</td></tr>
           <tr><td>Pop-Up Pals</td><td>Sudden bursts of play</td><td>Tap what pops out of a hole, keep a combo going</td><td>Timed rounds last 30 s. Golden ferrets score 3, hoppers 2 and a 3-tap boss 10. Clocks add 2 s up to 45 s. Levels set a score target of 20 plus 8 per level, with stars at 1, 1.3 and 1.6 times the target. Endless has no clock but 3 hearts, up to 5, with the pops speeding up 1.7 times as fast. Daily is a 30 s round with every critter on and a date-seeded pop pattern.</td></tr>
           <tr><td>Ferret Gems</td><td>Hoarding favorite treats</td><td>Swap two neighbors to line up 3 or more of a kind and reach the level goal</td><td>7 x 7 board, 5 then 6 piece types. World 1 (levels 1 to 30) rotates through score, collect, special-piece, tangled-sock and chain goals with 20 to 25 moves. World 2 (level 31 on) adds up to 10 frozen gems, some with two layers of ice, and up to 7 locked gems that cannot be swapped, with thaw and unlock goals. Three stars needs 40 percent of the moves left. Four in a row leaves a blaster, five a bomb, and an L or T a paw burst. Boosters cost 15 to 30 coins. Rush lasts 60 seconds and Zen has no limits.</td></tr>
-          <tr><td>Hammock Stack</td><td>Piling into hammocks to sleep</td><td>Drop a swinging hammock onto the pile so the overlap stays</td><td>The first hammock is 190 px wide and each layer is 22 px tall. The swing starts at 130 px/s and gains 7 px/s per layer up to 380. A drop within 5 px of centre is perfect and loses nothing, and three perfects in a row widen the hammock by 6 px, up to its first width. A complete miss ends the game. 1 coin per 3 layers, up to 25.</td></tr>
-          <tr><td>Hide the Raisin</td><td>Hiding food</td><td>Watch the raisin go under a sock, follow the shuffle, pick the sock</td><td>3 hearts. Rounds 1 to 3 use three socks, rounds 4 to 8 four, and later rounds five. Each round does 4 plus 1.2 times the round number in swaps, up to 18, and each swap takes 520 ms minus 26 ms per round, down to 170 ms. A right pick scores 10 per sock plus 5 per streak step, up to 8. The daily mode is 10 rounds with date-seeded shuffles. Peek costs 10 coins.</td></tr>
+          <tr><td>Hammock Stack</td><td>Piling into hammocks to sleep</td><td>Drop a swinging hammock onto the pile so the overlap stays</td><td>The first hammock is <span data-wp="stack-w">190</span> px wide and each layer is <span data-wp="stack-h">22</span> px tall. The swing starts at 130 px/s and gains 7 px/s per layer up to 380. A drop within 5 px of centre is perfect and loses nothing, and three perfects in a row widen the hammock by 6 px, up to its first width. A complete miss ends the game. 1 coin per 3 layers, up to 25.</td></tr>
+          <tr><td>Hide the Raisin</td><td>Hiding food</td><td>Watch the raisin go under a sock, follow the shuffle, pick the sock</td><td>3 hearts. Rounds 1 to 3 use three socks, rounds 4 to 8 four, and later rounds five. Each round does 4 plus 1.2 times the round number in swaps, up to 18, and each swap takes 520 ms minus 26 ms per round, down to 170 ms. A right pick scores 10 per sock plus 5 per streak step, up to 8. The daily mode is <span data-wp="hide-daily">10</span> rounds with date-seeded shuffles. Peek costs <span data-wp="hide-peek">10</span> coins.</td></tr>
         </tbody>
       </table>
     </div>
@@ -1201,14 +1218,15 @@ body.cbshapes .cbm { display: block; }
     <p>Every game restarts with one tap, and the action games ramp up slowly. In Ferret Gems, a swap that makes no match slides back and costs no move, and the Hint button is free. In Tunnel Dash, no more than two of the three lanes are ever blocked in the same row, so a clear lane always exists, a boss chase flags at most two lanes at a time, a shield absorbs one hit, and a hit gives 1.2 seconds of protection so one mistake does not chain into three. In Pop-Up Pals, most pop-ups are ordinary ferrets, with golden ferrets, clocks and vacuums mixed in to reward attention. Sock Match shows a clock but ranks you by moves only, so players can take their time. Hide the Raisin always shows the raisin first and gives the player a peek, and Hammock Stack forgives small misses by trimming the hammock rather than ending the game.</p>
 
     <h3>4. One wallet, many places to spend it</h3>
-    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: 10 hats (40 to 150 coins), 4 coats (60 to 120), gem sets (70 to 90), board themes (50 to 80), sock card backs (50 to 90), and backgrounds (50 to 70) and frames (50 to 90) for the pictures made by Copy my result. It also sells boost packs for 15 to 60 coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
+    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: <span data-wp="hat-n">10</span> hats (<span data-wp="hat-min">40</span> to <span data-wp="hat-max">150</span> coins), <span data-wp="coat-n">4</span> coats (<span data-wp="coat-min">60</span> to <span data-wp="coat-max">120</span>), gem sets (<span data-wp="gems-min">70</span> to <span data-wp="gems-max">90</span>), board themes (<span data-wp="board-min">50</span> to <span data-wp="board-max">80</span>), sock card backs (<span data-wp="back-min">50</span> to <span data-wp="back-max">90</span>), and backgrounds (<span data-wp="cbg-min">50</span> to <span data-wp="cbg-max">70</span>) and frames (<span data-wp="cfr-min">50</span> to <span data-wp="cfr-max">90</span>) for the pictures made by Copy my result. It also sells boost packs for <span data-wp="boost-min">15</span> to <span data-wp="boost-max">60</span> coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
 
     <h3>5. Identity and long-term goals</h3>
-    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to 16 characters and 16 titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are 50 badges across the arcade, each paying 10 to 120 coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays 15 to 35 coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
+    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">16</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">50</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">120</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
+    <p>Progress lives in the browser, so the arcade gives players some control over it. The Settings page (the gear in the corner) sets sound and volume, reduced motion, text size shape markers for the gems and letter labels for sock cards. It also makes a backup code: a block of text, with a check value to catch copying errors, that carries all progress, Dook Dash included. Pasting a code on another device shows a summary first. The player can then merge it, keeping the higher value of each item, with items and badges from both sides kept and coins not added together, or replace everything outright. Nothing changes until one is chosen. The code is not encrypted, so anyone holding it can load the progress. A Share today block on the quests page turns the day&rsquo;s quests and daily boards into a few lines of text or a picture, with no server involved, so players can compare days with friends.</p>
 
     <h3>6. Dook Dash, the larger runner</h3>
     <p>Dook Dash is the arcade&rsquo;s one-thumb endless runner, and the biggest game in it. A ferret runs down a three-lane track on its own while you swipe to change lane, jump or slide (arrow keys, WASD and Space also work). Hitting a barrier is a stumble, and each stumble brings a hawk half a bar closer. A full bar ends the run. The bar drains slowly (2% a second) while you run clean. It borrows the tunneling and bolting side of ferret play, and it has its own in-game whitepaper with every number.</p>
-    <p>Speed starts at 15 and rises 0.011 per metre until it caps at 34, around 1,730 m. Score is distance, plus 10 per coin, plus bonuses: 25 for a sock, 5 per barrier smashed, 15 for a close call and 50 for a corner turned. Every barrier has a right answer, and the track is built from nine patterns whose gaps shrink as you speed up.</p>
+    <p>Speed starts at <span data-wp="dd-s0">15</span> and rises <span data-wp="dd-sk">0.011</span> per metre until it caps at <span data-wp="dd-smax">34</span>, around <span data-wp="dd-capat">1,730</span> m. Score is distance, plus 10 per coin, plus bonuses: 25 for a sock, 5 per barrier smashed, 15 for a close call and 50 for a corner turned. Every barrier has a right answer, and the track is built from nine patterns whose gaps shrink as you speed up.</p>
     <div class="tw">
       <table style="min-width:0">
         <thead><tr><th>Barrier</th><th>Right answer</th></tr></thead>
@@ -1233,10 +1251,10 @@ body.cbshapes .cbm { display: block; }
         </tbody>
       </table>
     </div>
-    <p>Two features break up the long middle of a run. About every 2,500 m the path ends in a corner wall with an arrow: swipe that way in time and you turn the corner for 50 points and drop into a burrow, about 300 m of barrier-free earth tunnel full of coins where the hawk bar drains six times faster. Miss it and you stumble. Once per run, when the hawk would end it, you can pay coins to continue: 100, plus 25 for every full 500 m, up to 500. It empties the hawk bar and gives three seconds of safety.</p>
+    <p>Two features break up the long middle of a run. About every <span data-wp="dd-corner">2,500</span> m the path ends in a corner wall with an arrow: swipe that way in time and you turn the corner for 50 points and drop into a burrow, about <span data-wp="dd-burrow">300</span> m of barrier-free earth tunnel full of coins where the hawk bar drains six times faster. Miss it and you stumble. Once per run, when the hawk would end it, you can pay coins to continue: <span data-wp="dd-cbase">100</span>, plus <span data-wp="dd-cstep">25</span> for every full <span data-wp="dd-cevery">500</span> m, up to <span data-wp="dd-cmax">500</span>. It empties the hawk bar and gives three seconds of safety.</p>
     <p>Each run uses one of four worlds, never the same as the last: Garden, Sewer, Attic and Rooftops. They change the look and nothing else, except the Attic, where one lane at a time flickers and then goes dark for four seconds. The dark lane works normally and is only harder to read.</p>
-    <p>Dook Dash has its own long-term loop, kept separate from the arcade&rsquo;s. Coins from a run pay for five upgrades: the length of each of the four boosts (10 seconds at level 0, 5 more per level, 2 minutes at level 22) and Boost Finder, which makes boosts appear more often. Every upgrade follows one price curve, from 20 coins for the first level to 625 for the last. Maxing one boost costs 5,735 coins. A wardrobe of furs and hats is cosmetic only and costs 2,380 coins in all. Three daily goals, picked from seven types and worth 25, 40 or 60 coins, add a 50-coin bonus for finishing all three and a streak of consecutive days.</p>
-    <p>The two halves are connected in a few places and not in others. Dook Dash&rsquo;s runs, distance, corners, close calls and goals feed the arcade&rsquo;s quests, badges, titles and My stats page, and one backup code carries its progress too. Its coins, upgrades and wardrobe stay in its own wallet and do not mix with the arcade&rsquo;s. The sound switch, volume and reduced-motion setting apply to it, but the text-size setting does not, because the game draws its own text at a fixed size. Like the other games, none of its numbers have been playtested with other people.</p>
+    <p>Dook Dash has its own long-term loop, kept separate from the arcade&rsquo;s. Coins from a run pay for five upgrades: the length of each of the four boosts (<span data-wp="dd-bbase">10</span> seconds at level 0, <span data-wp="dd-binc">5</span> more per level, <span data-wp="dd-bmin">2</span> minutes at level <span data-wp="dd-blvl">22</span>) and Boost Finder, which makes boosts appear more often. Every upgrade follows one price curve, from <span data-wp="dd-upfirst">20</span> coins for the first level to <span data-wp="dd-uplast">625</span> for the last. Maxing one boost costs <span data-wp="dd-maxcost">5,735</span> coins. A wardrobe of furs and hats is cosmetic only and costs <span data-wp="dd-ward">2,380</span> coins in all. Three daily goals, picked from <span data-wp="dd-gtypes">seven</span> types and worth <span data-wp="dd-g0">25</span>, <span data-wp="dd-g1">40</span> or <span data-wp="dd-g2">60</span> coins, add a 50-coin bonus for finishing all three and a streak of consecutive days.</p>
+    <p>The two halves are connected in a few places and not in others. Dook Dash&rsquo;s runs, distance, corners, close calls and goals feed the arcade&rsquo;s quests, badges, titles and My stats page, and one backup code carries its progress too. Its coins, upgrades and wardrobe stay in its own wallet and do not mix with the arcade&rsquo;s. The sound switch, volume, reduced-motion and text-size settings apply to it, although the big countdown and pop-ups drawn on its track stay at a fixed size. Like the other games, none of its numbers have been playtested with other people.</p>
 
     <p class="fine">Ferret behavior notes reflect general pet-care knowledge and were not taken from a specific study.</p>
   </section>
@@ -1357,6 +1375,7 @@ body.cbshapes .cbm { display: block; }
   var PICKS = ['sock', 'magnet', 'shield', 'gold'];
   function lvl(k) { return Math.min(SAVE.up[k] || 0, UPBY[k].max); }
   function upVal(k, L) { return Math.min(120, UPBY[k].base + UPBY[k].inc * L); }
+  var SPD0 = 15, SPDK = 0.011, SPDMAX = 34, CORNER_GAP = 2500, BURROW_LEN = 300, CONT = { base: 100, step: 25, every: 500, max: 500 };
   function upCost(L) { return Math.round((20 + 10 * L + 0.9 * L * L) / 5) * 5; }
   function dur(k) { return upVal(k, lvl(k)); }
   function finderGap() { return Math.max(8, upVal('finder', lvl('finder'))); }
@@ -1422,7 +1441,7 @@ body.cbshapes .cbm { display: block; }
   function newState(mode) {
     return { mode: mode, z: 0, speed: mode === 'play' ? 14 : 6, lane: 0, px: 0, py: 0, vy: 0, slide: 0, queueSlide: false,
       coins: 0, bonus: 0, hawk: 0, ents: [], next: 38, dance: 0, stumble: 0, shake: 0, flash: 0, parts: [], t: 0, phase: 0, wi: 0, pickT: 10, magnet: 0, shield: 0, gold: 0, grace: 0, toast: null,
-      dark: null, nextDark: 1e9, continued: false, turnFx: null, hold: false, burrow: null, turnZ: 2500 + rnd(-300, 300), turnDir: Math.random() < 0.5 ? -1 : 1,
+      dark: null, nextDark: 1e9, continued: false, turnFx: null, hold: false, burrow: null, turnZ: CORNER_GAP + rnd(-300, 300), turnDir: Math.random() < 0.5 ? -1 : 1,
       st: { coins: 0, slides: 0, jumps: 0, boosts: 0, smash: 0, close: 0, turns: 0, stumbles: 0, burrows: 0 } };
   }
   var best = 0;
@@ -1585,7 +1604,7 @@ body.cbshapes .cbm { display: block; }
     S.ents = S.ents.filter(function (e) { return e.z < tz - 8; });
     S.ents.push({ type: 'turn', lane: 0, z: tz, y: 0, dead: false, dir: S.turnDir, ok: false, done: false });
     S.hold = true; // no new patterns until the turn is resolved
-    S.turnZ = tz + 2500 + rnd(-300, 300); S.turnDir = Math.random() < 0.5 ? -1 : 1;
+    S.turnZ = tz + CORNER_GAP + rnd(-300, 300); S.turnDir = Math.random() < 0.5 ? -1 : 1;
   }
   function act(a) {
     if (S.mode !== 'play') return;
@@ -1607,7 +1626,7 @@ body.cbshapes .cbm { display: block; }
     if (S.hawk >= 1) { if (canContinue()) askContinue(); else over(); }
   }
   // Pay coins to keep going, once per run. Saved coins are spent first, then coins from this run.
-  function contCost() { return Math.min(500, 100 + 25 * Math.floor(S.z / 500)); }
+  function contCost() { return Math.min(CONT.max, CONT.base + CONT.step * Math.floor(S.z / CONT.every)); }
   function canContinue() { return !S.continued && SAVE.coins + S.coins >= contCost(); }
   function askContinue() {
     S.mode = 'cont';
@@ -1716,7 +1735,7 @@ body.cbshapes .cbm { display: block; }
     }
     if (S.mode === 'over') { updParts(dt); S.shake = Math.max(0, S.shake - dt); S.flash = Math.max(0, S.flash - dt); return; }
 
-    var base = Math.min(34, 15 + S.z * 0.011);
+    var base = Math.min(SPDMAX, SPD0 + S.z * SPDK);
     var target = base * (S.stumble > 0 ? 0.6 : 1) * (S.dance > 0 ? 1.2 : 1);
     S.speed += (target - S.speed) * Math.min(1, dt * 4);
     S.z += S.speed * dt;
@@ -1758,7 +1777,7 @@ body.cbshapes .cbm { display: block; }
           e.done = true;
           var okT = e.ok || S.dance > 0;
           S.hold = false;
-          if (okT) { S.burrow = { z0: S.z, z1: S.z + 300 }; S.next = S.z + 14; S.st.burrows++; } else S.next = S.z + 40;
+          if (okT) { S.burrow = { z0: S.z, z1: S.z + BURROW_LEN }; S.next = S.z + 14; S.st.burrows++; } else S.next = S.z + 40;
           S.turnFx = { dir: e.dir, t: 0 }; S.lane = 0; S.px = 0;
           if (okT) { S.st.turns++; S.bonus += 50; toast('BURROW BONUS!'); sfx('power'); }
           else { toast('MISSED THE TURN'); if (S.grace <= 0) { hurt(); if (S.mode !== 'play') return; } }
@@ -2401,6 +2420,14 @@ body.cbshapes .cbm { display: block; }
     try { window.dispatchEvent(new CustomEvent('fa-sound', { detail: !muted })); } catch (e) {}
   });
   window.faDD = {
+    consts: function () {
+      var maxCost = 0, i, furs = 0, hats = 0, D = UPBY.dance;
+      for (i = 0; i < D.max; i++) maxCost += upCost(i);
+      Object.keys(FURS).forEach(function (k) { furs += FURS[k].cost; }); Object.keys(HATS).forEach(function (k) { hats += HATS[k].cost; });
+      return { speed0: SPD0, speedK: SPDK, speedMax: SPDMAX, capAt: Math.round((SPDMAX - SPD0) / SPDK / 10) * 10, cornerGap: CORNER_GAP, burrow: BURROW_LEN,
+        upFirst: upCost(0), upLast: upCost(D.max - 1), boostMaxLevel: D.max, boostBase: D.base, boostInc: D.inc, boostMaxSec: upVal('dance', D.max), maxCost: maxCost, wardrobe: furs + hats,
+        goalRewards: GOALREWARD.slice(), goalTypes: GOALKEYS.length, contBase: CONT.base, contStep: CONT.step, contEvery: CONT.every, contMax: CONT.max };
+    },
     setMuted: function (m) { muted = !!m; muteBtn.textContent = muted ? 'Sound off' : 'Sound on'; },
     setVol: function (n) { vol = Math.max(0, Math.min(1, n / 100)); },
     setReduce: function (r) { reduce = !!r; }
@@ -2613,7 +2640,7 @@ body.cbshapes .cbm { display: block; }
       '<span class="face front"><svg viewBox="0 0 100 100" aria-hidden="true">' +
       '<path d="' + SOCK + '" fill="url(#sk' + it.p + ')" stroke="var(--mask)" stroke-width="3" stroke-linejoin="round"/>' +
       '<rect x="36" y="8" width="26" height="14" rx="2" fill="' + CUFFS[it.p] + '" stroke="var(--mask)" stroke-width="3" stroke-linejoin="round"/>' +
-      '</svg></span></span></button>';
+      '</svg><b class="slab" aria-hidden="true">' + (it.p < 26 ? String.fromCharCode(65 + it.p) : it.p + 1) + '</b></span></span></button>';
   }
   function buildSocks() {
     clearTimeout(freezeT); frozen = false;
@@ -3022,11 +3049,11 @@ body.cbshapes .cbm { display: block; }
     replaceMissions(); renderMissions();
   }
   function hurt() {
-    if (shield) { shield = false; inv = 1; dToast('SHIELD BROKE'); }
-    else { lives--; inv = 1.2; rs.hits++; }
+    if (shield) { shield = false; inv = 1; dToast('SHIELD BROKE'); playFx('shield'); }
+    else { lives--; inv = 1.2; rs.hits++; playFx(lives <= 0 ? 'over' : 'hurt'); }
   }
   function loopDash(now) {
-    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    var dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;
     dt0 += dt;
     slowT = Math.max(0, slowT - dt);
     var wdt = dt * (slowT > 0 ? 0.6 : 1);
@@ -3046,7 +3073,7 @@ body.cbshapes .cbm { display: block; }
       rs.checkpoints++; nextCp += 500;
       if (lives < 3) { lives++; dToast('CHECKPOINT +1 LIFE'); } else dToast('CHECKPOINT ' + mt + ' m');
     }
-    var bi = Math.floor(mt / 400) % 3;
+    var bi = Math.max(0, Math.floor(mt / 400)) % 3;
     if (bi !== curBiome) { curBiome = bi; dToast(BIOMES[bi].name.toUpperCase()); }
     if (!boss && mt >= nextBossAt) startBoss();
     if (boss) bossUpdate(dt);
@@ -3070,7 +3097,7 @@ body.cbshapes .cbm { display: block; }
         return;
       }
       if (o.dead || o.hit || Math.abs(o.lane - lane) >= 0.5 || Math.abs(o.y - (FY + 20)) >= o.h / 2 + 28) return;
-      if (o.type === 'raisin') { o.dead = true; raisins++; }
+      if (o.type === 'raisin') { o.dead = true; raisins++; playFx('raisin'); }
       else if (o.type === 'magnet') { o.dead = true; magnetT = 7; rs.magnets++; rs.powers++; dToast('MAGNET'); }
       else if (o.type === 'shield') { o.dead = true; shield = true; rs.shields++; rs.powers++; dToast('SHIELD'); }
       else if (o.type === 'slow') { o.dead = true; slowT = 5; rs.slows++; rs.powers++; dToast('SLOW-MO'); }
@@ -3235,8 +3262,8 @@ body.cbshapes .cbm { display: block; }
     }
   }
   function moveLane(d) { if (dpaused) return; lane = Math.max(0, Math.min(2, lane + d)); }
-  function jump() { if (!dpaused && jt <= 0) { jt = JDUR; dkt = 0; rs.jumps++; } }
-  function duck() { if (!dpaused && dkt <= 0 && jt <= 0) dkt = DDUR; }
+  function jump() { if (!dpaused && jt <= 0) { jt = JDUR; dkt = 0; rs.jumps++; playFx('jump'); } }
+  function duck() { if (!dpaused && dkt <= 0 && jt <= 0) { dkt = DDUR; playFx('duck'); } }
   function pauseOverlay(c, w, h) {
     c.fillStyle = 'rgba(8,12,18,.6)'; c.fillRect(0, 0, w, h); c.fillStyle = '#ffffff'; c.textAlign = 'center';
     c.font = '700 26px "DM Sans", sans-serif'; c.fillText('Paused', w / 2, h / 2 - 8);
@@ -4428,12 +4455,12 @@ body.cbshapes .cbm { display: block; }
     if (ov <= 0) { kfalls.push({ x: c.x, w: c.w, y: kWorldY(klayers.length), vy: 0, n: klayers.length }); kcur = null; kEnd(); return; }
     var perfect = Math.abs(c.x - top.x) < 5, nl;
     if (perfect) {
-      kperf++; kperfN++; kmaxperf = Math.max(kmaxperf, kperf);
+      kperf++; kperfN++; kmaxperf = Math.max(kmaxperf, kperf); playFx('perfect');
       var w = top.w; if (kperf >= 3) w = Math.min(KBASE, w + 6);
       nl = { x: top.x - (w - top.w) / 2, w: w };
       ktoast = kperf >= 3 ? 'PERFECT x' + kperf : 'PERFECT'; ktoastT = 0.9;
     } else {
-      kperf = 0;
+      kperf = 0; playFx('land');
       if (c.x < top.x) kfalls.push({ x: c.x, w: top.x - c.x, y: kWorldY(klayers.length), vy: 0, n: klayers.length });
       else kfalls.push({ x: top.x + top.w, w: c.x + c.w - (top.x + top.w), y: kWorldY(klayers.length), vy: 0, n: klayers.length });
       nl = { x: l, w: ov };
@@ -4441,7 +4468,7 @@ body.cbshapes .cbm { display: block; }
     klayers.push(nl); kSetHud(); kNewPiece();
   }
   function kEnd() {
-    kst = 'over';
+    kst = 'over'; playFx('topple');
     var S = ST.stack, sc = kScore();
     S.layers += sc; S.perfects += kperfN; S.bestStreak = Math.max(S.bestStreak, kmaxperf);
     var nb = sc > S.tallest; if (nb) S.tallest = sc;
@@ -4453,7 +4480,7 @@ body.cbshapes .cbm { display: block; }
     showCopy('stack', HEAD + '\nHammock Stack\n' + sc + (sc === 1 ? ' layer' : ' layers') + ' · ' + kperfN + ' perfect drops · best streak ' + kmaxperf);
   }
   function kLoop(now) {
-    var dt = Math.min(0.05, (now - klast) / 1000); klast = now;
+    var dt = Math.max(0, Math.min(0.05, (now - klast) / 1000)); klast = now;
     if (kst === 'playing' && kcur) {
       kcur.x += kcur.dir * kcur.speed * dt;
       if (kcur.x <= 0) { kcur.x = 0; kcur.dir = 1; } else if (kcur.x + kcur.w >= KW) { kcur.x = KW - kcur.w; kcur.dir = -1; }
@@ -4538,7 +4565,7 @@ body.cbshapes .cbm { display: block; }
   function hdToday() { if (HD.date !== dayKey()) { HD.date = dayKey(); HD.best = 0; HD.plays = 0; } return HD; }
   function hdStreak() { return (HD.last === dayKey() || HD.last === yesterdayKey()) ? HD.streak : 0; }
   var hmode = 'classic', hrun = 0, hphase = 'idle', hround = 1, hscore = 0, hlives = 3, hstreak = 0, hmaxs = 0, hfound = 0, hcups = [], hrz = -1, hrng = Math.random, hpick = null, hpeeked = false, hdaily = false;
-  var HDAILY_ROUNDS = 10;
+  var HDAILY_ROUNDS = 10, HPEEK = 10;
   var cupsEl = $('#cups');
   function cupsFor(r) { return r <= 3 ? 3 : (r <= 8 ? 4 : 5); }
   function swapsFor(r) { return Math.min(18, 4 + Math.floor(r * 1.2)); }
@@ -4550,8 +4577,8 @@ body.cbshapes .cbm { display: block; }
     $('#h-score').textContent = hscore;
     $('#h-lives').textContent = '♥'.repeat(Math.max(0, hlives)) || '0';
     $('#h-best').textContent = hmode === 'daily' ? (hdToday().best || '–') : (ST.hide.bestRound || '–');
-    $('#hide-peek').disabled = hphase !== 'pick' || hpeeked || !canBuy('hpeek', 10);
-    $('#hide-peek small').textContent = costText('hpeek', 10);
+    $('#hide-peek').disabled = hphase !== 'pick' || hpeeked || !canBuy('hpeek', HPEEK);
+    $('#hide-peek small').textContent = costText('hpeek', HPEEK);
   }
   function hBuild(n) {
     cupsEl.innerHTML = ''; hcups = [];
@@ -4585,7 +4612,7 @@ body.cbshapes .cbm { display: block; }
       for (r = 0; r < swaps; r++) {
         var a = Math.floor(hrng() * n), b = Math.floor(hrng() * (n - 1)); if (b >= a) b++;
         var ca = hcups.filter(function (c) { return c.slot === a; })[0], cb = hcups.filter(function (c) { return c.slot === b; })[0];
-        ca.slot = b; cb.slot = a;
+        ca.slot = b; cb.slot = a; playFx('shuffle');
         [ca, cb].forEach(function (c) { c.el.style.transitionDuration = ms + 'ms'; c.el.style.left = ((c.slot + 0.5) * 100 / n) + '%'; });
         if (!(await hWait(ms + 40, id))) return;
       }
@@ -4599,9 +4626,10 @@ body.cbshapes .cbm { display: block; }
       if (ok) {
         hstreak++; hmaxs = Math.max(hmaxs, hstreak); hfound++;
         var gain = 10 * n + 5 * Math.min(hstreak, 8); hscore += gain;
+        playFx('found');
         hMsg('Found it! +' + gain + (hstreak > 1 ? ' (streak ' + hstreak + ')' : ''));
       } else {
-        hstreak = 0; hlives--;
+        hstreak = 0; hlives--; playFx('miss');
         hMsg('Not there. The raisin was under the other sock.');
       }
       hSetHud();
@@ -4664,8 +4692,8 @@ body.cbshapes .cbm { display: block; }
     hmode = b.dataset.t; hStop(); hMsg(''); updateHideUI();
   });
   $('#hide-peek').addEventListener('click', function () {
-    if (hphase !== 'pick' || hpeeked || !canBuy('hpeek', 10)) return;
-    hpeeked = true; spendOr('hpeek', 10); ST.hide.peeks++; sSave();
+    if (hphase !== 'pick' || hpeeked || !canBuy('hpeek', HPEEK)) return;
+    hpeeked = true; spendOr('hpeek', HPEEK); ST.hide.peeks++; sSave();
     var id = hrun, c = hcups[hrz]; hLift(c, true); hSetHud();
     setTimeout(function () { if (id === hrun && hphase === 'pick') hLift(c, false); }, 800);
   });
@@ -5174,12 +5202,12 @@ body.cbshapes .cbm { display: block; }
       var url = cnv.toDataURL('image/png'), im = $('#copyimg-' + g);
       if (!im) { im = document.createElement('img'); im.id = 'copyimg-' + g; im.className = 'copyimg'; btn.parentNode.insertAdjacentElement('afterend', im); }
       im.src = url; im.alt = text;
-      function manual() { btn.textContent = 'Press and hold the picture to copy or save it'; }
+      function manual() { btn.textContent = 'Press and hold the picture to copy or save it'; setTimeout(function () { btn.textContent = btn.dataset.label || 'Copy my result'; }, 4000); }
       cnv.toBlob(function (blob) {
         try {
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).then(function () {
             btn.classList.add('done'); btn.textContent = 'Picture copied!';
-            setTimeout(function () { btn.classList.remove('done'); btn.textContent = 'Copy my result'; }, 2000);
+            setTimeout(function () { btn.classList.remove('done'); btn.textContent = btn.dataset.label || 'Copy my result'; }, 2000);
           }, manual);
         } catch (err) { manual(); }
       }, 'image/png');
@@ -5294,7 +5322,7 @@ body.cbshapes .cbm { display: block; }
 
 
   /* ---------- Settings ---------- */
-  var SET = { sound: true, vol: 70, motion: 'auto', text: 100, shapes: false };
+  var SET = { sound: true, vol: 70, motion: 'auto', text: 100, shapes: false, labels: false };
   (function () {
     var v = load('fa-set');
     if (!v || typeof v !== 'object') return;
@@ -5303,6 +5331,7 @@ body.cbshapes .cbm { display: block; }
     if (v.motion === 'reduce') SET.motion = 'reduce';
     if (v.text === 115 || v.text === 130) SET.text = v.text;
     if (v.shapes === true) SET.shapes = true;
+    if (v.labels === true) SET.labels = true;
   })();
   function setSave() { save('fa-set', SET); }
   var osReduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -5324,6 +5353,18 @@ body.cbshapes .cbm { display: block; }
     else if (n === 'pair') { fxTone(520, 780, 0.1, 'triangle', 0.06); fxTone(780, 1040, 0.1, 'triangle', 0.05, 0.09); }
     else if (n === 'hit') fxTone(420, 760, 0.07, 'square', 0.035);
     else if (n === 'pop') fxTone(360, 900, 0.1, 'triangle', 0.055);
+    else if (n === 'jump') fxTone(300, 620, 0.12, 'square', 0.03);
+    else if (n === 'duck') fxTone(520, 240, 0.1, 'square', 0.025);
+    else if (n === 'raisin') fxTone(1000, 1500, 0.05, 'triangle', 0.03);
+    else if (n === 'hurt') fxTone(260, 90, 0.22, 'sawtooth', 0.05);
+    else if (n === 'shield') fxTone(700, 340, 0.15, 'triangle', 0.05);
+    else if (n === 'over') { fxTone(330, 120, 0.3, 'sawtooth', 0.05); fxTone(220, 70, 0.4, 'sawtooth', 0.05, 0.25); }
+    else if (n === 'land') fxTone(190, 90, 0.09, 'triangle', 0.07);
+    else if (n === 'perfect') { fxTone(660, 990, 0.1, 'triangle', 0.06); fxTone(990, 1320, 0.12, 'triangle', 0.05, 0.09); }
+    else if (n === 'topple') { fxTone(420, 60, 0.5, 'sawtooth', 0.045); fxTone(160, 50, 0.3, 'triangle', 0.06, 0.2); }
+    else if (n === 'shuffle') fxTone(240, 330, 0.05, 'square', 0.018);
+    else if (n === 'found') { fxTone(520, 780, 0.09, 'triangle', 0.06); fxTone(780, 1040, 0.09, 'triangle', 0.055, 0.09); fxTone(1040, 1560, 0.12, 'triangle', 0.05, 0.18); }
+    else if (n === 'miss') fxTone(320, 140, 0.26, 'triangle', 0.05);
     else if (n === 'test') { fxTone(660, 990, 0.1, 'triangle', 0.06); fxTone(990, 1320, 0.12, 'triangle', 0.05, 0.11); }
   }
   function motionOn() { return SET.motion === 'reduce' || (SET.motion === 'auto' && osReduce); }
@@ -5331,7 +5372,9 @@ body.cbshapes .cbm { display: block; }
     var r = document.documentElement;
     if (motionOn()) r.setAttribute('data-motion', 'reduce'); else r.removeAttribute('data-motion');
     r.style.fontSize = SET.text === 100 ? '' : SET.text + '%';
+    r.style.setProperty('--ts', String(SET.text / 100));
     document.body.classList.toggle('cbshapes', SET.shapes);
+    document.body.classList.toggle('cblabels', SET.labels);
     if (window.faDD) { window.faDD.setMuted(!SET.sound); window.faDD.setVol(SET.vol); window.faDD.setReduce(motionOn()); }
   }
   function pressed(id, on) { var e = $(id); if (e) e.setAttribute('aria-pressed', on ? 'true' : 'false'); }
@@ -5341,6 +5384,7 @@ body.cbshapes .cbm { display: block; }
     pressed('#set-motion-auto', SET.motion === 'auto'); pressed('#set-motion-reduce', SET.motion === 'reduce');
     Array.prototype.forEach.call(document.querySelectorAll('[data-text]'), function (b) { b.setAttribute('aria-pressed', String(parseInt(b.dataset.text, 10) === SET.text)); });
     pressed('#set-shapes-on', SET.shapes); pressed('#set-shapes-off', !SET.shapes);
+    pressed('#set-labels-on', SET.labels); pressed('#set-labels-off', !SET.labels);
     var pv = $('#set-prev');
     if (!pv.firstChild) pv.innerHTML = GSYM.map(function (sym, i) { return '<span class="gem" title="' + GNAME[i] + '"><span class="g" style="background:' + GCOL[i] + '">' + sym + '<i class="cbm" data-s="' + i + '"></i></span></span>'; }).join('');
     else Array.prototype.forEach.call(pv.querySelectorAll('.g'), function (g, i) { g.style.background = GCOL[i]; });
@@ -5356,7 +5400,9 @@ body.cbshapes .cbm { display: block; }
   Array.prototype.forEach.call(document.querySelectorAll('[data-text]'), function (b) { b.addEventListener('click', function () { SET.text = parseInt(b.dataset.text, 10); setChange('Text size updated.'); }); });
   $('#set-shapes-on').addEventListener('click', function () { SET.shapes = true; setChange('Gem shape markers are on.'); });
   $('#set-shapes-off').addEventListener('click', function () { SET.shapes = false; setChange('Gem shape markers are off.'); });
-  $('#set-reset').addEventListener('click', function () { SET.sound = true; SET.vol = 70; SET.motion = 'auto'; SET.text = 100; SET.shapes = false; setChange('Settings restored to defaults.'); });
+  $('#set-labels-on').addEventListener('click', function () { SET.labels = true; setChange('Sock card labels are on.'); });
+  $('#set-labels-off').addEventListener('click', function () { SET.labels = false; setChange('Sock card labels are off.'); });
+  $('#set-reset').addEventListener('click', function () { SET.sound = true; SET.vol = 70; SET.motion = 'auto'; SET.text = 100; SET.shapes = false; SET.labels = false; setChange('Settings restored to defaults.'); });
   window.addEventListener('fa-sound', function (e) { SET.sound = !!e.detail; setSave(); if ($('#settings') && !$('#settings').hidden) renderSettings(); });
 
 
@@ -5420,6 +5466,80 @@ body.cbshapes .cbm { display: block; }
       ['Here now', nf(GP.coins) + ' coins, ' + nf(bkCount(SHOP.owned)) + ' items, ' + nf(bkCount(ACH.claimed)) + ' badges']
     ];
   }
+  function bkAfter(d) {
+    var gm = bkParse(d, 'fa-gems3') || {}, sh = bkParse(d, 'fa-shop') || {}, ach = bkParse(d, 'fa-ach') || {};
+    return nf(typeof gm.coins === 'number' ? gm.coins : 0) + ' coins, ' + nf(bkCount(sh.owned)) + ' items, ' + nf(bkCount(ach.claimed)) + ' badges';
+  }
+
+  /* Merge: keep the better value of each item. a is what is saved here, b comes from the code. */
+  function mxDeep(a, b) {
+    if (a === undefined || a === null) return b;
+    if (b === undefined || b === null) return a;
+    if (typeof a === 'number' && typeof b === 'number') return Math.max(a, b);
+    if (typeof a === 'boolean' && typeof b === 'boolean') return a || b;
+    if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+      var o = {}; Object.keys(a).forEach(function (k) { o[k] = a[k]; });
+      Object.keys(b).forEach(function (k) { o[k] = mxDeep(a[k], b[k]); });
+      return o;
+    }
+    return a;
+  }
+  function mxLater(a, b, f) { return (typeof b[f] === 'string' && b[f] > (typeof a[f] === 'string' ? a[f] : '')) ? b : a; }
+  function mxStreak(out, a, b) {
+    var w = (a.last || '') === (b.last || '') ? ((b.streak || 0) > (a.streak || 0) ? b : a) : mxLater(a, b, 'last');
+    out.streak = w.streak || 0; out.last = w.last || '';
+  }
+  function mxDaily(a, b) {
+    var newer = mxLater(a, b, 'date'), out = {}; Object.keys(newer).forEach(function (k) { out[k] = newer[k]; });
+    ['best', 'stars'].forEach(function (k) { if (typeof a[k] === 'number' || typeof b[k] === 'number') out[k] = Math.max(a[k] || 0, b[k] || 0); });
+    if ((a.date || '') === (b.date || '')) {
+      if ('plays' in a || 'plays' in b) out.plays = Math.max(a.plays || 0, b.plays || 0);
+      if ('done' in a || 'done' in b) out.done = !!(a.done || b.done);
+    }
+    mxStreak(out, a, b); return out;
+  }
+  function mxMin(a, b) { var o = {}; Object.keys(a).forEach(function (k) { o[k] = a[k]; }); Object.keys(b).forEach(function (k) { o[k] = (typeof a[k] === 'number' && a[k] > 0 && typeof b[k] === 'number' && b[k] > 0) ? Math.min(a[k], b[k]) : (typeof a[k] === 'number' && a[k] > 0 ? a[k] : b[k]); }); return o; }
+  function mxShop(a, b) {
+    var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; });
+    o.owned = mxDeep(a.owned || {}, b.owned || {}); o.stock = mxDeep(a.stock || {}, b.stock || {}); return o;
+  }
+  function mxQuests(a, b) {
+    var w = mxLater(a, b, 'date'), o = {}; Object.keys(w).forEach(function (k) { o[k] = w[k]; });
+    if ((a.date || '') === (b.date || '')) { o.claimed = mxDeep(a.claimed || {}, b.claimed || {}); o.swept = !!(a.swept || b.swept); o.base = a.base || b.base || {}; }
+    mxStreak(o, a, b); return o;
+  }
+  function mxDook(a, b) {
+    var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; });
+    if (typeof a.coins === 'number' || typeof b.coins === 'number') o.coins = Math.max(a.coins || 0, b.coins || 0);
+    o.up = mxDeep(a.up || {}, b.up || {}); o.own = mxDeep(a.own || {}, b.own || {}); o.stats = mxDeep(a.stats || {}, b.stats || {});
+    if (a.day && b.day) o.day = (b.day.date || '') > (a.day.date || '') ? b.day : a.day; else o.day = a.day || b.day || null;
+    var sa = a.streak || {}, sb = b.streak || {}, w = (sa.last || '') === (sb.last || '') ? ((sb.n || 0) > (sa.n || 0) ? sb : sa) : mxLater(sa, sb, 'last');
+    o.streak = { last: w.last || '', n: w.n || 0 };
+    return o;
+  }
+  var MX = {
+    'fa-stats': mxDeep, 'fa-gems3': mxDeep, 'fa-socks3': mxDeep, 'fa-wlvl': mxDeep, 'fa-ach': mxDeep, 'fa-whack2': mxDeep, 'fa-dash': mxDeep, 'fa-gems2': mxDeep, 'dookdash-best': mxDeep,
+    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'dookdash-save': mxDook,
+    'fa-prof': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { if (a[k] !== '' && a[k] !== null && a[k] !== undefined) o[k] = a[k]; }); return o; },
+    'fa-dmis': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; }); ['done', 'next'].forEach(function (k) { if (typeof a[k] === 'number' || typeof b[k] === 'number') o[k] = Math.max(a[k] || 0, b[k] || 0); }); return o; }
+  };
+  function bkMergeMap(local, back) {
+    var out = {}, pj = function (t) { try { return JSON.parse(t); } catch (e) { return undefined; } };
+    Object.keys(back).forEach(function (k) { out[k] = back[k]; });
+    Object.keys(local).forEach(function (k) { out[k] = local[k]; });
+    Object.keys(back).forEach(function (k) {
+      if (!(k in local)) return;
+      var f = MX[k]; if (!f) return;              // settings, ghost and anything unknown: keep what is here
+      var a = pj(local[k]), b = pj(back[k]);
+      if (a === undefined || b === undefined || a === null || b === null || typeof a !== typeof b) return;
+      try { out[k] = JSON.stringify(f(a, b)); } catch (e) {}
+    });
+    // The ghost belongs to the best Tunnel Dash score. Use the code's ghost only if its score is higher.
+    var ls = pj(local['fa-dash'] || 'null'), bs = pj(back['fa-dash'] || 'null');
+    if (typeof bs === 'number' && (typeof ls !== 'number' || bs > ls) && back['fa-dghost']) out['fa-dghost'] = back['fa-dghost'];
+    else if (!out['fa-dghost'] && back['fa-dghost']) out['fa-dghost'] = back['fa-dghost'];
+    return out;
+  }
   var bkPending = null;
   function bkMsg(t) { $('#bk-msg').textContent = t || ''; }
   function bkClosePrev() { bkPending = null; $('#bk-prev').hidden = true; }
@@ -5441,25 +5561,59 @@ body.cbshapes .cbm { display: block; }
     var txt = $('#bk-in').value;
     if (!txt.trim()) { bkMsg('Paste a code first.'); return; }
     bkRead(txt).then(function (res) {
-      bkPending = res;
-      $('#bk-rows').innerHTML = [['Code made', res.t ? new Date(res.t).toLocaleString() : 'unknown']].concat(bkSummary(res.d)).map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + String(r[1]).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }) + '</dd></div>'; }).join('');
-      $('#bk-prev').hidden = false; bkMsg('Code is valid. Check the summary, then replace your progress if it looks right.');
+      bkPending = res; res.merged = bkMergeMap(bkCollect(), res.d);
+      $('#bk-rows').innerHTML = [['Code made', res.t ? new Date(res.t).toLocaleString() : 'unknown']].concat(bkSummary(res.d), [['After merging', bkAfter(res.merged)]]).map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + String(r[1]).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }) + '</dd></div>'; }).join('');
+      $('#bk-prev').hidden = false; bkMsg('Code is valid. Check the summary, then merge or replace.');
     }, function (e) { bkMsg(e.message || 'That code could not be read.'); });
   });
   $('#bk-cancel').addEventListener('click', function () { bkClosePrev(); bkMsg('Nothing was changed.'); });
-  $('#bk-go').addEventListener('click', function () {
+  $('#bk-merge').addEventListener('click', function () { bkApply(false); });
+  $('#bk-go').addEventListener('click', function () { bkApply(true); });
+  function bkApply(replace) {
     if (!bkPending) return;
-    var d = bkPending.d, old = bkCollect();
+    var d = replace ? bkPending.d : bkPending.merged, old = bkCollect();
     try {
-      Object.keys(old).forEach(function (k) { localStorage.removeItem(k); });
+      if (replace) Object.keys(old).forEach(function (k) { localStorage.removeItem(k); });
       Object.keys(d).forEach(function (k) { localStorage.setItem(k, d[k]); });
     } catch (e) {
       try { Object.keys(old).forEach(function (k) { localStorage.setItem(k, old[k]); }); } catch (e2) {}
       bkMsg('This browser would not save the progress, so nothing was changed.'); return;
     }
-    bkPending = null; bkMsg('Progress restored. Reloading…');
+    bkPending = null; bkMsg(replace ? 'Progress restored. Reloading…' : 'Progress merged. Reloading…');
     setTimeout(function () { location.reload(); }, 400);
-  });
+  }
+
+
+  /* ---------- Whitepaper numbers, read from the code ---------- */
+  function wpValues() {
+    var v = {}, defs = achDefs(), rw = defs.map(function (a) { return a.reward; }), q = QPOOL.map(function (x) { return x.reward; });
+    v['ach-n'] = defs.length; v['ach-min'] = Math.min.apply(null, rw); v['ach-max'] = Math.max.apply(null, rw);
+    v['title-n'] = titleList().length;
+    v['name-max'] = parseInt($('#prof-name').getAttribute('maxlength'), 10);
+    v['q-min'] = Math.min.apply(null, q); v['q-max'] = Math.max.apply(null, q);
+    ['hat', 'coat', 'gems', 'board', 'back', 'cbg', 'cfr', 'boost'].forEach(function (k) {
+      var pr = SHOP_ITEMS.filter(function (i) { return i.kind === k && i.price > 0; }).map(function (i) { return i.price; });
+      v[k + '-n'] = pr.length; v[k + '-min'] = Math.min.apply(null, pr); v[k + '-max'] = Math.max.apply(null, pr);
+    });
+    v['sock-reveal'] = SCOST.reveal; v['sock-freeze'] = SCOST.freeze; v['hide-daily'] = HDAILY_ROUNDS; v['hide-peek'] = HPEEK; v['stack-w'] = KBASE; v['stack-h'] = KLH;
+    if (window.faDD && window.faDD.consts) {
+      var d = window.faDD.consts(), words = { 7: 'seven', 6: 'six', 5: 'five', 8: 'eight', 9: 'nine' };
+      v['dd-s0'] = d.speed0; v['dd-sk'] = d.speedK; v['dd-smax'] = d.speedMax; v['dd-capat'] = d.capAt; v['dd-corner'] = d.cornerGap; v['dd-burrow'] = d.burrow;
+      v['dd-cbase'] = d.contBase; v['dd-cstep'] = d.contStep; v['dd-cevery'] = d.contEvery; v['dd-cmax'] = d.contMax;
+      v['dd-bbase'] = d.boostBase; v['dd-binc'] = d.boostInc; v['dd-bmin'] = d.boostMaxSec / 60; v['dd-blvl'] = d.boostMaxLevel;
+      v['dd-upfirst'] = d.upFirst; v['dd-uplast'] = d.upLast; v['dd-maxcost'] = d.maxCost; v['dd-ward'] = d.wardrobe;
+      v['dd-gtypes'] = words[d.goalTypes] || d.goalTypes; v['dd-g0'] = d.goalRewards[0]; v['dd-g1'] = d.goalRewards[1]; v['dd-g2'] = d.goalRewards[2];
+    }
+    return v;
+  }
+  function fillPaper() {
+    var v; try { v = wpValues(); } catch (e) { return; }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-wp]'), function (el) {
+      if (el.dataset.was === undefined) el.dataset.was = el.textContent;
+      var x = v[el.dataset.wp]; if (x === undefined || (typeof x === 'number' && !isFinite(x))) return;
+      el.textContent = typeof x === 'number' ? (x % 1 ? String(x) : nf(x)) : x;
+    });
+  }
 
   /* ---------- Daily quests ---------- */
   // Dook Dash keeps its own save. Read it fresh each time, so quests and badges see runs as soon as they end.
@@ -5556,9 +5710,40 @@ body.cbshapes .cbm { display: block; }
         '<div class="abar" role="progressbar" aria-valuemin="0" aria-valuemax="' + q.goal + '" aria-valuenow="' + p + '"><i style="width:' + (cl ? 100 : Math.round(p / q.goal * 100)) + '%"></i></div></div>' +
         (cl ? '<span class="arew">Claimed</span>' : ok ? '<button type="button" class="abtn" data-q="' + q.id + '">Claim +' + q.reward + '</button>' : '<span class="arew">' + nf(p) + ' / ' + nf(q.goal) + '<br>+' + q.reward + ' coins</span>') + '</div>';
     }).join('');
+    renderShare();
     $('#quest-note').textContent = QS.swept ? 'All three done today. Fresh quests arrive tomorrow.' : 'Finish all three for a bonus of ' + bonus + ' coins. Quests change at midnight, and progress is counted from the first time you open this page each day, when a game ends.';
     updateQuestBadge();
   }
+
+  function ddDay() {
+    try {
+      var j = JSON.parse(localStorage.getItem('dookdash-save') || 'null');
+      if (!j || !j.day || j.day.date !== dayKey() || !Array.isArray(j.day.goals)) return null;
+      return { done: j.day.goals.filter(function (g) { return g && g.done; }).length, n: j.day.goals.length };
+    } catch (e) { return null; }
+  }
+  function renderShare() {
+    var c = qCounts(), today = dayKey(), parts = [], dd = ddDay();
+    var hit = c.list.map(function (q) { return !!QS.claimed[q.id] || qProg(q) >= q.goal; }), n = hit.filter(Boolean).length;
+    if (SD.date === today && SD.done) parts.push('Sock Match ' + SD.best + ' moves' + (SD.stars ? ' ' + starStr(SD.stars) : ''));
+    if (WD.date === today && WD.plays > 0) parts.push('Pop-Up Pals ' + nf(WD.best));
+    if (HD.date === today && HD.plays > 0) parts.push('Hide the Raisin ' + nf(HD.best));
+    if (dd && dd.done > 0) parts.push('Dook Dash goals ' + dd.done + '/' + dd.n);
+    var label = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), st = qStreakNow();
+    var lines = [HEAD + ' · ' + label,
+      'Quests ' + n + '/3 ' + hit.map(function (h) { return h ? '🟩' : '⬜'; }).join(''),
+      c.list.map(function (q, i) { return (hit[i] ? '✅ ' : '⬜ ') + q.game; }).join(' · ')];
+    if (st > 0) lines.push('Quest streak ' + st + (st === 1 ? ' day' : ' days'));
+    lines.push(parts.length ? 'Daily boards: ' + parts.join(' · ') : 'No daily boards played yet today.');
+    var text = lines.join('\n');
+    $('#share-text').value = text; RES.daily = text;
+    CARD.daily = { game: 'Daily result', sub: label, big: n + '/3', bigLabel: 'quests done', stats: [['Quest streak', st + (st === 1 ? ' day' : ' days')], ['Daily boards', parts.length + ' played'], ['Dook goals', dd ? dd.done + '/' + dd.n : '–']] };
+  }
+  $('#share-copy').addEventListener('click', function () {
+    var t = $('#share-text'), msg = $('#share-msg'); renderShare(); t.focus(); t.select();
+    var ok = function () { msg.textContent = 'Copied. Paste it anywhere.'; }, no = function () { try { document.execCommand('copy') ? ok() : msg.textContent = 'Press and hold the selected text to copy it.'; } catch (e) { msg.textContent = 'Press and hold the selected text to copy it.'; } };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t.value).then(ok, no); else no();
+  });
   function claimQuests(ids) {
     qEnsure(); var c = qCounts(), got = 0, n = 0;
     c.list.forEach(function (q) { if (ids.indexOf(q.id) >= 0 && !QS.claimed[q.id] && qProg(q) >= q.goal) { QS.claimed[q.id] = true; got += q.reward; n++; ST.quests.claimed++; } });
@@ -5933,6 +6118,7 @@ body.cbshapes .cbm { display: block; }
     if (name === 'shop') { renderShop(); $('#shop-msg').textContent = ''; }
     if (name === 'col') { resetColSel(); renderCol(); $('#col-msg').textContent = ''; }
     if (name === 'ach') { renderAch(); $('#ach-msg').textContent = ''; }
+    if (name === 'paper') fillPaper();
     if (name === 'settings') { $('#set-msg').textContent = ''; renderSettings(); bkMsg(''); bkClosePrev(); }
     if (name === 'quest') { $('#quest-msg').textContent = ''; renderQuests(); }
     if (name === 'home') { updateAchBadge(); updateColBadge(); updateProf(); showBest(); updateQuestBadge(); }
@@ -5943,6 +6129,7 @@ body.cbshapes .cbm { display: block; }
   window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
 
   applySettings();
+  fillPaper();
   applySkins(); updateSockUI(); updateAchBadge(); updateColBadge(); updateProf(); updateQuestBadge();
   updateWUI();
   buildSocks();
