@@ -8,7 +8,7 @@
   --bg: #dce8f3;
   --surface: #f5f9fd;
   --ink: #1c2733;
-  --muted: #566678;
+  --muted: #4a5a6c;
   --line: #b9cade;
   --sable: #9b6a3c;
   --cream: #f1e4cc;
@@ -27,7 +27,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f1823; --surface: #18232f; --ink: #e7eef6; --muted: #9db0c3; --line: #2b3a4a;
+    --bg: #0f1823; --surface: #18232f; --ink: #e7eef6; --muted: #aebfd0; --line: #2b3a4a;
     --sable: #c18a55; --cream: #f1e4cc; --mask: #2a1e18; --nose: #e88f9a;
     --accent: #b79bf0; --accent-ink: #14101f; --good: #4cc38a; --bad: #ff7a66;
     --tile: #223142; --hole: #07090c; --tunnel: #0b1018; --rib: #17212e;
@@ -35,7 +35,7 @@
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f1823; --surface: #18232f; --ink: #e7eef6; --muted: #9db0c3; --line: #2b3a4a;
+  --bg: #0f1823; --surface: #18232f; --ink: #e7eef6; --muted: #aebfd0; --line: #2b3a4a;
   --sable: #c18a55; --cream: #f1e4cc; --mask: #2a1e18; --nose: #e88f9a;
   --accent: #b79bf0; --accent-ink: #14101f; --good: #4cc38a; --bad: #ff7a66;
   --tile: #223142; --hole: #07090c; --tunnel: #0b1018; --rib: #17212e;
@@ -139,7 +139,7 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; marg
 .card:disabled { cursor: default; }
 
 /* Tunnel Dash */
-#cv { display: block; width: 100%; max-width: 340px; aspect-ratio: 320 / 460; margin: 0 auto; border-radius: 14px; touch-action: pan-y; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+#cv { display: block; width: 100%; max-width: 340px; aspect-ratio: 320 / 460; margin: 0 auto; border-radius: 14px; touch-action: none; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 
 /* Whack-a-ferret */
 .holes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 360px; margin: 0 auto; }
@@ -282,7 +282,7 @@ a.choice { flex-direction: row; align-items: center; gap: 10px; padding: 10px; b
 .gchip[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 -3px 0 var(--accent); }
 .goaltext { margin: 0; font-weight: 700; }
 .boosters { display: flex; gap: 8px; flex-wrap: wrap; }
-.boost small { opacity: .75; font-weight: 400; margin-left: 4px; }
+.boost small { opacity: .9; font-weight: 400; margin-left: 4px; }
 .boost.armed { background: var(--accent); color: var(--accent-ink); }
 .board.hammer .gem { cursor: crosshair; }
 .mferret { position: absolute; left: 0; top: 0; width: 14.2857%; height: 14.2857%; z-index: 5; pointer-events: none; }
@@ -407,6 +407,7 @@ a.choice.slim small { display: none; }
 .dotsw { width: 16px; height: 16px; border-radius: 5px; display: block; }
 .copybox { width: 100%; min-height: 4.5em; font: inherit; font-size: .85rem; padding: 8px; border: 2px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); box-sizing: border-box; }
 .copyimg { display: block; width: 100%; max-width: 420px; border-radius: 12px; border: 2px solid var(--line); }
+.copyres { max-width: 100%; white-space: normal; text-align: center; }
 .copyres.done { border-color: var(--good); color: var(--good); }
 
 /* Whitepaper */
@@ -436,11 +437,39 @@ body.cblabels .slab { display: block; }
 .keys { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: .8rem; color: var(--muted); }
 .keys span { white-space: nowrap; }
 kbd { font: 700 .75rem/1 ui-monospace, Menlo, Consolas, monospace; padding: 2px 6px; border: 2px solid var(--line); border-bottom-width: 3px; border-radius: 6px; background: var(--surface); color: var(--ink); }
-@media (pointer: coarse) { .keys { display: none; } }
+@media (pointer: coarse) {
+  .keys { display: none; }
+  .homeback { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px 0 0; }
+  .abtn, .gtools .abtn { min-height: 40px; }
+  .shead a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 4px; }
+  .mute { min-height: 40px; min-width: 44px; }
+  .adesc a, .tip a, .srows a { padding: 14px 8px; margin: -14px -8px; }
+  .setrow input[type=range], input[type=range] { min-height: 40px; }
+}
 /* Settings */
 .gear { margin-left: 8px; align-self: center; flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); }
 .gear svg { width: 22px; height: 22px; }
-#meb { margin-left: auto; }
+#meb { margin-left: auto; position: relative; }
+.ndot { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 999px; background: var(--accent); color: var(--accent-ink); border: 2px solid var(--bg); font-size: .72rem; font-weight: 800; line-height: 1; display: grid; place-items: center; }
+.nudges { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.nudge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 999px; border: 2px solid var(--accent); background: var(--surface); color: var(--ink); font-weight: 700; font-size: .85rem; text-decoration: none; }
+.nudge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+.sr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.sr:first-of-type { border-top: 0; }
+.sr b { display: block; }
+.sr .abar { grid-column: 1 / -1; }
+.sr .done { color: var(--good); font-weight: 700; }
+.wg { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.wg:first-of-type { border-top: 0; }
+.wg b { display: block; }
+.wg .abar { grid-column: 1 / -1; }
+.wg .done { color: var(--good); font-weight: 700; }
+.wgnote { margin: 0; }
+.mebadges { display: flex; flex-wrap: wrap; gap: 6px; }
+.mechip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 6px; border: 2px solid var(--line); border-radius: 999px; font-size: 0.85rem; font-weight: 700; background: var(--bg); }
+.mechip svg { width: 16px; height: 16px; flex: none; }
+.mechip.none { font-weight: 400; color: var(--muted); border-style: dashed; padding-left: 10px; }
+.up { color: var(--good, #1f7a45); }
 #meb svg { width: 30px; height: 30px; }
 a.abtn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
 .mehero { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 12px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); }
@@ -451,12 +480,14 @@ a.abtn { display: inline-flex; align-items: center; justify-content: center; tex
 .meinfo p { margin: 0; color: var(--muted); }
 .mestack { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 @media (max-height: 700px) { header .tag { display: none; } }
+@media (max-width: 350px) { header { gap: 8px; } header > svg { width: 36px; height: 36px; } header h1 { font-size: 1.15rem; min-width: 0; overflow-wrap: anywhere; } }
 .gear:hover, .gear[aria-current="page"] { border-color: var(--accent); }
 .setlist { display: flex; flex-direction: column; gap: 12px; }
 .setrow { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); }
 .setrow h3 { margin: 0; font-size: 1rem; }
 .setrow p { margin: 0; color: var(--muted); font-size: .88rem; max-width: 62ch; }
 .setrow input[type=range] { width: 100%; accent-color: var(--accent); min-height: 28px; }
+@media (pointer: coarse) { .setrow input[type=range] { min-height: 40px; } }
 .setrow .seg button { padding: 10px 6px; }
 .bkbox { width: 100%; box-sizing: border-box; font: 500 .8rem/1.35 ui-monospace, Menlo, Consolas, monospace; padding: 8px 10px; border: 2px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); resize: vertical; word-break: break-all; }
 .bkbox:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
@@ -611,7 +642,7 @@ body.cbshapes .cbm { display: block; }
       <h1>lurkinferret’s “ai”rcade</h1>
       <p class="tag" id="tag">Seven games and a whitepaper. Dook, dook, dook.</p>
     </div>
-    <a class="gear" id="meb" href="#me" aria-label="My ferret" title="My ferret"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#ferret"/></svg></a>
+    <a class="gear" id="meb" href="#me" aria-label="My ferret" title="My ferret"><span class="ndot" id="meb-dot" hidden></span><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#ferret"/></svg></a>
     <a class="gear" id="gear" href="#prefs" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.3 5.3 L7.1 7.1 M16.9 16.9 L18.7 18.7 M18.7 5.3 L16.9 7.1 M7.1 16.9 L5.3 18.7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></a>
   </header>
 
@@ -619,6 +650,7 @@ body.cbshapes .cbm { display: block; }
 
   <section class="home" id="home" aria-label="Choose a game">
     <h2 class="pick">Pick a game</h2>
+    <div class="nudges" id="nudges" hidden aria-label="Ready to claim"></div>
     <div class="choices">
       <a class="choice feature" id="tab-dook" href="#dook">
         <svg class="ico" viewBox="0 0 100 100" aria-hidden="true"><use href="#ferret"/></svg>
@@ -1109,6 +1141,7 @@ body.cbshapes .cbm { display: block; }
       <div class="colferret"><svg id="me-ferret" viewBox="0 0 100 100" aria-label="Your ferret"><use href="#ferret"/></svg></div>
       <div class="meinfo">
         <h3 id="me-name"></h3><p id="me-title"></p>
+        <div class="mebadges" id="me-chips" aria-label="Recently claimed badges"></div>
         <div class="btnrow"><a class="abtn" href="#col">Change name or outfit</a><button class="abtn ghostbtn copyres" type="button" id="copy-me" data-g="me" data-label="Copy ferret card">Copy ferret card</button></div>
       </div>
     </div>
@@ -1248,7 +1281,7 @@ body.cbshapes .cbm { display: block; }
 
     <h3>5. Identity and long-term goals</h3>
     <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">16</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">50</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">120</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
-    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">50</span> badges and <span data-wp="title-n">16</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday.</p>
+    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">50</span> badges and <span data-wp="title-n">16</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday.</p>
 
     <p>Progress lives in the browser, so the arcade gives players some control over it. The Settings page (the gear in the header) sets sound and volume, reduced motion, text size shape markers for the gems and letter labels for sock cards. It also makes a backup code: a block of text, with a check value to catch copying errors, that carries all progress, Dook Dash included. Pasting a code on another device shows a summary first. The player can then merge it, keeping the higher value of each item, with items and badges from both sides kept and coins not added together, or replace everything outright. Nothing changes until one is chosen. The code is not encrypted, so anyone holding it can load the progress. A Share today block on the quests page turns the day&rsquo;s quests and daily boards into a few lines of text or a picture, with no server involved, so players can compare days with friends.</p>
 
@@ -2535,7 +2568,7 @@ body.cbshapes .cbm { display: block; }
       });
     });
   })();
-  function sSave() { save('fa-stats', ST); }
+  function sSave() { save('fa-stats', ST); if (typeof wkSync === 'function') wkSync(); }
   // One coin wallet shared by Ferret Gems, Sock Match and Tunnel Dash. It lives in the Ferret Gems save.
   function showCoins() {
     var c = GP.coins, e = $('#s-coins'); if (e) e.textContent = c;
@@ -2543,7 +2576,7 @@ body.cbshapes .cbm { display: block; }
     e = $('#b-shop'); if (e) e.textContent = 'Coins ' + c;
     e = $('#shop-coins'); if (e) e.textContent = c;
   }
-  function wallet(n) { GP.coins = Math.max(0, GP.coins + n); gpSave(); showCoins(); if (n > 0 && typeof playFx === 'function') playFx('coin'); }
+  function wallet(n, quiet) { if (n > 0 && !quiet && typeof wkAdd === 'function') wkAdd('c', n); GP.coins = Math.max(0, GP.coins + n); gpSave(); showCoins(); if (n > 0 && typeof playFx === 'function') playFx('coin'); }
   // Boost packs bought in the shop sit in SHOP.stock and are used before any coins are spent.
   function stockN(k) { return (typeof SHOP === 'object' && SHOP.stock && SHOP.stock[k]) | 0; }
   function canBuy(k, c) { return stockN(k) > 0 || GP.coins >= c; }
@@ -2565,6 +2598,8 @@ body.cbshapes .cbm { display: block; }
     pals: { round: 30, gold: 3, hop: 2, boss: 10, bossHp: 3, clock: 2, cap: 45, targetBase: 20, targetPer: 8, targetMax: 150, star2: 1.3, star3: 1.6, lives: 3, maxLives: 5, speed: 1.7 },
     gems: { star3: 0.4, rushMs: 60000 },
     stack: { speed0: 130, perLayer: 7, max: 380, perfectPx: 5, widen: 6, widenAfter: 3, perCoin: 3, coinMax: 25 },
+    streak: { a: 7, ra: 40, c: 14, rc: 80, b: 30, rb: 150 },
+    week: { days: 5, games: 20, coins: 100, reward: 20, sweep: 30 },
     hide: { lives: 3, cups4: 4, cups5: 9, swapBase: 4, swapPer: 1.2, swapMax: 18, msBase: 520, msPer: 26, msMin: 170, sock: 10, streak: 5, streakMax: 8 }
   };
   var SCOST = { reveal: 15, freeze: 5 };
@@ -4190,7 +4225,7 @@ body.cbshapes .cbm { display: block; }
     if (stars > (GP.stars[GS.level] || 0)) GP.stars[GS.level] = stars;
     GP.cleared = Math.max(GP.cleared, GS.level);
     var coins = 10 + 10 * stars;
-    GP.coins += coins; ST.gems.coinsEarned += coins; gpSave();
+    GP.coins += coins; ST.gems.coinsEarned += coins; gpSave(); wkAdd('c', coins);
     ST.gems.cleared++; ST.gems.bestTotal = Math.max(ST.gems.bestTotal, GS.total); sSave();
     GS.lastStars = stars;
     gMsg('Level ' + GS.level + ' cleared! ' + starStr(stars) + ' +' + coins + ' coins.' + (spare ? ' ' + spare + ' spare ' + (spare === 1 ? 'move' : 'moves') + ' add ' + bonus + ' points.' : ''));
@@ -5343,7 +5378,7 @@ body.cbshapes .cbm { display: block; }
   $('#stats-yes').addEventListener('click', function () {
     ST = ST_DEFAULT();
     best.socks = null; best.dash = null; best.whack = null; best.gems = null;
-    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-hdaily', 'fa-quests'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-hdaily', 'fa-quests', 'fa-week', 'fa-wgoal', 'fa-sreward', 'fa-weeks'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
     $('#stats-confirm').hidden = true; $('#stats-reset').hidden = false;
     GP.cleared = 0; GP.stars = {}; GP.coins = 40; GS.level = 1; GS.mode = 'levels'; GS.busy = false;
     Array.prototype.forEach.call($('#gems-modes').children, function (x) { x.setAttribute('aria-pressed', x.dataset.d === 'levels' ? 'true' : 'false'); });
@@ -5540,6 +5575,16 @@ body.cbshapes .cbm { display: block; }
     var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; });
     o.owned = mxDeep(a.owned || {}, b.owned || {}); o.stock = mxDeep(a.stock || {}, b.stock || {}); return o;
   }
+  function mxSReward(a, b) {
+    var ar = typeof a.run === 'string' ? a.run : '', br = typeof b.run === 'string' ? b.run : '';
+    if (ar !== br) return br > ar ? b : a;
+    return { run: ar, claimed: mxDeep(a.claimed || {}, b.claimed || {}) };
+  }
+  function mxWGoal(a, b) {
+    var aw = typeof a.wk === 'string' ? a.wk : '', bw = typeof b.wk === 'string' ? b.wk : '';
+    if (aw !== bw) return bw > aw ? b : a;
+    return { wk: aw, claimed: mxDeep(a.claimed || {}, b.claimed || {}), swept: !!(a.swept || b.swept) };
+  }
   function mxQuests(a, b) {
     var w = mxLater(a, b, 'date'), o = {}; Object.keys(w).forEach(function (k) { o[k] = w[k]; });
     if ((a.date || '') === (b.date || '')) { o.claimed = mxDeep(a.claimed || {}, b.claimed || {}); o.swept = !!(a.swept || b.swept); o.base = a.base || b.base || {}; }
@@ -5555,8 +5600,8 @@ body.cbshapes .cbm { display: block; }
     return o;
   }
   var MX = {
-    'fa-stats': mxDeep, 'fa-gems3': mxDeep, 'fa-socks3': mxDeep, 'fa-wlvl': mxDeep, 'fa-ach': mxDeep, 'fa-whack2': mxDeep, 'fa-dash': mxDeep, 'fa-gems2': mxDeep, 'dookdash-best': mxDeep,
-    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'dookdash-save': mxDook,
+    'fa-stats': mxDeep, 'fa-week': mxDeep, 'fa-gems3': mxDeep, 'fa-socks3': mxDeep, 'fa-wlvl': mxDeep, 'fa-ach': mxDeep, 'fa-whack2': mxDeep, 'fa-dash': mxDeep, 'fa-gems2': mxDeep, 'dookdash-best': mxDeep,
+    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-wgoal': mxWGoal, 'fa-sreward': mxSReward, 'fa-weeks': mxDeep, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'dookdash-save': mxDook,
     'fa-prof': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { if (a[k] !== '' && a[k] !== null && a[k] !== undefined) o[k] = a[k]; }); return o; },
     'fa-dmis': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; }); ['done', 'next'].forEach(function (k) { if (typeof a[k] === 'number' || typeof b[k] === 'number') o[k] = Math.max(a[k] || 0, b[k] || 0); }); return o; }
   };
@@ -5644,6 +5689,8 @@ body.cbshapes .cbm { display: block; }
     v['g-bmin'] = Math.min.apply(null, Object.keys(BOOST).map(function (k) { return BOOST[k]; })); v['g-bmax'] = Math.max.apply(null, Object.keys(BOOST).map(function (k) { return BOOST[k]; })); v['g-rush'] = B.gems.rushMs / 1000;
     v['k-s0'] = B.stack.speed0; v['k-pl'] = B.stack.perLayer; v['k-max'] = B.stack.max; v['k-px'] = B.stack.perfectPx; v['k-after'] = ({ 2: 'two', 3: 'three', 4: 'four', 5: 'five' })[B.stack.widenAfter] || B.stack.widenAfter; v['k-widen'] = B.stack.widen; v['k-pc'] = B.stack.perCoin; v['k-cmax'] = B.stack.coinMax;
     v['h-lives'] = B.hide.lives; v['h-r3'] = c3; v['h-r4a'] = c3 + 1; v['h-r4b'] = c4; v['h-sb'] = B.hide.swapBase; v['h-sp'] = B.hide.swapPer; v['h-sm'] = B.hide.swapMax; v['h-mb'] = B.hide.msBase; v['h-mp'] = B.hide.msPer; v['h-mm'] = B.hide.msMin; v['h-sock'] = B.hide.sock; v['h-str'] = B.hide.streak; v['h-strm'] = B.hide.streakMax;
+    v['sr-c'] = BAL.streak.c; v['sr-rc'] = BAL.streak.rc; v['sr-a'] = BAL.streak.a; v['sr-ra'] = BAL.streak.ra; v['sr-b'] = BAL.streak.b; v['sr-rb'] = BAL.streak.rb;
+    v['wg-days'] = BAL.week.days; v['wg-games'] = BAL.week.games; v['wg-coins'] = BAL.week.coins; v['wg-reward'] = BAL.week.reward; v['wg-sweep'] = BAL.week.sweep;
     v['sock-reveal'] = SCOST.reveal; v['sock-freeze'] = SCOST.freeze; v['hide-daily'] = HDAILY_ROUNDS; v['hide-peek'] = HPEEK; v['stack-w'] = KBASE; v['stack-h'] = KLH;
     if (window.faDD && window.faDD.consts) {
       var d = window.faDD.consts(), words = { 7: 'seven', 6: 'six', 5: 'five', 8: 'eight', 9: 'nine' };
@@ -5665,6 +5712,145 @@ body.cbshapes .cbm { display: block; }
   }
 
 
+  /* ---------- Weekly recap ---------- */
+  var WK = { d: {} }, wkLast = null;
+  (function () { var v = load('fa-week'); if (v && v.d && typeof v.d === 'object') Object.keys(v.d).forEach(function (k) { var e = v.d[k]; if (/^\d{4}-\d\d-\d\d$/.test(k) && e && typeof e === 'object') WK.d[k] = { g: Math.max(0, Math.floor(+e.g) || 0), c: Math.max(0, Math.floor(+e.c) || 0) }; }); })();
+  function wkDay(k) { return WK.d[k] || (WK.d[k] = { g: 0, c: 0 }); }
+  function wkPrune() { var keys = Object.keys(WK.d).sort(); while (keys.length > 21) delete WK.d[keys.shift()]; }
+  function wkAdd(f, n) { if (!(n > 0)) return; wkDay(dayKey())[f] += Math.floor(n); wkPrune(); save('fa-week', WK); }
+  var wkDLast = null;
+  function wkDookCoins() { var j = dookData().j; return j && j.stats && typeof j.stats.coins === 'number' ? j.stats.coins : 0; }
+  function wkSync() {
+    var t = achTotalGames(), dc = wkDookCoins();
+    if (wkLast === null) { wkLast = t; wkDLast = dc; return; }
+    if (t > wkLast) { wkAdd('g', t - wkLast); }
+    if (dc > wkDLast) { wkAdd('c', dc - wkDLast); }
+    wkLast = t; wkDLast = dc;
+  }
+  wkSync();
+  function wkSum(from, to) {
+    var g = 0, c = 0, days = 0, best = { k: '', g: 0 };
+    for (var i = from; i < to; i++) {
+      var d = new Date(); d.setDate(d.getDate() - i); var e = WK.d[dayKey(d)];
+      if (!e) continue; g += e.g; c += e.c; if (e.g > 0) days++; if (e.g > best.g) best = { k: dayKey(d), g: e.g };
+    }
+    return { g: g, c: c, days: days, best: best };
+  }
+  function wkDelta(a, b) { var n = a - b; return n === 0 ? '' : ' <small class="' + (n > 0 ? 'up' : '') + '">(' + (n > 0 ? '+' : '−') + nf(Math.abs(n)) + ' vs last week)</small>'; }
+
+  /* ---------- Weekly goals ---------- */
+  var WG = { wk: '', claimed: {}, swept: false };
+  (function () { var v = load('fa-wgoal'); if (v && typeof v === 'object') { if (typeof v.wk === 'string') WG.wk = v.wk; if (v.claimed && typeof v.claimed === 'object') Object.keys(v.claimed).forEach(function (k) { if (v.claimed[k]) WG.claimed[k] = 1; }); WG.swept = !!v.swept; } })();
+  function wgMonday() { var d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d; }
+  function wgEnsure() { var m = dayKey(wgMonday()); if (WG.wk !== m) { WG.wk = m; WG.claimed = {}; WG.swept = false; save('fa-wgoal', WG); } }
+  function wgVals() {
+    var back = (new Date().getDay() + 6) % 7, w = wkSum(0, back + 1);
+    return { days: w.days, games: w.g, coins: w.c };
+  }
+  var WGOALS = [['days', 'Play on {n} different days'], ['games', 'Play {n} games'], ['coins', 'Earn {n} coins']];
+  function wgClaim(id) {
+    wgEnsure(); var v = wgVals(), goal = BAL.week[id];
+    if (!goal || WG.claimed[id] || v[id] < goal) return '';
+    WG.claimed[id] = 1; wallet(BAL.week.reward, true); var msg = '+' + BAL.week.reward + ' coins claimed.';
+    if (WGOALS.every(function (g) { return WG.claimed[g[0]]; }) && !WG.swept) { WG.swept = true; wallet(BAL.week.sweep, true); msg = 'All three done! +' + (BAL.week.reward + BAL.week.sweep) + ' coins.'; }
+    save('fa-wgoal', WG); return msg;
+  }
+  function wgBlock() {
+    wgEnsure(); var v = wgVals(), mon = new Date(WG.wk + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), n = 0;
+    var rows = WGOALS.map(function (g) {
+      var id = g[0], goal = BAL.week[id], val = Math.min(goal, v[id]), ok = v[id] >= goal, got = !!WG.claimed[id]; if (got) n++;
+      return '<div class="wg"><div><b>' + g[1].replace('{n}', goal) + '</b><span class="tip">' + nf(val) + ' / ' + nf(goal) + '</span></div>' +
+        (got ? '<span class="done">Claimed ✓</span>' : ok ? '<button class="abtn" type="button" data-wg="' + id + '">Claim +' + BAL.week.reward + '</button>' : '<span class="tip">+' + BAL.week.reward + ' coins</span>') +
+        '<div class="abar" role="progressbar" aria-label="' + g[1].replace('{n}', goal) + '" aria-valuemin="0" aria-valuemax="' + goal + '" aria-valuenow="' + val + '"><i style="width:' + Math.round(val / goal * 100) + '%"></i></div></div>';
+    }).join('');
+    return { n: n, html: '<section class="sblock"><div class="shead"><h3>Weekly goals</h3><span class="tip">Week of ' + mon + '</span></div>' + rows +
+      '<p class="tip wgnote">' + (WG.swept ? 'All three claimed. New goals start Monday.' : 'Finish all three for a +' + BAL.week.sweep + ' coin bonus. Goals reset every Monday.') + '</p><p class="msg" id="wg-msg" aria-live="polite"></p></section>' };
+  }
+
+  /* ---------- Streak rewards ---------- */
+  var SR = { run: '', claimed: {} };
+  (function () { var v = load('fa-sreward'); if (v && typeof v === 'object') { if (typeof v.run === 'string') SR.run = v.run; if (v.claimed && typeof v.claimed === 'object') Object.keys(v.claimed).forEach(function (k) { if (v.claimed[k]) SR.claimed[k] = 1; }); } })();
+  function srEnsure() {
+    var n = qStreakNow(); if (n < 1) return n;
+    var d = new Date(QS.last + 'T12:00:00'); d.setDate(d.getDate() - (QS.streak - 1)); var run = dayKey(d);
+    if (SR.run !== run) { SR.run = run; SR.claimed = {}; save('fa-sreward', SR); }
+    return n;
+  }
+  var SRMS = [['a', 'ra'], ['c', 'rc'], ['b', 'rb']];
+  function srClaim(key) {
+    var n = srEnsure(), m = BAL.streak[key], r = BAL.streak['r' + key];
+    if (!m || n < m || SR.claimed[m]) return '';
+    SR.claimed[m] = 1; wallet(r, true); save('fa-sreward', SR); return m + '-day streak reward: +' + r + ' coins.';
+  }
+  function srBlock() {
+    var n = srEnsure();
+    var rows = SRMS.map(function (p) {
+      var m = BAL.streak[p[0]], r = BAL.streak[p[1]], val = Math.min(m, n), ok = n >= m, got = !!SR.claimed[m];
+      return '<div class="sr"><div><b>' + m + ' days in a row</b><span class="tip">' + val + ' / ' + m + ' days of daily quests</span></div>' +
+        (got ? '<span class="done">Claimed ✓</span>' : ok ? '<button class="abtn" type="button" data-sr="' + p[0] + '">Claim +' + r + '</button>' : '<span class="tip">+' + r + ' coins</span>') +
+        '<div class="abar" role="progressbar" aria-label="' + m + ' day streak" aria-valuemin="0" aria-valuemax="' + m + '" aria-valuenow="' + val + '"><i style="width:' + Math.round(val / m * 100) + '%"></i></div></div>';
+    }).join('');
+    return '<section class="sblock"><div class="shead"><h3>Streak rewards</h3><a href="#quest">Daily quests</a></div>' + rows + '<p class="tip wgnote">Finish at least one daily quest every day. Each reward can be claimed once per streak; a broken streak starts fresh.</p><p class="msg" id="sr-msg" aria-live="polite"></p></section>';
+  }
+  function lastWeekBlock() {
+    var back = (new Date().getDay() + 6) % 7, w = wkSum(back + 1, back + 8);
+    if (!w.g && !w.c) return '';
+    var mon = new Date(); mon.setDate(mon.getDate() - back - 7); var sun = new Date(mon); sun.setDate(sun.getDate() + 6);
+    var f = function (d) { return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); };
+    var hit = (w.days >= BAL.week.days ? 1 : 0) + (w.g >= BAL.week.games ? 1 : 0) + (w.c >= BAL.week.coins ? 1 : 0);
+    var bd = w.best.g ? new Date(w.best.k + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long' }) + ' <small>(' + w.best.g + (w.best.g === 1 ? ' game' : ' games') + ')</small>' : '–';
+    return '<section class="sblock"><div class="shead"><h3>Last week</h3><span class="tip">' + f(mon) + ' – ' + f(sun) + '</span></div><dl class="srows">' +
+      [['Games played', nf(w.g)], ['Coins earned', nf(w.c)], ['Days played', w.days + ' / 7'], ['Weekly goals reached', hit + ' / 3'], ['Busiest day', bd]].map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl></section>';
+  }
+
+  /* ---------- All-time weeks ---------- */
+  var WKA = {};
+  (function () { var v = load('fa-weeks'); if (v && typeof v === 'object') Object.keys(v).forEach(function (k) { var e = v[k]; if (/^\d{4}-\d\d-\d\d$/.test(k) && e && typeof e === 'object') WKA[k] = { g: Math.max(0, Math.floor(+e.g) || 0), c: Math.max(0, Math.floor(+e.c) || 0), d: Math.max(0, Math.min(7, Math.floor(+e.d) || 0)), h: Math.max(0, Math.min(3, Math.floor(+e.h) || 0)) }; }); })();
+  function wkMonKey(k) { var d = new Date(k + 'T12:00:00'); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return dayKey(d); }
+  function wkHits(g, c, days) { return (days >= BAL.week.days ? 1 : 0) + (g >= BAL.week.games ? 1 : 0) + (c >= BAL.week.coins ? 1 : 0); }
+  function wkArchive() {
+    var cur = dayKey(wgMonday()), by = {}, changed = false;
+    Object.keys(WK.d).forEach(function (k) { var m = wkMonKey(k); if (m >= cur) return; var e = by[m] || (by[m] = { g: 0, c: 0, d: 0 }); e.g += WK.d[k].g; e.c += WK.d[k].c; if (WK.d[k].g > 0) e.d++; });
+    Object.keys(by).forEach(function (m) { if (WKA[m]) return; var e = by[m]; e.h = wkHits(e.g, e.c, e.d); WKA[m] = e; changed = true; });
+    var keys = Object.keys(WKA).sort(); while (keys.length > 260) { delete WKA[keys.shift()]; changed = true; }
+    if (changed) save('fa-weeks', WKA);
+  }
+  wkArchive();
+  function allTimeBlock() {
+    wkArchive();
+    var back = (new Date().getDay() + 6) % 7, w = wkSum(0, back + 1), curMon = dayKey(wgMonday()), all = [];
+    Object.keys(WKA).forEach(function (m) { all.push({ m: m, g: WKA[m].g, c: WKA[m].c, h: WKA[m].h }); });
+    all.push({ m: curMon, g: w.g, c: w.c, h: wkHits(w.g, w.c, w.days) });
+    var played = all.filter(function (e) { return e.g > 0; });
+    if (!played.length) return '';
+    var bestG = played.reduce(function (a, e) { return e.g > a.g ? e : a; }, played[0]), bestC = all.reduce(function (a, e) { return e.c > a.c ? e : a; }, all[0]);
+    var full = all.filter(function (e) { return e.h === 3; }).length, tg = 0, tc = 0; all.forEach(function (e) { tg += e.g; tc += e.c; });
+    var lab = function (m) { var d = new Date(m + 'T12:00:00'), e = new Date(d); e.setDate(e.getDate() + 6); var f = function (x) { return x.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); }; return ' <small>(' + f(d) + ' – ' + f(e) + ')</small>'; };
+    return meBlock('All time', [['Weeks played', String(played.length)], ['Busiest week', nf(bestG.g) + ' games' + lab(bestG.m)], ['Biggest coin week', nf(bestC.c) + ' coins' + lab(bestC.m)], ['Weeks with all 3 goals', String(full)], ['Games tracked', nf(tg)], ['Coins tracked', nf(tc)]]) +
+      '<p class="tip" style="margin:0">Totals cover the weeks tracked since the weekly recap began on this device, plus any weeks you merged in from a backup.</p>';
+  }
+
+  /* ---------- Ready-to-claim nudges ---------- */
+  function readyCounts() {
+    qEnsure(); var q = qCounts().ready;
+    var b = achDefs().filter(function (a) { return !ACH.claimed[a.id] && a.val >= a.goal; }).length;
+    wgEnsure(); var v = wgVals(), w = WGOALS.filter(function (g) { return !WG.claimed[g[0]] && v[g[0]] >= BAL.week[g[0]]; }).length;
+    var n = srEnsure(), st = SRMS.filter(function (p) { return n >= BAL.streak[p[0]] && !SR.claimed[BAL.streak[p[0]]]; }).length;
+    return { q: q, b: b, w: w, s: st };
+  }
+  function renderNudges() {
+    var r; try { r = readyCounts(); } catch (e) { return; }
+    var pl = function (n, one, many) { return n + ' ' + (n === 1 ? one : many) + ' ready'; };
+    var items = [];
+    if (r.q) items.push(['#quest', pl(r.q, 'daily quest', 'daily quests')]);
+    if (r.w + r.s) items.push(['#me', pl(r.w + r.s, 'reward', 'rewards')]);
+    if (r.b) items.push(['#ach', pl(r.b, 'badge', 'badges')]);
+    var box = $('#nudges'); if (box) { box.innerHTML = items.map(function (i) { return '<a class="nudge" href="' + i[0] + '">' + i[1] + '</a>'; }).join(''); box.hidden = !items.length; }
+    var me = r.w + r.s, dot = $('#meb-dot'), btn = $('#meb');
+    if (dot) { dot.textContent = me; dot.hidden = !me; }
+    if (btn) btn.setAttribute('aria-label', me ? 'My ferret, ' + me + (me === 1 ? ' reward' : ' rewards') + ' ready to claim' : 'My ferret');
+  }
+
   /* ---------- My ferret ---------- */
   function liveStreak(n, last) { return (last === dayKey() || last === yesterdayKey()) ? (n || 0) : 0; }
   function skinName(kind) { var it = skinItems(kind).filter(function (i) { return i.key === SHOP[kind]; })[0]; return it ? it.name : '–'; }
@@ -5672,18 +5858,36 @@ body.cbshapes .cbm { display: block; }
     return '<section class="sblock"><div class="shead"><h3>' + title + '</h3>' + (link ? '<a href="' + link[0] + '">' + link[1] + '</a>' : '') + '</div><dl class="srows">' +
       rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl></section>';
   }
+  document.addEventListener('click', function (e) {
+    var sb = e.target.closest('[data-sr]');
+    if (sb) { var sm = srClaim(sb.dataset.sr); if (!sm) return; renderMe(); renderNudges(); var se = $('#sr-msg'); if (se) se.textContent = sm; return; }
+    var b = e.target.closest('[data-wg]'); if (!b) return;
+    var m = wgClaim(b.dataset.wg); if (!m) return;
+    renderMe(); renderNudges(); var el = $('#wg-msg'); if (el) el.textContent = m;
+  });
   function renderMe() {
     var defs = achDefs(), claimed = defs.filter(function (a) { return ACH.claimed[a.id]; }).length, tl = titleList(), tOk = tl.filter(function (t) { return t.ok; }).length, ct = curTitle();
     var name = PROF.name || 'Unnamed ferret', total = 0, have = 0;
     SKIN_KINDS.forEach(function (k) { skinItems(k).forEach(function (it) { total++; if (itemOwned(it)) have++; }); });
     $('#me-badges').textContent = claimed + ' / ' + defs.length; $('#me-titles').textContent = tOk + ' / ' + tl.length;
     $('#me-ferret').setAttribute('style', hatStyle(SHOP.hat) + ';' + coatVars(SHOP.coat));
+    var recent = Object.keys(ACH.claimed).filter(function (id) { return ACH.claimed[id]; }).map(function (id) { return defs.filter(function (a) { return a.id === id; })[0]; }).filter(Boolean).slice(-3).reverse();
+    $('#me-chips').innerHTML = recent.length ? recent.map(function (a) { return '<span class="mechip">' + TROPHY + a.name + '</span>'; }).join('') : '<span class="mechip none">No badges claimed yet</span>';
     $('#me-name').textContent = name; $('#me-title').textContent = ct.label;
     // streaks
     var dd = {}; try { var j = JSON.parse(localStorage.getItem('dookdash-save') || 'null'); dd = (j && j.streak) || {}; } catch (e) {}
     var st = [['Daily quests', qStreakNow(), ST.quests.bestStreak], ['Sock Match daily', liveStreak(SD.streak, SD.last), SD.streak], ['Pop-Up Pals daily', liveStreak(WD.streak, WD.last), WD.streak], ['Hide the Raisin daily', liveStreak(HD.streak, HD.last), HD.streak], ['Dook Dash goals', liveStreak(dd.n, dd.last), dd.n || 0]];
     var bestNow = Math.max.apply(null, st.map(function (r) { return r[1]; }));
     var h = meBlock('Streaks', st.map(function (r) { return [r[0], r[1] + (r[1] === 1 ? ' day' : ' days') + (r[2] > r[1] ? ' <small>(last run ' + r[2] + ')</small>' : '')]; }));
+    h += srBlock();
+    // weekly recap
+    wkSync();
+    var w0 = wkSum(0, 7), w1 = wkSum(7, 14), bd = w0.best.k ? new Date(w0.best.k + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long' }) : '\u2013';
+    h += meBlock('This week', [['Games played', nf(w0.g) + wkDelta(w0.g, w1.g)], ['Coins earned', nf(w0.c) + wkDelta(w0.c, w1.c)], ['Days played', w0.days + ' / 7'], ['Busiest day', w0.best.g ? bd + ' <small>(' + w0.best.g + (w0.best.g === 1 ? ' game' : ' games') + ')</small>' : '\u2013']]) + '<div class="btnrow"><button class="abtn ghostbtn copyres" type="button" data-g="week" data-label="Copy my week">Copy my week</button></div><p class="tip" style="margin:0">Counted from the day this version first ran on this device. Dook Dash coins from runs are included; its daily goal bonuses are not.</p>';
+    var wgb = wgBlock(); h += wgb.html + lastWeekBlock() + allTimeBlock();
+    var wr = new Date(); wr.setDate(wr.getDate() - 6); var rng = wr.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' \u2013 ' + new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    CARD.week = { game: 'My week', sub: name + ' \u00b7 ' + rng, big: w0.g, bigLabel: w0.g === 1 ? 'game played' : 'games played', stats: [['Coins earned', nf(w0.c)], ['Days played', w0.days + ' / 7'], ['Weekly goals', wgb.n + ' / 3']] };
+    RES.week = HEAD + '\nMy week \u00b7 ' + rng + '\n' + w0.g + ' games \u00b7 ' + w0.c + ' coins \u00b7 ' + w0.days + '/7 days \u00b7 ' + wgb.n + '/3 weekly goals';
     // outfit
     h += meBlock('Outfit', [['Hat', skinName('hat')], ['Coat', skinName('coat')], ['Gem set', skinName('gems')], ['Board theme', skinName('board')], ['Sock card back', skinName('back')], ['Picture background', skinName('cbg')], ['Picture frame', skinName('cfr')], ['Items owned', have + ' / ' + total]], ['#col', 'Change']);
     // badges closest to claiming
@@ -5699,8 +5903,8 @@ body.cbshapes .cbm { display: block; }
     var played = achTotalGames();
     h += meBlock('Totals', [['Arcade coins', nf(GP.coins)], ['Games played', nf(played)], ['Badges claimed', claimed + ' / ' + defs.length], ['Longest streak running', bestNow + (bestNow === 1 ? ' day' : ' days')]], ['#stats', 'All stats']);
     $('#me-body').innerHTML = h;
-    CARD.me = { game: 'My ferret', sub: name + ' · ' + ct.label, big: claimed, bigLabel: 'badges claimed', stats: [['Titles', tOk + ' / ' + tl.length], ['Items owned', have + ' / ' + total], ['Streak now', bestNow + (bestNow === 1 ? ' day' : ' days')]] };
-    RES.me = HEAD + '\n' + name + ' · ' + ct.label + '\n' + claimed + ' badges · ' + tOk + ' titles · ' + have + ' items';
+    CARD.me = { game: 'My ferret', sub: name + ' · ' + ct.label, big: claimed, bigLabel: 'badges claimed', stats: [['Titles', tOk + ' / ' + tl.length], ['Items owned', have + ' / ' + total], ['Games this week', w0.g]] };
+    RES.me = HEAD + '\n' + name + ' · ' + ct.label + '\n' + claimed + ' badges · ' + tOk + ' titles · ' + have + ' items\n' + 'This week: ' + w0.g + ' games, ' + w0.c + ' coins, ' + w0.days + '/7 days';
   }
 
   /* ---------- Daily quests ---------- */
@@ -6188,7 +6392,9 @@ body.cbshapes .cbm { display: block; }
   var names = ['home', 'socks', 'dash', 'whack', 'gems', 'dook', 'shop', 'col', 'ach', 'stats', 'paper', 'stack', 'hide', 'quest', 'prefs', 'me'];
   function show(name) {
     if (names.indexOf(name) < 0) name = 'home';
+    if (typeof wkSync === 'function') wkSync();
     hideGuides();
+    if (typeof renderNudges === 'function') renderNudges();
     names.forEach(function (n) { $('#' + n).hidden = n !== name; });
     $('#back').hidden = name === 'home';
     if (name !== 'dash') { if (dst === 'playing') { $('#dash-go').textContent = 'Start'; resetDash(); } }
