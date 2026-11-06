@@ -749,7 +749,7 @@ body.cbshapes .cbm { display: block; }
       <button class="abtn ghostbtn boost" type="button" id="socks-freeze">Freeze time <small>5 coins</small></button>
     </div>
     <div class="btnrow"><button class="abtn" id="socks-next" hidden>Next level</button><button class="abtn ghostbtn copyres" id="copy-socks" data-g="socks" hidden>Copy my result</button></div>
-    <p class="tip">Peek is free but costs 3 moves. Reveal flips one pair for no moves, and Freeze stops the clock for 15 seconds, which helps your best time. Coins are shared with Ferret Gems and Tunnel Dash. Cards with a gold edge are a golden pair that gives back 2 moves. A smelly decoy costs 2 moves. From level 2, the mischief ferret swaps two face-down cards every few misses. Three stars needs 1.8 moves per pair or fewer.</p>
+    <p class="tip">Peek is free but costs 3 moves. Reveal flips one pair for no moves, and Freeze stops the clock for 15 seconds, which helps your best time. Coins are shared with Ferret Gems and Tunnel Dash. Cards with a gold edge are a golden pair that gives back 2 moves. A smelly decoy costs 2 moves. From level 2, the mischief ferret swaps two face-down cards every few misses. Three stars needs 1.6 moves per pair or fewer, plus 2 for each decoy.</p>
   </section>
 
   <section class="panel" id="dash" hidden>
@@ -1291,12 +1291,12 @@ body.cbshapes .cbm { display: block; }
       <table>
         <thead><tr><th>Game</th><th>Behavior borrowed</th><th>Core loop</th><th>Numbers that set difficulty</th></tr></thead>
         <tbody>
-          <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at <span data-wp="s-e">6</span>, <span data-wp="s-m">8</span> or <span data-wp="s-h">10</span> pairs, levels that grow to <span data-wp="s-max">10</span> pairs, and a daily board seeded from the date. Three stars at <span data-wp="s-st3">1.8</span> moves per pair or fewer, two at <span data-wp="s-st2">2.6</span>. Decoys cost <span data-wp="s-decoy">2</span> moves, a golden pair gives <span data-wp="s-gold">2</span> back, and from level <span data-wp="s-mis">2</span> a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost <span data-wp="sock-reveal">15</span> and <span data-wp="sock-freeze">5</span> coins.</td></tr>
+          <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at <span data-wp="s-e">6</span>, <span data-wp="s-m">8</span> or <span data-wp="s-h">10</span> pairs, levels that grow to <span data-wp="s-max">10</span> pairs, and a daily board seeded from the date. Three stars at <span data-wp="s-st3">1.6</span> moves per pair or fewer, two at <span data-wp="s-st2">2.6</span>, with each decoy on the board adding its cost to both limits. Decoys cost <span data-wp="s-decoy">2</span> moves, a golden pair gives <span data-wp="s-gold">2</span> back, and from level <span data-wp="s-mis">2</span> a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost <span data-wp="sock-reveal">15</span> and <span data-wp="sock-freeze">5</span> coins.</td></tr>
           <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from <span data-wp="d-s0">170</span> to <span data-wp="d-s1">380</span> px/s over the first <span data-wp="d-rs">60</span> s, then keeps climbing to <span data-wp="d-smax">520</span> px/s while obstacles arrive faster and more often in pairs. <span data-wp="d-lives">3</span> lives, up to <span data-wp="d-maxl">5</span>. The tunnel changes every <span data-wp="d-bm">400</span> m, with a checkpoint every <span data-wp="d-cp">500</span> m. From <span data-wp="d-b1">600</span> m, and every <span data-wp="d-be">700</span> m after, a giant vacuum starts a boss chase of <span data-wp="d-ba0">7</span> flagged-lane attacks, growing to <span data-wp="d-bmax">12</span>. Each warning lasts <span data-wp="d-w0">1.2</span> s and shortens with every attack and every chase, to a floor of <span data-wp="d-wmin">0.6</span> s. Three missions at a time pay <span data-wp="d-mmin">10</span> to <span data-wp="d-mmax">25</span> coins each.</td></tr>
-          <tr><td>Pop-Up Pals</td><td>Sudden bursts of play</td><td>Tap what pops out of a hole, keep a combo going</td><td>Timed rounds last <span data-wp="p-round">30</span> s. Golden ferrets score <span data-wp="p-gold">3</span>, hoppers <span data-wp="p-hop">2</span> and a <span data-wp="p-hp">3</span>-tap boss <span data-wp="p-boss">10</span>. Clocks add <span data-wp="p-clock">2</span> s up to <span data-wp="p-cap">45</span> s. Levels set a score target of <span data-wp="p-tb">20</span> plus <span data-wp="p-tp">8</span> per level, with stars at 1, <span data-wp="p-s2">1.3</span> and <span data-wp="p-s3">1.6</span> times the target. Endless has no clock but <span data-wp="p-lives">3</span> hearts, up to <span data-wp="p-maxl">5</span>, with the pops speeding up <span data-wp="p-speed">1.7</span> times as fast. Daily is a <span data-wp="p-round2">30</span> s round with every critter on and a date-seeded pop pattern.</td></tr>
+          <tr><td>Pop-Up Pals</td><td>Sudden bursts of play</td><td>Tap what pops out of a hole, keep a combo going</td><td>Timed rounds last <span data-wp="p-round">30</span> s. Golden ferrets score <span data-wp="p-gold">3</span>, hoppers <span data-wp="p-hop">2</span> and a <span data-wp="p-hp">3</span>-tap boss <span data-wp="p-boss">10</span>. Clocks add <span data-wp="p-clock">2</span> s up to <span data-wp="p-cap">45</span> s. Levels set a score target of <span data-wp="p-tb">40</span> plus <span data-wp="p-tp">6</span> per level, with stars at 1, <span data-wp="p-s2">1.3</span> and <span data-wp="p-s3">1.6</span> times the target. Endless has no clock but <span data-wp="p-lives">3</span> hearts, up to <span data-wp="p-maxl">5</span>, with the pops speeding up <span data-wp="p-speed">1.7</span> times as fast. A ferret that hides before you tap it breaks your combo, as does tapping an empty hole or a vacuum. Daily is a <span data-wp="p-round2">30</span> s round with every critter on and a date-seeded pop pattern.</td></tr>
           <tr><td>Ferret Gems</td><td>Hoarding favorite treats</td><td>Swap two neighbors to line up 3 or more of a kind and reach the level goal</td><td><span data-wp="g-n">7</span> x <span data-wp="g-n2">7</span> board, <span data-wp="g-t1">5</span> then <span data-wp="g-t2">6</span> piece types. World 1 (levels 1 to <span data-wp="g-w1">30</span>) rotates through score, collect, special-piece, tangled-sock and chain goals with <span data-wp="g-mvmin">20</span> to <span data-wp="g-mvmax">25</span> moves. World 2 (level <span data-wp="g-w2">31</span> on) adds up to <span data-wp="g-fz">10</span> frozen gems, some with two layers of ice, and up to <span data-wp="g-lk">7</span> locked gems that cannot be swapped, with thaw and unlock goals. Three stars needs <span data-wp="g-star3">40</span> percent of the moves left. Four in a row leaves a blaster, five a bomb, and an L or T a paw burst. Boosters cost <span data-wp="g-bmin">15</span> to <span data-wp="g-bmax">30</span> coins. Rush lasts <span data-wp="g-rush">60</span> seconds and Zen has no limits.</td></tr>
           <tr><td>Hammock Stack</td><td>Piling into hammocks to sleep</td><td>Drop a swinging hammock onto the pile so the overlap stays</td><td>The first hammock is <span data-wp="stack-w">190</span> px wide and each layer is <span data-wp="stack-h">22</span> px tall. The swing starts at <span data-wp="k-s0">130</span> px/s and gains <span data-wp="k-pl">7</span> px/s per layer up to <span data-wp="k-max">380</span>. A drop within <span data-wp="k-px">5</span> px of centre is perfect and loses nothing, and <span data-wp="k-after">three</span> perfects in a row widen the hammock by <span data-wp="k-widen">6</span> px, up to its first width. A complete miss ends the game. 1 coin per <span data-wp="k-pc">3</span> layers, up to <span data-wp="k-cmax">25</span>.</td></tr>
-          <tr><td>Hide the Raisin</td><td>Hiding food</td><td>Watch the raisin go under a sock, follow the shuffle, pick the sock</td><td><span data-wp="h-lives">3</span> hearts. Rounds 1 to <span data-wp="h-r3">3</span> use three socks, rounds <span data-wp="h-r4a">4</span> to <span data-wp="h-r4b">8</span> four, and later rounds five. Each round does <span data-wp="h-sb">4</span> plus <span data-wp="h-sp">1.2</span> times the round number in swaps, up to <span data-wp="h-sm">18</span>, and each swap takes <span data-wp="h-mb">520</span> ms minus <span data-wp="h-mp">26</span> ms per round, down to <span data-wp="h-mm">170</span> ms. A right pick scores <span data-wp="h-sock">10</span> per sock plus <span data-wp="h-str">5</span> per streak step, up to <span data-wp="h-strm">8</span>. The daily mode is <span data-wp="hide-daily">10</span> rounds with date-seeded shuffles. Peek costs <span data-wp="hide-peek">10</span> coins.</td></tr>
+          <tr><td>Hide the Raisin</td><td>Hiding food</td><td>Watch the raisin go under a sock, follow the shuffle, pick the sock</td><td><span data-wp="h-lives">3</span> hearts. Rounds 1 to <span data-wp="h-r3">3</span> use three socks, rounds <span data-wp="h-r4a">4</span> to <span data-wp="h-r4b">8</span> four, and later rounds five. Each round does <span data-wp="h-sb">4</span> plus <span data-wp="h-sp">1.2</span> times the round number in swaps, up to <span data-wp="h-sm">18</span>, and each swap takes <span data-wp="h-mb">520</span> ms minus <span data-wp="h-mp">26</span> ms per round, down to <span data-wp="h-mm">170</span> ms. A right pick scores <span data-wp="h-sock">10</span> per sock plus <span data-wp="h-str">5</span> per streak step, up to <span data-wp="h-strm">8</span>. The daily mode is <span data-wp="hide-daily">10</span> rounds with date-seeded shuffles, played as Twin socks (same-colour socks, one extra sock, scores times <span data-wp="h-tm">1.5</span>). Its shuffles start <span data-wp="h-da">4</span> rounds ahead on the swap and speed curve, and finding <span data-wp="h-mb1">5</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb3">10</span> raisins earns a bronze, silver or gold medal. Peek costs <span data-wp="hide-peek">10</span> coins.</td></tr>
         </tbody>
       </table>
     </div>
@@ -1309,7 +1309,7 @@ body.cbshapes .cbm { display: block; }
 
     <h3>5. Identity and long-term goals</h3>
     <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">17</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">53</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">150</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
-    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">53</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday.</p>
+    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">53</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday. Each daily can also earn a medal, kept per day and counted on the page: Sock Match gives gold, silver or bronze for three, two or one stars, Pop-Up Pals for <span data-wp="pm-g">250</span>, <span data-wp="pm-s">150</span> or <span data-wp="pm-b">80</span> points, and Hide the Raisin for <span data-wp="h-mb3">10</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb1">5</span> raisins found.</p>
 
     <p>Progress lives in the browser, so the arcade gives players some control over it. The Settings page (the gear in the header) sets sound and volume, reduced motion, text size shape markers for the gems and letter labels for sock cards. It also makes a backup code: a block of text, with a check value to catch copying errors, that carries all progress, Dook Dash included. Pasting a code on another device shows a summary first. The player can then merge it, keeping the higher value of each item, with items and badges from both sides kept and coins not added together, or replace everything outright. Nothing changes until one is chosen. The code is not encrypted, so anyone holding it can load the progress. A Share today block on the quests page turns the day&rsquo;s quests and daily boards into a few lines of text or a picture, with no server involved, so players can compare days with friends.</p>
 
@@ -2626,15 +2626,15 @@ body.cbshapes .cbm { display: block; }
   var SMODES = { easy: { pairs: 6, cols: 4 }, medium: { pairs: 8, cols: 4 }, hard: { pairs: 10, cols: 5 } };
   // Balance numbers. The games read them from here, and so does the whitepaper.
   var BAL = {
-    socks: { maxPairs: 10, star3: 1.8, star2: 2.6, decoy: 2, goldBack: 2, misFrom: 2 },
-    dash: { speed0: 170, ramp: 3.5, rampSecs: 60, ramp2: 1.2, speedMax: 520, spawn0: 0.95, spawnPer: 0.009, spawnMin: 0.32, fill0: 0.35, fillMin: 0.12, fillPer: 0.003, dbl0: 0.3, dblMax: 0.65, dblPer: 0.004, lives: 3, maxLives: 5, biomeM: 400, cpM: 500, boss1: 600, bossEvery: 700, bossBase: 5, bossPerLvl: 2, bossMax: 12, warn0: 1.2, warnAtk: 0.05, warnLvl: 0.08, warnMin: 0.6, grace: 1.2 },
-    pals: { round: 30, gold: 3, hop: 2, boss: 10, bossHp: 3, clock: 2, cap: 45, targetBase: 20, targetPer: 8, targetMax: 150, star2: 1.3, star3: 1.6, lives: 3, maxLives: 5, speed: 1.7 },
+    socks: { maxPairs: 10, star3: 1.6, star2: 2.6, decoy: 2, goldBack: 2, misFrom: 2 },
+    dash: { speed0: 170, ramp: 3.5, rampSecs: 60, ramp2: 1.2, speedMax: 520, spawn0: 0.95, spawnPer: 0.0065, spawnMin: 0.3, fill0: 0.35, fillMin: 0.1, fillPer: 0.0028, dbl0: 0.3, dblMax: 0.7, dblPer: 0.0036, lives: 3, maxLives: 5, biomeM: 400, cpM: 500, boss1: 600, bossEvery: 700, bossBase: 5, bossPerLvl: 2, bossMax: 12, warn0: 1.2, warnAtk: 0.05, warnLvl: 0.08, warnMin: 0.6, grace: 1.2 },
+    pals: { medalB: 80, medalS: 150, medalG: 250, round: 30, gold: 3, hop: 2, boss: 10, bossHp: 3, clock: 2, cap: 45, targetBase: 40, targetPer: 6, targetMax: 160, star2: 1.3, star3: 1.6, lives: 3, maxLives: 5, speed: 1.7 },
     gems: { star3: 0.4, rushMs: 60000 },
     stack: { speed0: 130, perLayer: 7, max: 380, perfectPx: 5, widen: 6, widenAfter: 3, perCoin: 3, coinMax: 25 },
     streak: { a: 7, ra: 40, c: 14, rc: 80, b: 30, rb: 150 },
     theme: { n: 5, reward: 30, b1: 3, rb1: 50, b2: 7, rb2: 150, t: 4 },
     week: { days: 5, games: 20, coins: 100, reward: 20, sweep: 30 },
-    hide: { twinExtra: 1, twinMax: 6, twinMult: 1.5, lives: 3, cups4: 4, cups5: 9, swapBase: 4, swapPer: 1.2, swapMax: 18, msBase: 520, msPer: 26, msMin: 170, sock: 10, streak: 5, streakMax: 8 }
+    hide: { twinExtra: 1, twinMax: 6, twinMult: 1.5, lives: 3, cups4: 4, cups5: 9, swapBase: 4, swapPer: 1.2, swapMax: 18, msBase: 520, msPer: 26, msMin: 170, sock: 10, streak: 5, streakMax: 8, dailyAhead: 4, bronze: 5, silver: 8, gold: 10 }
   };
   var THEMES = [['socks', 'Sock Match', 'rounds'], ['dash', 'Tunnel Dash', 'runs'], ['whack', 'Pop-Up Pals', 'rounds'], ['gems', 'Ferret Gems', 'games'], ['stack', 'Hammock Stack', 'towers'], ['hide', 'Hide the Raisin', 'games'], ['dook', 'Dook Dash', 'runs']];
   var SCOST = { reveal: 15, freeze: 5 };
@@ -2655,6 +2655,19 @@ body.cbshapes .cbm { display: block; }
   })();
   function spSave() { save('fa-socks3', { cleared: SP.cleared, stars: SP.stars }); }
   var SD = { date: '', done: false, best: 0, stars: 0, streak: 0, last: '' };
+  // Daily medals: the best medal earned per game per day, kept so the My ferret page can count them.
+  var MED = load('fa-medals'); if (!MED || typeof MED !== 'object' || !MED.d || typeof MED.d !== 'object') MED = { d: {} };
+  var MRANK = { Bronze: 1, Silver: 2, Gold: 3 };
+  function medalSave() { save('fa-medals', MED); }
+  function awardMedal(game, m) {
+    if (!m || !MRANK[m]) return;
+    var k = dayKey(), d = MED.d[k] || (MED.d[k] = {});
+    if ((MRANK[d[game]] || 0) < MRANK[m]) { d[game] = m; medalSave(); }
+  }
+  function medalToday(game) { var d = MED.d[dayKey()]; return (d && d[game]) || ''; }
+  function medalCounts() { var c = { Gold: 0, Silver: 0, Bronze: 0 }; Object.keys(MED.d).forEach(function (k) { Object.keys(MED.d[k]).forEach(function (g) { var m = MED.d[k][g]; if (c[m] !== undefined) c[m]++; }); }); return c; }
+  function palsMedal(n) { return n >= BAL.pals.medalG ? 'Gold' : n >= BAL.pals.medalS ? 'Silver' : n >= BAL.pals.medalB ? 'Bronze' : ''; }
+  function sockMedal(st) { return st >= 3 ? 'Gold' : st === 2 ? 'Silver' : st === 1 ? 'Bronze' : ''; }
   (function () {
     var v = load('fa-sdaily');
     if (!v || typeof v !== 'object') return;
@@ -2779,7 +2792,7 @@ body.cbshapes .cbm { display: block; }
   function setMoves() { $('#s-moves').textContent = moves; }
   function sockWin() {
     won = true; pauseTimer(); clearTimeout(freezeT); frozen = false;
-    var stars = moves <= total * BAL.socks.star3 ? 3 : (moves <= total * BAL.socks.star2 ? 2 : 1), S = ST.socks;
+    var allow = ((cfg && cfg.decoys) || 0) * BAL.socks.decoy, stars = moves <= total * BAL.socks.star3 + allow ? 3 : (moves <= total * BAL.socks.star2 + allow ? 2 : 1), S = ST.socks;
     S.won++; if (stars === 3) S.threeStars++;
     var tm = sElapsed(), msg = 'All ' + total + ' pairs in ' + moves + ' moves and ' + fmtT(tm) + '. ' + starStr(stars);
     if (sockType === 'free') {
@@ -2798,9 +2811,9 @@ body.cbshapes .cbm { display: block; }
     } else if (!SD.done) {
       var ns = SD.last === dayKey() ? SD.streak : (SD.last === yesterdayKey() ? SD.streak + 1 : 1), gain2 = 15 + Math.min(ns, 5) * 2;
       SD.done = true; SD.best = moves; SD.stars = stars; SD.streak = ns; SD.last = dayKey(); sdSave();
-      S.dailies++; S.bestDaily = Math.max(S.bestDaily, ns);
+      S.dailies++; S.bestDaily = Math.max(S.bestDaily, ns); awardMedal('socks', sockMedal(stars));
       wallet(gain2);
-      msg += ' Daily streak ' + ns + '. +' + gain2 + ' coins.';
+      msg += (sockMedal(stars) ? ' ' + sockMedal(stars) + ' medal.' : '') + ' Daily streak ' + ns + '. +' + gain2 + ' coins.';
     } else msg += ' (Replay, so no reward.)';
     $('#socks-msg').textContent = msg;
     var slabel = sockType === 'daily' ? 'Daily ' + SD.date : (sockType === 'levels' ? 'Level ' + SP.level : sockMode.charAt(0).toUpperCase() + sockMode.slice(1));
@@ -3558,7 +3571,10 @@ body.cbshapes .cbm { display: block; }
     holeBtns.forEach(function (h, i) {
       if (until[i] && until[i] < now) {
         var mt = h.getAttribute('data-t');
-        if (wrun.endless && (mt === 'f' || mt === 'g' || mt === 'h' || mt === 'b')) { wlives--; wcombo = 0; floatText(h, 'Missed', 'minus'); }
+        if (mt === 'f' || mt === 'g' || mt === 'h' || mt === 'b') {
+          if (wrun.endless) { wlives--; floatText(h, 'Missed', 'minus'); }
+          if (wcombo > 0) { wcombo = 0; setW(); }
+        }
         h.removeAttribute('data-t'); until[i] = 0; hops[i] = 0; hopAt[i] = 0;
       }
       if (cover[i] && cover[i] < now) { cover[i] = 0; h.classList.remove('cv'); }
@@ -3680,8 +3696,8 @@ body.cbshapes .cbm { display: block; }
         coinsD = 15 + 3 * Math.min(D.streak - 1, 6); wallet(coinsD);
       }
       var nb = wscore > D.best; if (nb) D.best = wscore;
-      WS.bestDaily = Math.max(WS.bestDaily, wscore); wdSave();
-      msg = 'Daily done. You scored ' + wscore + '. Best today ' + D.best + ', streak ' + D.streak + (D.streak === 1 ? ' day' : ' days') + '.' + (coinsD ? ' +' + coinsD + ' coins.' : ' Coins are only paid for the first round each day.');
+      WS.bestDaily = Math.max(WS.bestDaily, wscore); wdSave(); awardMedal('whack', palsMedal(wscore));
+      msg = 'Daily done. ' + (palsMedal(wscore) ? palsMedal(wscore) + ' medal. ' : '') + 'You scored ' + wscore + '. Best today ' + D.best + ', streak ' + D.streak + (D.streak === 1 ? ' day' : ' days') + '.' + (coinsD ? ' +' + coinsD + ' coins.' : ' Coins are only paid for the first round each day.');
     } else {
       label = wmode.charAt(0).toUpperCase() + wmode.slice(1);
       msg = 'Time. You scored ' + wscore + '. Accuracy ' + acc + '%, best combo ' + wmaxc + '.';
@@ -4703,8 +4719,10 @@ body.cbshapes .cbm { display: block; }
   function cupsFor(r) { return r < BAL.hide.cups4 ? 3 : (r < BAL.hide.cups5 ? 4 : 5); }
   function isTwin() { return hmode === 'twin' || hmode === 'daily'; }
   function nFor(r) { return isTwin() ? Math.min(BAL.hide.twinMax, cupsFor(r) + BAL.hide.twinExtra) : cupsFor(r); }
-  function swapsFor(r) { return Math.min(BAL.hide.swapMax, BAL.hide.swapBase + Math.floor(r * BAL.hide.swapPer)); }
-  function msFor(r) { return Math.max(BAL.hide.msMin, BAL.hide.msBase - r * BAL.hide.msPer); }
+  function ahead(r) { return hmode === 'daily' ? r + BAL.hide.dailyAhead : r; }
+  function hMedal(n) { return n >= BAL.hide.gold ? 'Gold' : n >= BAL.hide.silver ? 'Silver' : n >= BAL.hide.bronze ? 'Bronze' : ''; }
+  function swapsFor(r) { r = ahead(r); return Math.min(BAL.hide.swapMax, BAL.hide.swapBase + Math.floor(r * BAL.hide.swapPer)); }
+  function msFor(r) { r = ahead(r); return Math.max(BAL.hide.msMin, BAL.hide.msBase - r * BAL.hide.msPer); }
   function hWait(ms, id) { return new Promise(function (res) { setTimeout(function () { res(id === hrun); }, ms); }); }
   function hMsg(t) { $('#hide-msg').textContent = t; }
   function hSetHud() {
@@ -4783,7 +4801,7 @@ body.cbshapes .cbm { display: block; }
       var D = hdToday(), first = D.plays === 0; D.plays++;
       if (first) { S.dailies++; D.streak = D.last === yesterdayKey() ? D.streak + 1 : 1; D.last = dayKey(); coins = 15 + 3 * Math.min(D.streak - 1, 6); wallet(coins); }
       var nb = hscore > D.best; if (nb) D.best = hscore; hdSave();
-      msg = (complete ? 'Daily complete! ' : 'Out of hearts. ') + 'You scored ' + hscore + '. Best today ' + D.best + ', streak ' + D.streak + (D.streak === 1 ? ' day' : ' days') + '.' + (coins ? ' +' + coins + ' coins.' : ' Coins are only paid for the first round each day.');
+      var medal = hMedal(hfound); awardMedal('hide', medal); msg = (complete ? 'Daily complete! ' : 'Out of hearts. ') + (medal ? medal + ' medal for ' + hfound + ' raisins found. ' : '') + 'You scored ' + hscore + '. Best today ' + D.best + ', streak ' + D.streak + (D.streak === 1 ? ' day' : ' days') + '.' + (coins ? ' +' + coins + ' coins.' : ' Coins are only paid for the first round each day.');
     } else {
       S.bestRound = Math.max(S.bestRound, reached); if (hmode === 'twin') S.bestTwin = Math.max(S.bestTwin || 0, reached);
       coins = Math.min(30, Math.floor(hscore / 30)); if (coins) wallet(coins);
@@ -4791,8 +4809,8 @@ body.cbshapes .cbm { display: block; }
     }
     sSave(); hSetHud(); hMsg(msg);
     $('#hide-go').textContent = 'Play again';
-    setCard('hide', { game: 'Hide the Raisin', sub: hmode === 'daily' ? 'Daily ' + dayKey() : hmode === 'twin' ? 'Twin socks' : 'Classic', big: hfound, bigLabel: hfound === 1 ? 'raisin found' : 'raisins found', stats: [['Rounds', reached], ['Score', hscore], ['Best streak', hmaxs]] });
-    showCopy('hide', HEAD + '\nHide the Raisin · ' + (hmode === 'daily' ? 'Daily Twin socks' : hmode === 'twin' ? 'Twin socks' : 'Classic') + '\nFound ' + hfound + ' · ' + reached + ' rounds · score ' + hscore + ' · best streak ' + hmaxs);
+    setCard('hide', { game: 'Hide the Raisin', sub: hmode === 'daily' ? 'Daily ' + dayKey() + (hMedal(hfound) ? ' · ' + hMedal(hfound) : '') : hmode === 'twin' ? 'Twin socks' : 'Classic', big: hfound, bigLabel: hfound === 1 ? 'raisin found' : 'raisins found', stats: [['Rounds', reached], ['Score', hscore], ['Best streak', hmaxs]] });
+    showCopy('hide', HEAD + '\nHide the Raisin · ' + (hmode === 'daily' ? 'Daily Twin socks' + (hMedal(hfound) ? ' ' + hMedal(hfound) + ' medal' : '') : hmode === 'twin' ? 'Twin socks' : 'Classic') + '\nFound ' + hfound + ' · ' + reached + ' rounds · score ' + hscore + ' · best streak ' + hmaxs);
   }
   function hStart() {
     hrun++; var id = hrun;
@@ -4808,7 +4826,7 @@ body.cbshapes .cbm { display: block; }
   }
   function hNote() {
     return hmode === 'daily'
-      ? 'Daily (Twin socks): ' + HDAILY_ROUNDS + ' rounds, every sock the same colour, one extra sock, scores count ' + BAL.hide.twinMult + ' times, and the same shuffles for everyone today. Best today: ' + (hdToday().best || '–') + ' · streak ' + hdStreak() + (hdStreak() === 1 ? ' day' : ' days') + '. The first round each day earns coins.'
+      ? 'Daily (Twin socks): ' + HDAILY_ROUNDS + ' rounds, every sock the same colour, one extra sock, scores count ' + BAL.hide.twinMult + ' times, and the same shuffles for everyone today. It starts on the speed of round ' + (1 + BAL.hide.dailyAhead) + ' and gets faster, so it is the hard one. Find ' + BAL.hide.bronze + ', ' + BAL.hide.silver + ' or ' + BAL.hide.gold + ' for bronze, silver or gold. Best today: ' + (hdToday().best || '–') + ' · streak ' + hdStreak() + (hdStreak() === 1 ? ' day' : ' days') + '. The first round each day earns coins.'
       : hmode === 'twin' ? 'Twin socks: every sock is the same colour, so there is nothing to track but position. You have 3 hearts, there is one more sock than in Classic, and scores count ' + BAL.hide.twinMult + ' times.'
       : 'Classic: you have 3 hearts. Each round the socks shuffle faster, and more socks join in. Keep your eyes on the raisin.';
   }
@@ -5443,13 +5461,13 @@ body.cbshapes .cbm { display: block; }
   $('#stats-yes').addEventListener('click', function () {
     ST = ST_DEFAULT();
     best.socks = null; best.dash = null; best.whack = null; best.gems = null;
-    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-hdaily', 'fa-quests', 'fa-week', 'fa-wgoal', 'fa-sreward', 'fa-weeks', 'fa-stamps'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-hdaily', 'fa-quests', 'fa-week', 'fa-wgoal', 'fa-sreward', 'fa-weeks', 'fa-stamps', 'fa-medals'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
     $('#stats-confirm').hidden = true; $('#stats-reset').hidden = false;
     GP.cleared = 0; GP.stars = {}; GP.coins = 40; GS.level = 1; GS.mode = 'levels'; GS.busy = false;
     Array.prototype.forEach.call($('#gems-modes').children, function (x) { x.setAttribute('aria-pressed', x.dataset.d === 'levels' ? 'true' : 'false'); });
     newGems();
     SP.cleared = 0; SP.stars = {}; SP.level = 1; sockType = 'free';
-    SD.date = ''; SD.done = false; SD.best = 0; SD.stars = 0; SD.streak = 0; SD.last = '';
+    SD.date = ''; SD.done = false; SD.best = 0; SD.stars = 0; SD.streak = 0; SD.last = ''; MED = { d: {} };
     M = mDefault(); ghost = ''; mdone = {};
     WL.cleared = 0; WL.stars = {}; WL.level = 1; wtype = 'free'; WD.date = ''; WD.best = 0; WD.streak = 0; WD.last = ''; WD.plays = 0; HD.date = ''; HD.best = 0; HD.streak = 0; HD.last = ''; HD.plays = 0; QS.date = ''; QS.base = {}; QS.claimed = {}; QS.swept = false; QS.streak = 0; QS.last = '';
     buildSocks(); resetDash(); wReset();
@@ -5621,6 +5639,10 @@ body.cbshapes .cbm { display: block; }
     }
     return a;
   }
+  function mxMedals(a, b) {
+    var o = { d: {} }; [a, b].forEach(function (x) { var d = (x && x.d) || {}; Object.keys(d).forEach(function (k) { var t = o.d[k] || (o.d[k] = {}); Object.keys(d[k] || {}).forEach(function (g) { if ((MRANK[d[k][g]] || 0) > (MRANK[t[g]] || 0)) t[g] = d[k][g]; }); }); });
+    return o;
+  }
   function mxLater(a, b, f) { return (typeof b[f] === 'string' && b[f] > (typeof a[f] === 'string' ? a[f] : '')) ? b : a; }
   function mxStreak(out, a, b) {
     var w = (a.last || '') === (b.last || '') ? ((b.streak || 0) > (a.streak || 0) ? b : a) : mxLater(a, b, 'last');
@@ -5666,7 +5688,7 @@ body.cbshapes .cbm { display: block; }
   }
   var MX = {
     'fa-stats': mxDeep, 'fa-week': mxDeep, 'fa-gems3': mxDeep, 'fa-socks3': mxDeep, 'fa-wlvl': mxDeep, 'fa-ach': mxDeep, 'fa-whack2': mxDeep, 'fa-dash': mxDeep, 'fa-gems2': mxDeep, 'dookdash-best': mxDeep,
-    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-wgoal': mxWGoal, 'fa-sreward': mxSReward, 'fa-weeks': mxDeep, 'fa-stamps': mxDeep, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'dookdash-save': mxDook,
+    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-wgoal': mxWGoal, 'fa-sreward': mxSReward, 'fa-weeks': mxDeep, 'fa-medals': mxMedals, 'fa-stamps': mxDeep, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'dookdash-save': mxDook,
     'fa-prof': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { if (a[k] !== '' && a[k] !== null && a[k] !== undefined) o[k] = a[k]; }); return o; },
     'fa-dmis': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; }); ['done', 'next'].forEach(function (k) { if (typeof a[k] === 'number' || typeof b[k] === 'number') o[k] = Math.max(a[k] || 0, b[k] || 0); }); return o; }
   };
@@ -5753,7 +5775,7 @@ body.cbshapes .cbm { display: block; }
     v['g-n'] = N; v['g-n2'] = N; v['g-t1'] = levelTypes(1); v['g-t2'] = levelTypes(99); v['g-w1'] = w1; v['g-w2'] = w1 + 1; v['g-mvmin'] = Math.min.apply(null, mv); v['g-mvmax'] = Math.max.apply(null, mv); v['g-fz'] = fz; v['g-lk'] = lk; v['g-star3'] = Math.round(B.gems.star3 * 100);
     v['g-bmin'] = Math.min.apply(null, Object.keys(BOOST).map(function (k) { return BOOST[k]; })); v['g-bmax'] = Math.max.apply(null, Object.keys(BOOST).map(function (k) { return BOOST[k]; })); v['g-rush'] = B.gems.rushMs / 1000;
     v['k-s0'] = B.stack.speed0; v['k-pl'] = B.stack.perLayer; v['k-max'] = B.stack.max; v['k-px'] = B.stack.perfectPx; v['k-after'] = ({ 2: 'two', 3: 'three', 4: 'four', 5: 'five' })[B.stack.widenAfter] || B.stack.widenAfter; v['k-widen'] = B.stack.widen; v['k-pc'] = B.stack.perCoin; v['k-cmax'] = B.stack.coinMax;
-    v['h-lives'] = B.hide.lives; v['h-r3'] = c3; v['h-r4a'] = c3 + 1; v['h-r4b'] = c4; v['h-sb'] = B.hide.swapBase; v['h-sp'] = B.hide.swapPer; v['h-sm'] = B.hide.swapMax; v['h-mb'] = B.hide.msBase; v['h-mp'] = B.hide.msPer; v['h-mm'] = B.hide.msMin; v['h-sock'] = B.hide.sock; v['h-str'] = B.hide.streak; v['h-strm'] = B.hide.streakMax;
+    v['h-lives'] = B.hide.lives; v['h-r3'] = c3; v['h-r4a'] = c3 + 1; v['h-r4b'] = c4; v['h-sb'] = B.hide.swapBase; v['h-sp'] = B.hide.swapPer; v['h-sm'] = B.hide.swapMax; v['h-mb'] = B.hide.msBase; v['h-mp'] = B.hide.msPer; v['h-mm'] = B.hide.msMin; v['h-sock'] = B.hide.sock; v['h-str'] = B.hide.streak; v['h-strm'] = B.hide.streakMax; v['pm-g'] = B.pals.medalG; v['pm-s'] = B.pals.medalS; v['pm-b'] = B.pals.medalB; v['h-tm'] = B.hide.twinMult; v['h-da'] = B.hide.dailyAhead; v['h-mb1'] = B.hide.bronze; v['h-mb2'] = B.hide.silver; v['h-mb3'] = B.hide.gold;
     v['sr-c'] = BAL.streak.c; v['sr-rc'] = BAL.streak.rc; v['sr-a'] = BAL.streak.a; v['sr-ra'] = BAL.streak.ra; v['sr-b'] = BAL.streak.b; v['sr-rb'] = BAL.streak.rb;
     v['th-n'] = BAL.theme.n; v['th-reward'] = BAL.theme.reward; v['th-b1'] = BAL.theme.b1; v['th-rb1'] = BAL.theme.rb1; v['th-b2'] = BAL.theme.b2; v['th-rb2'] = BAL.theme.rb2; v['th-t'] = BAL.theme.t;
     v['hd-twinx'] = BAL.hide.twinExtra; v['hd-twinmax'] = BAL.hide.twinMax; v['hd-twinm'] = BAL.hide.twinMult;
@@ -6058,6 +6080,8 @@ body.cbshapes .cbm { display: block; }
     var bestNow = Math.max.apply(null, st.map(function (r) { return r[1]; }));
     var h = meBlock('Streaks', st.map(function (r) { return [r[0], r[1] + (r[1] === 1 ? ' day' : ' days') + (r[2] > r[1] ? ' <small>(last run ' + r[2] + ')</small>' : '')]; }));
     h += srBlock();
+    var mc = medalCounts(), mt = [['Sock Match', 'socks'], ['Pop-Up Pals', 'whack'], ['Hide the Raisin', 'hide']];
+    h += meBlock('Daily medals', mt.map(function (g) { return [g[0] + ' today', medalToday(g[1]) || '<small>not yet</small>']; }).concat([['All time', mc.Gold + ' gold \u00b7 ' + mc.Silver + ' silver \u00b7 ' + mc.Bronze + ' bronze']]));
     // weekly recap
     wkSync();
     var w0 = wkSum(0, 7), w1 = wkSum(7, 14), bd = w0.best.k ? new Date(w0.best.k + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long' }) : '\u2013';
@@ -6200,9 +6224,9 @@ body.cbshapes .cbm { display: block; }
   function renderShare() {
     var c = qCounts(), today = dayKey(), parts = [], dd = ddDay();
     var hit = c.list.map(function (q) { return !!QS.claimed[q.id] || qProg(q) >= q.goal; }), n = hit.filter(Boolean).length;
-    if (SD.date === today && SD.done) parts.push('Sock Match ' + SD.best + ' moves' + (SD.stars ? ' ' + starStr(SD.stars) : ''));
-    if (WD.date === today && WD.plays > 0) parts.push('Pop-Up Pals ' + nf(WD.best));
-    if (HD.date === today && HD.plays > 0) parts.push('Hide the Raisin ' + nf(HD.best));
+    if (SD.date === today && SD.done) parts.push('Sock Match ' + SD.best + ' moves' + (SD.stars ? ' ' + starStr(SD.stars) : '') + (medalToday('socks') ? ' ' + medalToday('socks') : ''));
+    if (WD.date === today && WD.plays > 0) parts.push('Pop-Up Pals ' + nf(WD.best) + (medalToday('whack') ? ' ' + medalToday('whack') : ''));
+    if (HD.date === today && HD.plays > 0) parts.push('Hide the Raisin ' + nf(HD.best) + (medalToday('hide') ? ' ' + medalToday('hide') : ''));
     if (dd && dd.done > 0) parts.push('Dook Dash goals ' + dd.done + '/' + dd.n);
     var label = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), st = qStreakNow();
     var lines = [HEAD + ' · ' + label,
@@ -6362,7 +6386,7 @@ body.cbshapes .cbm { display: block; }
       sections: [
         { h: 'Ways to play', items: [
           { t: 'Free play', d: 'Pick Easy (6 pairs), Medium (8) or Hard (10). Your fewest moves and fastest time are saved for each size.', sel: '#sock-types button[data-t="free"]' },
-          { t: 'Levels', d: 'Levels get bigger and add twists as you climb, and clearing one unlocks the next. Three stars needs 1.8 moves per pair or fewer, and two stars needs 2.6. You earn 10 coins for a first clear and 5 for each extra star.', sel: '#sock-types button[data-t="levels"]' },
+          { t: 'Levels', d: 'Levels get bigger and add twists as you climb, and clearing one unlocks the next. Three stars needs 1.6 moves per pair or fewer, and two stars needs 2.6, with 2 extra moves allowed for each smelly decoy on the board. You earn 10 coins for a first clear and 5 for each extra star.', sel: '#sock-types button[data-t="levels"]' },
           { t: 'Daily board', d: 'One board a day, the same for everyone, with a decoy, golden pairs and the mischief ferret all switched on. Only your first try counts. Finishing pays 15 coins plus 2 for each day of your streak (up to 5), and keeps the streak going.', sel: '#sock-types button[data-t="daily"]' }
         ] },
         { h: 'Cards and twists', items: [
@@ -6429,7 +6453,7 @@ body.cbshapes .cbm { display: block; }
           { t: 'Daily', d: 'A 30-second round with every critter on and the same pops for everyone today. Your best and a streak are kept, and the first round each day pays 15 coins plus 3 for each streak day after the first (up to 6).', sel: '#whack-types button[data-t="daily"]' }
         ] },
         { h: 'Critters', items: [
-          { t: 'Ferrets', d: 'One point each, times your multiplier.' },
+          { t: 'Ferrets', d: 'One point each, times your multiplier. Every 5 hits in a row adds 1 to the multiplier, up to 4. Missing a ferret, or tapping an empty hole, breaks the streak.' },
           { t: 'Golden ferrets', d: 'Worth 3.' },
           { t: 'Sneaky blue ferrets', d: 'Worth 2. They hop to another hole up to twice before they hide.' },
           { t: 'Blue clocks', d: 'Add 2 seconds in timed rounds, or a heart in Endless.' },
@@ -6504,7 +6528,7 @@ body.cbshapes .cbm { display: block; }
         { h: 'Ways to play', items: [
           { t: 'Classic', d: 'You have 3 hearts. A wrong guess costs one. Rounds 1 to 3 have three socks, rounds 4 to 8 have four, and later rounds have five, with faster and longer shuffles.', sel: '#hide-types button[data-t="classic"]' },
           { t: 'Twin socks', d: 'A harder Classic. Every sock is the same colour, so you cannot follow the raisin by colour, only by position. There is one more sock than in Classic at each stage, up to six, and scores count 1.5 times.', sel: '#hide-types button[data-t="twin"]' },
-          { t: 'Daily', d: 'Ten rounds, with the same shuffles for everyone today. Your best and a streak are kept, and the first round each day pays 15 coins plus 3 for each streak day after the first (up to 6).', sel: '#hide-types button[data-t="daily"]' }
+          { t: 'Daily', d: 'Ten rounds of Twin socks (same-colour socks), with the same shuffles for everyone today. It starts at the speed of round 5, so it is the hardest mode, and you earn a bronze, silver or gold medal for finding 5, 8 or 10 raisins. Your best and a streak are kept, and the first round each day pays 15 coins plus 3 for each streak day after the first (up to 6).', sel: '#hide-types button[data-t="daily"]' }
         ] },
         { h: 'Scoring and help', items: [
           { t: 'Scoring', d: 'A right guess scores 10 for every sock on the table plus 5 per streak step, up to 8 steps. A wrong guess breaks the streak.' },
