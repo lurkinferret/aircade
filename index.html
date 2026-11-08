@@ -359,6 +359,7 @@ a.choice { flex-direction: row; align-items: center; gap: 10px; padding: 10px; b
 :root[data-bd="ocean"] .board, .boardsw[data-bd="ocean"] { background: linear-gradient(160deg, #cdeeff, #9fbcf5); }
 :root[data-bd="night"] .board, .boardsw[data-bd="night"] { background: linear-gradient(160deg, #3d3a70, #1d1b3d); }
 :root[data-bd="meadow"] .board, .boardsw[data-bd="meadow"] { background: linear-gradient(160deg, #e3f5c8, #a9d9a0); }
+:root[data-bd="closet"] .board, .boardsw[data-bd="closet"] { background: radial-gradient(circle, rgba(255,255,255,.35) 0 2px, transparent 3px) 0 0/12px 12px, linear-gradient(160deg, #f5c6dc, #d9a0c4); }
 .boardsw { display: block; width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--line); background: var(--tile); }
 .profrow { display: flex; gap: 8px; flex-wrap: wrap; }
 .pinput { flex: 1 1 180px; min-width: 0; font: inherit; padding: 8px 12px; border: 2px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
@@ -659,6 +660,7 @@ body.cbshapes .cbm { display: block; }
 </head>
 <body>
 
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <pattern id="sk0" width="100" height="14" patternUnits="userSpaceOnUse"><rect width="100" height="14" fill="#e8564a"/><rect width="100" height="7" fill="#fff4ea"/></pattern>
@@ -897,9 +899,10 @@ body.cbshapes .cbm { display: block; }
       <button class="abtn ghostbtn boost" type="button" data-b="moves">+5 moves <small>30 coins</small></button>
       <button class="abtn ghostbtn boost" type="button" data-b="hammer">Paw hammer <small>15 coins</small></button>
       <button class="abtn ghostbtn boost" type="button" data-b="sweep">Color sweep <small>25 coins</small></button>
+      <button class="abtn ghostbtn boost" type="button" data-b="cross">Cross zap <small>35 coins</small></button>
     </div>
     <div class="btnrow"><button class="abtn" id="gems-next" hidden>Next level</button><button class="abtn" id="gems-retry" hidden>Retry level</button><button class="abtn ghostbtn copyres" id="copy-gems" data-g="gems" hidden>Copy my result</button></div>
-    <p class="tip">Drag a piece toward a neighbor, or tap one piece and then another. Four in a row leaves a blaster that clears its row or column. Five leaves a bomb that clears a 3 by 3 area. An L or T shape leaves a paw burst that clears every piece of its kind. Swap two special pieces together for a bigger combo. Color sweep clears every piece of one kind. Rush mode gives you 60 seconds. From level 3, tangled socks sit in place and cannot be swapped. Match next to one to free it. The mischief ferret visits every few moves in every mode, from level 2 in Levels. He may swap two pieces, steal one, or leave you a blaster. Three stars needs 40 percent of your moves left.</p>
+    <p class="tip">Drag a piece toward a neighbor, or tap one piece and then another. Four in a row leaves a blaster that clears its row or column. Five leaves a bomb that clears a 3 by 3 area. An L or T shape leaves a paw burst that clears every piece of its kind. Swap two special pieces together for a bigger combo. Color sweep clears every piece of one kind. Cross zap clears the row and column of one piece. Rush mode gives you 60 seconds. From level 3, tangled socks sit in place and cannot be swapped. Match next to one to free it. The mischief ferret visits every few moves in every mode, from level 2 in Levels. He may swap two pieces, steal one, or leave you a blaster. Three stars needs 40 percent of your moves left.</p>
   </section>
 
   <section class="panel" id="dook" hidden>
@@ -1346,9 +1349,9 @@ body.cbshapes .cbm { display: block; }
         <thead><tr><th>Game</th><th>Behavior borrowed</th><th>Core loop</th><th>Numbers that set difficulty</th></tr></thead>
         <tbody>
           <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at <span data-wp="s-e">6</span>, <span data-wp="s-m">8</span> or <span data-wp="s-h">10</span> pairs, levels that grow to <span data-wp="s-max">10</span> pairs, and a daily board seeded from the date. Three stars at <span data-wp="s-st3">1.6</span> moves per pair or fewer, two at <span data-wp="s-st2">2.6</span>, with each decoy on the board adding its cost to both limits. Decoys cost <span data-wp="s-decoy">2</span> moves, a golden pair gives <span data-wp="s-gold">2</span> back, and from level <span data-wp="s-mis">2</span> a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost <span data-wp="sock-reveal">15</span> and <span data-wp="sock-freeze">5</span> coins.</td></tr>
-          <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from <span data-wp="d-s0">170</span> to <span data-wp="d-s1">380</span> px/s over the first <span data-wp="d-rs">60</span> s, then keeps climbing to <span data-wp="d-smax">450</span> px/s while obstacles arrive faster and more often in pairs. <span data-wp="d-lives">3</span> lives, up to <span data-wp="d-maxl">5</span>. The tunnel changes every <span data-wp="d-bm">400</span> m, with a checkpoint every <span data-wp="d-cp">500</span> m. From <span data-wp="d-b1">600</span> m, and every <span data-wp="d-be">700</span> m after, a giant vacuum starts a boss chase of <span data-wp="d-ba0">7</span> flagged-lane attacks, growing to <span data-wp="d-bmax">12</span>. Each warning lasts <span data-wp="d-w0">1.2</span> s and shortens with every attack and every chase, to a floor of <span data-wp="d-wmin">0.6</span> s. Three missions at a time pay <span data-wp="d-mmin">10</span> to <span data-wp="d-mmax">25</span> coins each.</td></tr>
+          <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from <span data-wp="d-s0">170</span> to <span data-wp="d-s1">380</span> px/s over the first <span data-wp="d-rs">60</span> s, then keeps climbing to <span data-wp="d-smax">450</span> px/s while obstacles arrive faster and more often in pairs. <span data-wp="d-lives">3</span> lives, up to <span data-wp="d-maxl">5</span>. The tunnel changes every <span data-wp="d-bm">400</span> m, with a checkpoint every <span data-wp="d-cp">500</span> m. From <span data-wp="d-b1">600</span> m, and every <span data-wp="d-be">700</span> m after, a giant vacuum starts a boss chase of <span data-wp="d-ba0">7</span> flagged-lane attacks, growing to <span data-wp="d-bmax">12</span>. Each warning lasts <span data-wp="d-w0">1.2</span> s and shortens with every attack and every chase, to a floor of <span data-wp="d-wmin">0.6</span> s. Three missions at a time pay <span data-wp="d-mmin">10</span> to <span data-wp="d-mmax">30</span> coins each.</td></tr>
           <tr><td>Pop-Up Pals</td><td>Sudden bursts of play</td><td>Tap what pops out of a hole, keep a combo going</td><td>Timed rounds last <span data-wp="p-round">30</span> s. Golden ferrets score <span data-wp="p-gold">3</span>, hoppers <span data-wp="p-hop">2</span> and a <span data-wp="p-hp">3</span>-tap boss <span data-wp="p-boss">10</span>. Clocks add <span data-wp="p-clock">2</span> s up to <span data-wp="p-cap">45</span> s. Levels set a score target of <span data-wp="p-tb">40</span> plus <span data-wp="p-tp">6</span> per level, with stars at 1, <span data-wp="p-s2">1.3</span> and <span data-wp="p-s3">1.6</span> times the target. Endless has no clock but <span data-wp="p-lives">3</span> hearts, up to <span data-wp="p-maxl">5</span>, with the pops speeding up <span data-wp="p-speed">1.7</span> times as fast. A ferret that hides before you tap it breaks your combo, as does tapping an empty hole or a vacuum. Daily is a <span data-wp="p-round2">30</span> s round with every critter on and a date-seeded pop pattern.</td></tr>
-          <tr><td>Ferret Gems</td><td>Hoarding favorite treats</td><td>Swap two neighbors to line up 3 or more of a kind and reach the level goal</td><td><span data-wp="g-n">7</span> x <span data-wp="g-n2">7</span> board, <span data-wp="g-t1">5</span> then <span data-wp="g-t2">6</span> piece types. World 1 (levels 1 to <span data-wp="g-w1">30</span>) rotates through score, collect, special-piece, tangled-sock and chain goals with <span data-wp="g-mvmin">20</span> to <span data-wp="g-mvmax">25</span> moves. World 2 (level <span data-wp="g-w2">31</span> on) adds up to <span data-wp="g-fz">10</span> frozen gems, some with two layers of ice, and up to <span data-wp="g-lk">7</span> locked gems that cannot be swapped, with thaw and unlock goals. Three stars needs <span data-wp="g-star3">40</span> percent of the moves left. Four in a row leaves a blaster, five a bomb, and an L or T a paw burst. Boosters cost <span data-wp="g-bmin">15</span> to <span data-wp="g-bmax">30</span> coins. Rush lasts <span data-wp="g-rush">60</span> seconds and Zen has no limits.</td></tr>
+          <tr><td>Ferret Gems</td><td>Hoarding favorite treats</td><td>Swap two neighbors to line up 3 or more of a kind and reach the level goal</td><td><span data-wp="g-n">7</span> x <span data-wp="g-n2">7</span> board, <span data-wp="g-t1">5</span> then <span data-wp="g-t2">6</span> piece types. World 1 (levels 1 to <span data-wp="g-w1">30</span>) rotates through score, collect, special-piece, tangled-sock and chain goals with <span data-wp="g-mvmin">20</span> to <span data-wp="g-mvmax">25</span> moves. World 2 (level <span data-wp="g-w2">31</span> on) adds up to <span data-wp="g-fz">10</span> frozen gems, some with two layers of ice, and up to <span data-wp="g-lk">7</span> locked gems that cannot be swapped, with thaw and unlock goals. Three stars needs <span data-wp="g-star3">40</span> percent of the moves left. Four in a row leaves a blaster, five a bomb, and an L or T a paw burst. Boosters cost <span data-wp="g-bmin">15</span> to <span data-wp="g-bmax">35</span> coins. Rush lasts <span data-wp="g-rush">60</span> seconds and Zen has no limits.</td></tr>
           <tr><td>Hammock Stack</td><td>Piling into hammocks to sleep</td><td>Drop a swinging hammock onto the pile so the overlap stays</td><td>The first hammock is <span data-wp="stack-w">190</span> px wide and each layer is <span data-wp="stack-h">22</span> px tall. The swing starts at <span data-wp="k-s0">130</span> px/s and gains <span data-wp="k-pl">7</span> px/s per layer up to <span data-wp="k-max">380</span>. A drop within <span data-wp="k-px">5</span> px of centre is perfect and loses nothing, and <span data-wp="k-after">three</span> perfects in a row widen the hammock by <span data-wp="k-widen">6</span> px, up to its first width. A complete miss ends the game. 1 coin per <span data-wp="k-pc">3</span> layers, up to <span data-wp="k-cmax">25</span>.</td></tr>
           <tr><td>Hide the Raisin</td><td>Hiding food</td><td>Watch the raisin go under a sock, follow the shuffle, pick the sock</td><td><span data-wp="h-lives">3</span> hearts. Rounds 1 to <span data-wp="h-r3">3</span> use three socks, rounds <span data-wp="h-r4a">4</span> to <span data-wp="h-r4b">8</span> four, and later rounds five. Each round does <span data-wp="h-sb">4</span> plus <span data-wp="h-sp">1.2</span> times the round number in swaps, up to <span data-wp="h-sm">18</span>, and each swap takes <span data-wp="h-mb">520</span> ms minus <span data-wp="h-mp">26</span> ms per round, down to <span data-wp="h-mm">170</span> ms. A right pick scores <span data-wp="h-sock">10</span> per sock plus <span data-wp="h-str">5</span> per streak step, up to <span data-wp="h-strm">8</span>. The daily mode is <span data-wp="hide-daily">10</span> rounds with date-seeded shuffles, played as Twin socks (same-colour socks, one extra sock, scores times <span data-wp="h-tm">1.5</span>). Its shuffles start <span data-wp="h-da">4</span> rounds ahead on the swap and speed curve, and finding <span data-wp="h-mb1">5</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb3">10</span> raisins earns a bronze, silver or gold medal. Peek costs <span data-wp="hide-peek">10</span> coins.</td></tr>
         </tbody>
@@ -1359,11 +1362,11 @@ body.cbshapes .cbm { display: block; }
     <p>Every game restarts with one tap, and the action games ramp up slowly. In Ferret Gems, a swap that makes no match slides back and costs no move, and the Hint button is free. In Tunnel Dash, no more than two of the three lanes are ever blocked in the same row, so a clear lane always exists, a boss chase flags at most two lanes at a time, a shield absorbs one hit, and a hit gives <span data-wp="d-grace">1.2</span> seconds of protection so one mistake does not chain into three. In Pop-Up Pals, most pop-ups are ordinary ferrets, with golden ferrets, clocks and vacuums mixed in to reward attention. Sock Match shows a clock but ranks you by moves only, so players can take their time. Hide the Raisin always shows the raisin first and gives the player a peek, and for players who find it too easy it has Twin socks, where every sock is the same colour so only position can be followed, with <span data-wp="hd-twinx">1</span> extra sock at each stage (up to <span data-wp="hd-twinmax">6</span>) and scores multiplied by <span data-wp="hd-twinm">1.5</span>. Hammock Stack forgives small misses by trimming the hammock rather than ending the game.</p>
 
     <h3>4. One wallet, many places to spend it</h3>
-    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: <span data-wp="hat-n">10</span> hats (<span data-wp="hat-min">40</span> to <span data-wp="hat-max">150</span> coins), <span data-wp="coat-n">4</span> coats (<span data-wp="coat-min">60</span> to <span data-wp="coat-max">120</span>), gem sets (<span data-wp="gems-min">70</span> to <span data-wp="gems-max">90</span>), board themes (<span data-wp="board-min">50</span> to <span data-wp="board-max">80</span>), sock card backs (<span data-wp="back-min">50</span> to <span data-wp="back-max">90</span>), and backgrounds (<span data-wp="cbg-min">50</span> to <span data-wp="cbg-max">70</span>) and frames (<span data-wp="cfr-min">50</span> to <span data-wp="cfr-max">90</span>) for the pictures made by Copy my result. It also sells boost packs for <span data-wp="boost-min">15</span> to <span data-wp="boost-max">60</span> coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
+    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: <span data-wp="hat-n">11</span> hats (<span data-wp="hat-min">40</span> to <span data-wp="hat-max">150</span> coins), <span data-wp="coat-n">4</span> coats (<span data-wp="coat-min">60</span> to <span data-wp="coat-max">120</span>), gem sets (<span data-wp="gems-min">70</span> to <span data-wp="gems-max">90</span>), board themes (<span data-wp="board-min">50</span> to <span data-wp="board-max">80</span>), sock card backs (<span data-wp="back-min">50</span> to <span data-wp="back-max">90</span>), and backgrounds (<span data-wp="cbg-min">50</span> to <span data-wp="cbg-max">70</span>) and frames (<span data-wp="cfr-min">50</span> to <span data-wp="cfr-max">90</span>) for the pictures made by Copy my result. It also sells boost packs for <span data-wp="boost-min">15</span> to <span data-wp="boost-max">90</span> coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
 
     <h3>5. Identity and long-term goals</h3>
-    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">17</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">55</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">150</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
-    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">55</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a bonus goal of <span data-wp="wg-med">5</span> daily medals in the week worth <span data-wp="wg-medr">25</span> coins, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday. Each daily can also earn a medal, kept per day and counted on the page: Sock Match gives gold, silver or bronze for three, two or one stars, Pop-Up Pals for <span data-wp="pm-g">250</span>, <span data-wp="pm-s">150</span> or <span data-wp="pm-b">80</span> points, and Hide the Raisin for <span data-wp="h-mb3">10</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb1">5</span> raisins found.</p>
+    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">17</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">56</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">150</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
+    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">56</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a bonus goal of <span data-wp="wg-med">5</span> daily medals in the week worth <span data-wp="wg-medr">25</span> coins, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday. Each daily can also earn a medal, kept per day and counted on the page: Sock Match gives gold, silver or bronze for three, two or one stars, Pop-Up Pals for <span data-wp="pm-g">250</span>, <span data-wp="pm-s">150</span> or <span data-wp="pm-b">80</span> points, and Hide the Raisin for <span data-wp="h-mb3">10</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb1">5</span> raisins found.</p>
 
     <p>Progress lives in the browser, so the arcade gives players some control over it. The Settings page (the gear in the header) sets sound and volume, reduced motion, text size shape markers for the gems and letter labels for sock cards. It also makes a backup code: a block of text, with a check value to catch copying errors, that carries all progress, Dook Dash included. Pasting a code on another device shows a summary first. The player can then merge it, keeping the higher value of each item, with items and badges from both sides kept and coins not added together, or replace everything outright. Nothing changes until one is chosen. The code is not encrypted, so anyone holding it can load the progress. A Share today block on the quests page turns the day&rsquo;s quests and daily boards into a few lines of text or a picture, with no server involved, so players can compare days with friends.</p>
 
@@ -2647,7 +2650,7 @@ body.cbshapes .cbm { display: block; }
   var ST_DEFAULT = function () {
     return {
       socks: { played: 0, won: 0, moves: 0, pairs: 0, peeks: 0, bestStreak: 0, threeStars: 0, fast: {}, levelsWon: 0, dailies: 0, bestDaily: 0, mischief: 0, decoys: 0, golds: 0, reveals: 0, freezes: 0 },
-      dash: { runs: 0, raisins: 0, meters: 0, longest: 0, bestRaisins: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, ducks: 0, leaps: 0, slows: 0, checkpoints: 0, missions: 0, chases: 0, bossWins: 0, bossHits: 0 },
+      dash: { runs: 0, raisins: 0, meters: 0, longest: 0, bestRaisins: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, ducks: 0, leaps: 0, yarns: 0, closets: 0, slows: 0, checkpoints: 0, missions: 0, chases: 0, bossWins: 0, bossHits: 0 },
       whack: { rounds: 0, hits: 0, taps: 0, score: 0, golds: 0, clocks: 0, vac: 0, maxCombo: 0, hops: 0, bosses: 0, covers: 0, levelsWon: 0, endlessBest: 0, endlessRuns: 0, dailies: 0, bestDaily: 0, boosts: 0 },
       quests: { claimed: 0, sweeps: 0, bestStreak: 0 },
       stack: { games: 0, layers: 0, tallest: 0, perfects: 0, bestStreak: 0, coinsEarned: 0 },
@@ -3012,14 +3015,15 @@ body.cbshapes .cbm { display: block; }
   var FY = H - 120, JDUR = 0.55, DDUR = 0.5;
   var dpaused = false, dst = 'ready', lane = 1, fx = 0, objs = [], dt0 = 0, spawnT = 0, dist = 0, raisins = 0, lives = 3, inv = 0, last = 0, raf = 0, col = {};
   var jt = 0, dkt = 0, magnetT = 0, slowT = 0, shield = false, toastT = 0, toastTxt = '', nextCp = 500, curBiome = 0, gfx = 0, gtr = [], mdone = {};
-  function newRs() { return { chases: 0, bossWins: 0, bossHits: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, slows: 0, shoes: 0, ducks: 0, leaps: 0, powers: 0, checkpoints: 0 }; }
+  function newRs() { return { yarns: 0, closet: 0, chases: 0, bossWins: 0, bossHits: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, slows: 0, shoes: 0, ducks: 0, leaps: 0, powers: 0, checkpoints: 0 }; }
   var rs = newRs();
   var boss = null, nextBossAt = BAL.dash.boss1, bossLvl = 0, bossX = 160;
   // The tunnel changes every 400 m. Each stretch leans on different hazards.
   var BIOMES = [
     { name: 'Laundry room', bg: null, rib: null, w: { shoe: 0.5, vac: 0.32, bar: 0.18 } },
     { name: 'Garden hose', bg: '#12301f', rib: '#1e4a2f', w: { shoe: 0.15, vac: 0.1, gap: 0.4, mvac: 0.25, bar: 0.1 } },
-    { name: 'Couch fort', bg: '#2b1d3d', rib: '#43305c', w: { shoe: 0.15, vac: 0.2, bar: 0.35, gap: 0.15, mvac: 0.15 } }
+    { name: 'Couch fort', bg: '#2b1d3d', rib: '#43305c', w: { shoe: 0.15, vac: 0.2, bar: 0.35, gap: 0.15, mvac: 0.15 } },
+    { name: 'Craft closet', bg: '#3a2236', rib: '#5c3558', w: { shoe: 0.12, vac: 0.14, bar: 0.22, gap: 0.14, mvac: 0.1, yarn: 0.28 } }
   ];
   // Missions: three at a time, finished ones are replaced after the run. They pay into the shared coin wallet.
   var MPOOL = [
@@ -3031,6 +3035,8 @@ body.cbshapes .cbm { display: block; }
     { id: 'powers', text: 'Grab 3 power-ups in one run', key: 'powers', n: 3, c: 10 },
     { id: 'clean', text: 'Run 300 m without taking a hit', key: 'clean', n: 300, c: 15 },
     { id: 'fort', text: 'Reach the Couch fort (800 m)', key: 'meters', n: 800, c: 20 },
+    { id: 'yarn', text: 'Hop 2 yarn balls in one run', key: 'yarns', n: 2, c: 20 },
+    { id: 'closet', text: 'Reach the Craft closet (1200 m)', key: 'meters', n: 1200, c: 30 },
     { id: 'boss', text: 'Outrun a boss chase', key: 'bossWins', n: 1, c: 25 }
   ];
   function mById(id) { for (var i = 0; i < MPOOL.length; i++) if (MPOOL[i].id === id) return MPOOL[i]; return null; }
@@ -3130,11 +3136,11 @@ body.cbshapes .cbm { display: block; }
     raf = requestAnimationFrame(loopDash);
   }
   function mk(l, type) {
-    var h = { raisin: 18, shoe: 56, vac: 44, mvac: 44, bar: 14, gap: 44 }[type] || 30;
-    return { lane: l, y: -40, type: type, h: h, dead: false, hit: false, dir: 1 };
+    var h = { raisin: 18, shoe: 56, vac: 44, mvac: 44, bar: 14, gap: 44, yarn: 44 }[type] || 30;
+    return { lane: l, y: -40, type: type, h: h, dead: false, hit: false, dir: type === 'yarn' && Math.random() < 0.5 ? -1 : 1 };
   }
   function pickHazard() {
-    var bi = Math.floor(dist / 20 / BAL.dash.biomeM) % 3, w = BIOMES[bi].w;
+    var bi = Math.floor(dist / 20 / BAL.dash.biomeM) % BIOMES.length, w = BIOMES[bi].w;
     if (bi === 0 && dist / 20 < 100) w = { shoe: 0.6, vac: 0.4 };
     var r = Math.random(), s = 0, k;
     for (k in w) { s += w[k]; if (r < s) return k; }
@@ -3219,7 +3225,7 @@ body.cbshapes .cbm { display: block; }
       if (kind !== 'mvac' && Math.random() < Math.min(BAL.dash.dblMax, BAL.dash.dbl0 + dt0 * BAL.dash.dblPer)) {
         var l2 = (l + 1 + Math.floor(Math.random() * 2)) % 3, pool = ['shoe'];
         if (dist / 20 >= 100) pool.push('bar');
-        if (Math.floor(dist / 20 / BAL.dash.biomeM) % 3 > 0) pool.push('gap');
+        if (Math.floor(dist / 20 / BAL.dash.biomeM) % BIOMES.length > 0) pool.push('gap');
         objs.push(mk(l2, Math.random() < 0.5 ? 'raisin' : pool[Math.floor(Math.random() * pool.length)]));
       }
     }
@@ -3231,7 +3237,7 @@ body.cbshapes .cbm { display: block; }
     var D = ST.dash, meters = Math.floor(dist / 20);
     D.runs++; D.raisins += raisins; D.meters += meters; D.longest = Math.max(D.longest, meters); D.bestRaisins = Math.max(D.bestRaisins, raisins);
     D.jumps += rs.jumps; D.hits += rs.hits; D.magnets += rs.magnets; D.shields += rs.shields; D.hearts += rs.hearts;
-    D.ducks += rs.ducks; D.leaps += rs.leaps; D.slows += rs.slows; D.checkpoints += rs.checkpoints;
+    D.ducks += rs.ducks; D.leaps += rs.leaps; D.yarns += rs.yarns; D.closets += rs.closet; D.slows += rs.slows; D.checkpoints += rs.checkpoints;
     D.chases += rs.chases; D.bossWins += rs.bossWins; D.bossHits += rs.bossHits;
     if (best.dash === null || sc > best.dash) {
       best.dash = sc; save('fa-dash', sc);
@@ -3268,24 +3274,24 @@ body.cbshapes .cbm { display: block; }
       rs.checkpoints++; nextCp += BAL.dash.cpM;
       if (lives < BAL.dash.lives) { lives++; dToast('CHECKPOINT +1 LIFE'); } else dToast('CHECKPOINT ' + mt + ' m');
     }
-    var bi = Math.max(0, Math.floor(mt / BAL.dash.biomeM)) % 3;
-    if (bi !== curBiome) { curBiome = bi; dToast(BIOMES[bi].name.toUpperCase()); }
+    var bi = Math.max(0, Math.floor(mt / BAL.dash.biomeM)) % BIOMES.length;
+    if (bi !== curBiome) { curBiome = bi; dToast(BIOMES[bi].name.toUpperCase()); if (bi === 3) rs.closet = 1; }
     if (!boss && mt >= nextBossAt) startBoss();
     if (boss) bossUpdate(dt);
     objs.forEach(function (o) {
       o.y += speed * wdt;
-      if (o.type === 'mvac' && o.y > -20) {
-        o.lane += o.dir * 0.8 * wdt;
+      if ((o.type === 'mvac' || o.type === 'yarn') && o.y > -20) {
+        o.lane += o.dir * (o.type === 'yarn' ? 0.25 : 0.8) * wdt;
         if (o.lane <= 0) { o.lane = 0; o.dir = 1; } else if (o.lane >= 2) { o.lane = 2; o.dir = -1; }
       }
       if (magnetT > 0 && o.type === 'raisin' && o.y > FY - 230 && o.y < FY + 60) o.lane += (lane - o.lane) * Math.min(1, dt * 9);
-      if (o.type === 'shoe' || o.type === 'gap' || o.type === 'bar') {
+      if (o.type === 'shoe' || o.type === 'gap' || o.type === 'bar' || o.type === 'yarn') {
         // Judged once, as it passes the ferret's middle: shoes and gaps need a jump, low pipes need a duck.
         if (!o.passed && o.y >= FY + 14) {
           o.passed = true;
           if (Math.abs(o.lane - lane) < 0.5) {
             var ok = o.type === 'bar' ? dkt > 0 : jumpY() > 0.3;
-            if (ok) rs[o.type === 'shoe' ? 'shoes' : (o.type === 'gap' ? 'leaps' : 'ducks')]++;
+            if (ok) rs[o.type === 'shoe' ? 'shoes' : (o.type === 'gap' ? 'leaps' : (o.type === 'yarn' ? 'yarns' : 'ducks'))]++;
             else if (inv <= 0) { o.hit = true; hurt(); }
           }
         }
@@ -3388,6 +3394,13 @@ body.cbshapes .cbm { display: block; }
     } else if (o.type === 'gap') {
       ctx.fillStyle = '#04060a'; ctx.beginPath(); ctx.ellipse(x, y, 40, 24, 0, 0, 7); ctx.fill();
       ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x, y, 40, 24, 0, 0, 7); ctx.stroke();
+    } else if (o.type === 'yarn') {
+      ctx.strokeStyle = '#e8a0c0'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, y + 20); ctx.quadraticCurveTo(x + o.dir * 16, y + 40, x - o.dir * 6, y + 58); ctx.stroke();
+      ctx.fillStyle = '#e0568a'; ctx.beginPath(); ctx.arc(x, y, 22, 0, 7); ctx.fill();
+      ctx.strokeStyle = '#ffd1e3'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.arc(x, y, 15, 0.4, 2.5); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, 9, 3.4, 5.6); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x - 20, y + 6); ctx.quadraticCurveTo(x, y - 8, x + 20, y + 6); ctx.stroke();
     } else if (o.type === 'mvac') {
       ctx.fillStyle = '#ffd9a8'; ctx.beginPath(); ctx.arc(x, y, 22, 0, 7); ctx.fill();
       ctx.fillStyle = '#33414f'; ctx.beginPath(); ctx.arc(x, y, 11, 0, 7); ctx.fill();
@@ -3848,7 +3861,7 @@ body.cbshapes .cbm { display: block; }
     '<svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="66" rx="22" ry="18" fill="#6b4a35"/><circle cx="24" cy="44" r="9" fill="#6b4a35"/><circle cx="40" cy="28" r="9" fill="#6b4a35"/><circle cx="60" cy="28" r="9" fill="#6b4a35"/><circle cx="76" cy="44" r="9" fill="#6b4a35"/></svg>'
   ];
   var GPLURAL = ['ferrets', 'socks', 'raisins', 'eggs', 'jingle balls', 'paw prints'];
-  var BOOST = { shuffle: 20, moves: 30, hammer: 15, sweep: 25 };
+  var BOOST = { shuffle: 20, moves: 30, hammer: 15, sweep: 25, cross: 35 };
   var gb = $('#gboard');
   // Saved progress: highest level cleared, best stars per level, and coins for boosters.
   var GP = { cleared: 0, stars: {}, coins: 40 };
@@ -3861,7 +3874,7 @@ body.cbshapes .cbm { display: block; }
   })();
   function gpSave() { save('fa-gems3', GP); }
   var GS = { started: false, zenMs: 0, shuffles: 0, rushLeft: BAL.gems.rushMs, rushOn: false, board: [], mode: 'levels', level: 1, goal: null, total: 0, lscore: 0, moves: 0, startMoves: 0, moveCount: 0,
-    cleared: [0, 0, 0, 0, 0, 0], made: 0, freed: 0, thawed: 0, unlocked: 0, chainMax: 0, types: 5, mis: 0, hammer: false, busy: false, over: false, sel: null, lastSwap: null, counted: false };
+    cleared: [0, 0, 0, 0, 0, 0], made: 0, blasts: 0, freed: 0, thawed: 0, unlocked: 0, chainMax: 0, types: 5, mis: 0, hammer: false, busy: false, over: false, sel: null, lastSwap: null, counted: false };
   GS.level = Math.min(99, GP.cleared + 1);
   var gdrag = null, hintTimer = 0;
 
@@ -3874,9 +3887,10 @@ body.cbshapes .cbm { display: block; }
     return { tg: Math.min(4, tangleCount(L)), fz: Math.min(10, 4 + Math.floor(k / 3)), lk: Math.min(7, 3 + Math.floor(k / 4)), two: Math.min(5, Math.floor(k / 5)) };
   }
   function goalFor2(L) {
-    var kind = ['thaw', 'score', 'unlock', 'collect', 'chain', 'thaw', 'special', 'unlock', 'untangle'][(L - 31) % 9], tier = Math.floor((L - 31) / 9), o = obsFor(L);
+    var kind = ['thaw', 'score', 'unlock', 'collect', 'chain', 'blast', 'special', 'unlock', 'untangle'][(L - 31) % 9], tier = Math.floor((L - 31) / 9), o = obsFor(L);
     if (kind === 'thaw') return { kind: kind, n: Math.min(o.fz, 4 + tier), moves: 26 };
     if (kind === 'unlock') return { kind: kind, n: Math.min(o.lk, 3 + tier), moves: 26 };
+    if (kind === 'blast') return { kind: kind, n: Math.min(5, 2 + tier), moves: 24 };
     if (kind === 'score') return { kind: kind, n: Math.min(9000, 1800 + 280 * (L - 31)), moves: 22 };
     if (kind === 'collect') return { kind: kind, type: (L * 2 + 1) % 6, n: Math.min(35, 12 + Math.floor((L - 30) / 2)), moves: 24 };
     if (kind === 'special') return { kind: kind, n: 3 + tier, moves: 24 };
@@ -3900,6 +3914,7 @@ body.cbshapes .cbm { display: block; }
     if (g.kind === 'thaw') return 'Thaw ' + g.n + ' frozen gems by matching next to them.';
     if (g.kind === 'unlock') return 'Clear ' + g.n + ' locked gems by matching them. They cannot be swapped.';
     if (g.kind === 'untangle') return 'Free ' + g.n + ' tangled socks by matching next to them.';
+    if (g.kind === 'blast') return 'Set off ' + g.n + ' special pieces. Match them, or tap one with a booster.';
     if (g.kind === 'special') return 'Make ' + g.n + ' special pieces by matching four or five.';
     return 'Set off a chain reaction of x' + g.n + '.';
   }
@@ -3911,10 +3926,11 @@ body.cbshapes .cbm { display: block; }
     if (g.kind === 'unlock') return GS.unlocked;
     if (g.kind === 'untangle') return GS.freed;
     if (g.kind === 'special') return GS.made;
+    if (g.kind === 'blast') return GS.blasts;
     return GS.chainMax;
   }
   function goalMet() { return goalProgress() >= GS.goal.n; }
-  var GLABEL = { score: 'Points', collect: 'Collected', special: 'Specials', chain: 'Chain', untangle: 'Freed', thaw: 'Thawed', unlock: 'Unlocked' };
+  var GLABEL = { score: 'Points', collect: 'Collected', special: 'Specials', chain: 'Chain', untangle: 'Freed', thaw: 'Thawed', unlock: 'Unlocked', blast: 'Set off' };
   function starStr(n) { return '★'.repeat(n) + '☆'.repeat(3 - n); }
 
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -4062,7 +4078,7 @@ body.cbshapes .cbm { display: block; }
   }
   function resetRound() {
     GS.over = false; GS.sel = null; GS.lastSwap = null; GS.hammer = false; GS.moveCount = 0;
-    GS.lscore = 0; GS.cleared = [0, 0, 0, 0, 0, 0]; GS.made = 0; GS.freed = 0; GS.thawed = 0; GS.unlocked = 0; GS.chainMax = 0;
+    GS.lscore = 0; GS.cleared = [0, 0, 0, 0, 0, 0]; GS.made = 0; GS.blasts = 0; GS.freed = 0; GS.thawed = 0; GS.unlocked = 0; GS.chainMax = 0;
     gb.classList.remove('hammer');
     $('#gems-next').hidden = true; $('#gems-retry').hidden = true; $('#gems-banner').hidden = true;
   }
@@ -4291,6 +4307,7 @@ body.cbshapes .cbm { display: block; }
       loose.forEach(function (t) { untangle(t); GS.freed++; ST.gems.freed++; });
       var thawedN = thawAround(R);
       GS.chainMax = Math.max(GS.chainMax, casc);
+      GS.blasts += countSp(R);
       var GM = ST.gems; GM.maxChain = Math.max(GM.maxChain, casc);
       spawns.forEach(function (sp) { GS.made++; if (sp.kind === 'b') GM.bombs++; else if (sp.kind === 'x') GM.bursts++; else GM.blasters++; });
       gHud();
@@ -4487,6 +4504,7 @@ body.cbshapes .cbm { display: block; }
 
   // ---- boosters ----
   function pay(k) { spendOr('g' + k, BOOST[k]); ST.gems.boosters++; sSave(); }
+  function countSp(R) { var n = 0; R.list.forEach(function (p) { var b = GS.board[p[0]][p[1]]; if (b && b.sp) n++; }); return n; }
   async function useHammer(t) {
     setBusy(true);
     try {
@@ -4497,11 +4515,13 @@ body.cbshapes .cbm { display: block; }
       if (kind === 'sweep') {
         for (var i = 0; i < N; i++) for (var j = 0; j < N; j++) { var o = GS.board[i][j]; if (o && !o.tg && !o.fz && o.t === t.t && o !== t) seed.push([i, j]); }
       }
+      if (kind === 'cross') { for (var ci = 0; ci < N; ci++) { seed.push([t.r, ci]); seed.push([ci, t.c]); } }
       var R = buildRemoval(seed);
+      GS.blasts += countSp(R);
       looseAround(R);
       GS.total += R.list.length * 10; GS.lscore += R.list.length * 10;
       tally(R.list);
-      gMsg(kind === 'sweep' ? 'Color sweep!' : (R.blasted ? 'Blast!' : ''));
+      gMsg(kind === 'sweep' ? 'Color sweep!' : (kind === 'cross' ? 'Cross zap!' : (R.blasted ? 'Blast!' : '')));
       await removeAndDrop(R.list, []);
       await resolve();
       await afterMove(false);
@@ -4562,12 +4582,12 @@ body.cbshapes .cbm { display: block; }
     var bt = e.target.closest('button[data-b]');
     if (!bt || bt.disabled || GS.mode !== 'levels') return;
     var k = bt.dataset.b;
-    if (k === 'hammer' || k === 'sweep') {
+    if (k === 'hammer' || k === 'sweep' || k === 'cross') {
       if (GS.busy || GS.over) return;
       var armed = GS.hammer === k;
       if (!armed && !canBuy('g' + k, BOOST[k])) return;
       GS.hammer = armed ? false : k; gb.classList.toggle('hammer', !!GS.hammer); clearSel();
-      gMsg(GS.hammer ? (k === 'sweep' ? 'Tap a piece to clear every piece of its kind.' : 'Tap any piece to smash it.') : ''); gHud();
+      gMsg(GS.hammer ? (k === 'sweep' ? 'Tap a piece to clear every piece of its kind.' : (k === 'cross' ? 'Tap a piece to clear its whole row and column.' : 'Tap any piece to smash it.')) : ''); gHud();
       return;
     }
     if (GS.busy || GS.over || !canBuy('g' + k, BOOST[k])) return;
@@ -4942,6 +4962,7 @@ body.cbshapes .cbm { display: block; }
     cowboy: [{ d: 'M38 25 Q37 10 44 12 Q50 17 56 12 Q63 10 62 25 Z', f: '#b07a3e' }, { d: 'M24 27 Q30 21 38 24 L62 24 Q70 21 76 27 Q50 34 24 27 Z', f: '#8c5a28' }],
     wizard: [{ d: 'M28 27 a22 4 0 1 0 44 0 a22 4 0 1 0 -44 0 Z', f: '#4a3190' }, { d: 'M37 26 Q44 14 53 2 Q60 14 63 26 Z', f: '#6a4cb8' }, { d: 'M50 17 a2.6 2.6 0 1 0 5.2 0 a2.6 2.6 0 1 0 -5.2 0 Z', f: '#ffd34d' }],
     chef: [{ d: 'M38 26 V15 Q31 11 37 6 Q43 2 50 6 Q57 2 63 6 Q69 11 62 15 V26 Z', f: '#ffffff' }, { d: 'M38 21 H62 V26 H38 Z', f: '#e4e6ee' }],
+    beanie: [{ d: 'M35 28 Q36 10 50 9 Q64 10 65 28 Z', f: '#e0568a' }, { d: 'M35 24 H65 V29 H35 Z', f: '#ffd1e3' }, { d: 'M46 9 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 Z', f: '#ffd1e3' }],
     pirate: [{ d: 'M29 27 Q32 9 50 6 Q68 9 71 27 Q50 20 29 27 Z', f: '#26262e' }, { d: 'M46 16 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 Z', f: '#f6f6f0' }],
     flower: [{ d: 'M31 27 Q50 19 69 27 L69 30 Q50 22 31 30 Z', f: '#4fa95a' }, { d: 'M33 22 a5.5 5.5 0 1 0 11 0 a5.5 5.5 0 1 0 -11 0 Z', f: '#f78fb3' }, { d: 'M45 19 a5.5 5.5 0 1 0 11 0 a5.5 5.5 0 1 0 -11 0 Z', f: '#ffd34d' }, { d: 'M57 22 a5.5 5.5 0 1 0 11 0 a5.5 5.5 0 1 0 -11 0 Z', f: '#b69cf0' }]
   };
@@ -4967,7 +4988,8 @@ body.cbshapes .cbm { display: block; }
     ocean: ['#a8d8ff', '#8fe3d6', '#b9c8ff', '#7fd1f2', '#a0e8b5', '#c3b5f5'],
     neon: ['#9bffb0', '#ffe66d', '#ff9bd9', '#7df0ff', '#ffb07a', '#c8a2ff'],
     candy: ['#ff9ec4', '#ffd1e8', '#b5f0e0', '#fff1a0', '#c7a8ff', '#ffb199'],
-    forest: ['#9ad08a', '#d6e89a', '#7bbf9e', '#e8c88a', '#c9a3d9', '#a3c4d8']
+    forest: ['#9ad08a', '#d6e89a', '#7bbf9e', '#e8c88a', '#c9a3d9', '#a3c4d8'],
+    yarn: ['#ff8fb8', '#ffd27a', '#8fd6c4', '#b9a4f0', '#f5a47a', '#9fc6f5']
   };
   var COATS = {
     sable: null,
@@ -5055,6 +5077,7 @@ body.cbshapes .cbm { display: block; }
     { kind: 'hat', key: 'chef', name: 'Chef hat', price: 90 },
     { kind: 'hat', key: 'wizard', name: 'Wizard hat', price: 110 },
     { kind: 'hat', key: 'pirate', name: 'Pirate hat', price: 120 },
+    { kind: 'hat', key: 'beanie', name: 'Yarn beanie', price: 100 },
     { kind: 'coat', key: 'sable', name: 'Sable', price: 0 },
     { kind: 'coat', key: 'cinnamon', name: 'Cinnamon', price: 60 },
     { kind: 'coat', key: 'silver', name: 'Silver', price: 80 },
@@ -5066,11 +5089,13 @@ body.cbshapes .cbm { display: block; }
     { kind: 'gems', key: 'neon', name: 'Neon', price: 90 },
     { kind: 'gems', key: 'candy', name: 'Candy', price: 70 },
     { kind: 'gems', key: 'forest', name: 'Forest', price: 70 },
+    { kind: 'gems', key: 'yarn', name: 'Yarn', price: 90 },
     { kind: 'board', key: 'classic', name: 'Classic', price: 0 },
     { kind: 'board', key: 'meadow', name: 'Meadow', price: 50 },
     { kind: 'board', key: 'sunset', name: 'Sunset glow', price: 60 },
     { kind: 'board', key: 'ocean', name: 'Deep ocean', price: 60 },
     { kind: 'board', key: 'night', name: 'Midnight', price: 80 },
+    { kind: 'board', key: 'closet', name: 'Craft closet', price: 70 },
     { kind: 'back', key: 'classic', name: 'Classic', price: 0 },
     { kind: 'back', key: 'stripes', name: 'Candy stripes', price: 50 },
     { kind: 'back', key: 'night', name: 'Night sky', price: 50 },
@@ -5091,7 +5116,7 @@ body.cbshapes .cbm { display: block; }
     { kind: 'cfr', key: 'stars', name: 'Starry edge', price: 90 },
     { kind: 'boost', key: 'dshield', name: 'Dash shield', price: 25, desc: 'Next Tunnel Dash run starts shielded.', bag: ['dshield'], give: { dshield: 1 } },
     { kind: 'boost', key: 'dheart', name: 'Spare heart', price: 30, desc: 'Next Tunnel Dash run starts with 4 lives.', bag: ['dheart'], give: { dheart: 1 } },
-    { kind: 'boost', key: 'gpack', name: 'Gem booster pack', price: 60, desc: 'One each: shuffle, +5 moves, hammer, sweep.', bag: ['gshuffle', 'gmoves', 'ghammer', 'gsweep'], give: { gshuffle: 1, gmoves: 1, ghammer: 1, gsweep: 1 } },
+    { kind: 'boost', key: 'gpack', name: 'Gem booster pack', price: 90, desc: 'One each: shuffle, +5 moves, hammer, sweep, cross zap.', bag: ['gshuffle', 'gmoves', 'ghammer', 'gsweep', 'gcross'], give: { gshuffle: 1, gmoves: 1, ghammer: 1, gsweep: 1, gcross: 1 } },
     { kind: 'boost', key: 'wtime', name: 'Pals extra time', price: 20, desc: 'Arm it in Pop-Up Pals: +5 seconds on a timed round.', bag: ['wtime'], give: { wtime: 1 } },
     { kind: 'boost', key: 'wnovac', name: 'Vacuum ban', price: 30, desc: 'Arm it in Pop-Up Pals: no vacuums for one round.', bag: ['wnovac'], give: { wnovac: 1 } },
     { kind: 'boost', key: 'wgold', name: 'Golden start', price: 25, desc: 'Arm it in Pop-Up Pals: the first 6 pops are golden.', bag: ['wgold'], give: { wgold: 1 } },
@@ -5492,7 +5517,7 @@ body.cbshapes .cbm { display: block; }
       ['Raisins collected', nf(D1.raisins)], ['Most raisins in a run', nf(D1.bestRaisins)],
       ['Jumps', nf(D1.jumps)], ['Hits taken', nf(D1.hits)],
       ['Magnets / shields / hearts', nf(D1.magnets) + ' / ' + nf(D1.shields) + ' / ' + nf(D1.hearts)],
-      ['Slow-mos grabbed', nf(D1.slows)], ['Low pipes ducked', nf(D1.ducks)], ['Gaps leaped', nf(D1.leaps)],
+      ['Slow-mos grabbed', nf(D1.slows)], ['Low pipes ducked', nf(D1.ducks)], ['Gaps leaped', nf(D1.leaps)], ['Yarn balls hopped', nf(D1.yarns)], ['Runs reaching the Craft closet', nf(D1.closets)],
       ['Checkpoints reached', nf(D1.checkpoints)], ['Missions completed', nf(D1.missions)],
       ['Boss chases (outrun / started)', nf(D1.bossWins) + ' / ' + nf(D1.chases)], ['Boss hits taken', nf(D1.bossHits)]]);
     h += block('Pop-Up Pals', 'whack', [
@@ -6211,7 +6236,7 @@ body.cbshapes .cbm { display: block; }
   }
   function qStats() {
     var DD = ddS();
-    return { sw: ST.socks.won, sp: ST.socks.pairs, sd: ST.socks.dailies, dm: ST.dash.meters, dr: ST.dash.raisins, dl: ST.dash.leaps, dms: ST.dash.missions, db: ST.dash.bossWins,
+    return { sw: ST.socks.won, sp: ST.socks.pairs, sd: ST.socks.dailies, dm: ST.dash.meters, dr: ST.dash.raisins, dl: ST.dash.leaps, dy: ST.dash.yarns, dms: ST.dash.missions, db: ST.dash.bossWins,
       wh: ST.whack.hits, wb: ST.whack.bosses, wd: ST.whack.dailies, wr: ST.whack.rounds, gc: ST.gems.cleared, gp: ST.gems.pieces, gb: ST.gems.blasters,
       kl: ST.stack.layers, kp: ST.stack.perfects, hf: ST.hide.found, hd: ST.hide.dailies, tf: ST.hide.twinFound || 0, md: medalTotal(), th: gameCounts()[themeNow()[0]] || 0,
       ddr: DD.runs, ddm: DD.dist, ddc: DD.close, ddt: DD.turns, ddb: DD.boosts, ddg: DD.goals };
@@ -6223,6 +6248,7 @@ body.cbshapes .cbm { display: block; }
     { id: 'dm', game: 'Tunnel Dash', hash: 'dash', text: 'Run 800 m in Tunnel Dash, in total', goal: 800, reward: 25 },
     { id: 'dr', game: 'Tunnel Dash', hash: 'dash', text: 'Collect 60 raisins in Tunnel Dash', goal: 60, reward: 20 },
     { id: 'dl', game: 'Tunnel Dash', hash: 'dash', text: 'Leap 6 gaps in Tunnel Dash', goal: 6, reward: 20 },
+    { id: 'dy', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 4 yarn balls in Tunnel Dash', goal: 4, reward: 25 },
     { id: 'dms', game: 'Tunnel Dash', hash: 'dash', text: 'Complete a Tunnel Dash mission', goal: 1, reward: 25 },
     { id: 'db', game: 'Tunnel Dash', hash: 'dash', text: 'Outrun a Tunnel Dash boss chase', goal: 1, reward: 35 },
     { id: 'wh', game: 'Pop-Up Pals', hash: 'whack', text: 'Tap 80 ferrets and clocks in Pop-Up Pals', goal: 80, reward: 20 },
@@ -6385,6 +6411,7 @@ body.cbshapes .cbm { display: block; }
       A('Tunnel Dash', 'd3k', 'Marathon ferret', 'Run 3,000 m in one go.', D1.longest, 3000, 70),
       A('Tunnel Dash', 'draisin', 'Raisin hoarder', 'Collect 1,000 raisins.', D1.raisins, 1000, 40),
       A('Tunnel Dash', 'dleap', 'Gap jumper', 'Leap 50 gaps.', D1.leaps, 50, 25),
+      A('Tunnel Dash', 'dyarn', 'Yarn hopper', 'Hop 40 yarn balls.', D1.yarns, 40, 30),
       A('Tunnel Dash', 'dcp', 'Checkpoint chaser', 'Reach 20 checkpoints.', D1.checkpoints, 20, 30),
       A('Tunnel Dash', 'dboss', 'Boss dodger', 'Outrun a boss chase.', D1.bossWins, 1, 30),
       A('Tunnel Dash', 'dboss5', 'Giant vacuum slayer', 'Outrun 5 boss chases.', D1.bossWins, 5, 70),
@@ -6522,7 +6549,8 @@ body.cbshapes .cbm { display: block; }
           { t: 'Heart', d: 'Gives back a life, up to 5.' }
         ] },
         { h: 'The tunnel', items: [
-          { t: 'Biomes', d: 'Laundry room, Garden hose and Couch fort, in a loop, changing every 400 m. Each leans on different hazards.' },
+          { t: 'Biomes', d: 'Laundry room, Garden hose, Couch fort and Craft closet, in a loop, changing every 400 m. Each leans on different hazards.' },
+          { t: 'Yarn balls', d: 'Roll sideways across the Craft closet. Jump them, or dodge, but they drift, so jumping is safer.' },
           { t: 'Checkpoints', d: 'Every 500 m is a checkpoint that restores a life if you have fewer than three.' },
           { t: 'The ghost', d: 'The faint ferret is your best run. Try to stay ahead of it.' }
         ] },
@@ -6587,7 +6615,7 @@ body.cbshapes .cbm { display: block; }
           { t: 'The mischief ferret', d: 'Visits every few moves in every mode, and from level 2 in Levels. He may swap two pieces, steal one or leave you a blaster.' }
         ] },
         { h: 'Boosters and help', items: [
-          { t: 'Shuffle (20), +5 moves (30), Paw hammer (15), Color sweep (25)', d: 'Coin boosters for Levels mode. The hammer smashes any piece, and the sweep clears every piece of one kind.' },
+          { t: 'Shuffle (20), +5 moves (30), Paw hammer (15), Color sweep (25), Cross zap (35)', d: 'Coin boosters for Levels mode. The hammer smashes any piece, the sweep clears every piece of one kind, and the cross zap clears the row and column of the piece you tap.' },
           { t: 'Gem booster pack', d: 'Buy it in the Ferret shop for one of each booster. Packs you own are used before any coins.', go: 'shop' },
           { t: 'Hint', d: 'Highlights a move that makes a match.' },
           { t: 'Gem sets and board themes', d: 'The Ferret shop sells new gem colours and board looks.', go: 'shop' }
