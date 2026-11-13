@@ -1,6 +1,31 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>lurkinferret’s “ai”rcade</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Seven small ferret-themed games in one pocket arcade: Dook Dash, Sock Match, Tunnel Dash, Pop-Up Pals, Ferret Gems, Hammock Stack and Hide the Raisin. Free, no ads, no accounts. Progress saves in your browser.">
+<meta name="theme-color" content="#dce8f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1823" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lurkinferret’s “ai”rcade">
+<meta property="og:description" content="Seven small ferret-themed games in one pocket arcade: Dook Dash, Sock Match, Tunnel Dash, Pop-Up Pals, Ferret Gems, Hammock Stack and Hide the Raisin. Free, no ads, no accounts. Progress saves in your browser.">
+<link rel="canonical" href="https://lurkinferret.github.io/aircade/">
+<meta property="og:url" content="https://lurkinferret.github.io/aircade/">
+<meta property="og:image" content="https://lurkinferret.github.io/aircade/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A ferret face next to the title lurkinferret’s “ai”rcade and the names of seven games.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lurkinferret.github.io/aircade/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f1e4cc'/%3E%3Cellipse cx='50' cy='46' rx='36' ry='14' fill='%2335261f'/%3E%3Ccircle cx='38' cy='46' r='4' fill='%23fff'/%3E%3Ccircle cx='62' cy='46' r='4' fill='%23fff'/%3E%3Cellipse cx='50' cy='62' rx='6' ry='4.5' fill='%23e88f9a'/%3E%3C/svg%3E">
+<style>
+/* Page reset the Claude artifact host normally supplies. */
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font: 14px system-ui, sans-serif; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500;700&display=swap">
 <style>
 /* Layout: one narrow column. Header, a three-way game switcher, then a single game panel under it. */
@@ -157,6 +182,8 @@ h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; marg
 .hole[data-t="b"] .hp { display: block; }
 .hole .cvr { position: absolute; inset: 0; border-radius: 16px; z-index: 3; display: none; pointer-events: none; opacity: .93; background: repeating-linear-gradient(45deg, #6b5b95 0 8px, #8a7bb5 8px 16px); }
 .hole.cv .cvr { display: block; }
+#whack.happy .hole { box-shadow: 0 0 0 3px #f2c230, 0 0 18px 4px rgba(242,194,48,.55); }
+:root[data-motion="reduce"] #whack.happy .hole { box-shadow: 0 0 0 3px #f2c230; }
 .pop { position: absolute; left: 50%; top: 18%; z-index: 2; font-family: var(--font-display); font-size: 1.5rem; pointer-events: none; animation: rise .6s ease-out forwards; }
 .pop.plus { color: var(--good); }
 .pop.minus { color: var(--bad); }
@@ -242,6 +269,15 @@ a.choice { flex-direction: row; align-items: center; gap: 10px; padding: 10px; b
 .board { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; margin: 0 auto; background: var(--tile); border-radius: 14px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
 .gem { position: absolute; left: 0; top: 0; width: 14.2857%; height: 14.2857%; padding: 0; border: 0; background: none; cursor: pointer; transition: transform .24s ease; -webkit-tap-highlight-color: transparent; }
 .gem.nt { transition: none; }
+.gem.lucky::before { content: ''; position: absolute; inset: 4%; border-radius: 28%; box-shadow: 0 0 0 3px #f2c230, 0 0 14px 4px rgba(242,194,48,.7); pointer-events: none; z-index: 2; animation: gluck 1.1s ease-in-out infinite; }
+@keyframes gluck { 50% { box-shadow: 0 0 0 4px #ffe27a, 0 0 22px 8px rgba(242,194,48,.85); } }
+:root[data-motion="reduce"] .gem.lucky::before { animation: none; }
+@media (prefers-reduced-motion: reduce) { .gem.lucky::before { animation: none; } }
+.gtr { position: absolute; width: 9%; aspect-ratio: 1; margin: -4.5% 0 0 -4.5%; pointer-events: none; z-index: 6; animation: gtrfly .7s ease-out forwards; }
+.gtr svg { width: 100%; height: 100%; display: block; }
+@keyframes gtrfly { from { opacity: 1; transform: translate(0, 0) scale(.6) rotate(0deg); } 60% { opacity: 1; } to { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.15) rotate(var(--rot)); } }
+@media (prefers-reduced-motion: reduce) { .gtr { display: none; } }
+:root[data-motion="reduce"] .gtr { display: none; }
 .gem .g { position: absolute; inset: 5%; border-radius: 24%; display: grid; place-items: center; transition: transform .25s, opacity .25s; }
 .gem .g svg { width: 78%; height: 78%; }
 .gem.sel .g { box-shadow: 0 0 0 3px var(--accent); transform: scale(1.06); }
@@ -352,6 +388,7 @@ a.choice { flex-direction: row; align-items: center; gap: 10px; padding: 10px; b
 :root[data-bd="evnuts"] .board, .boardsw[data-bd="evnuts"] { background: radial-gradient(circle, rgba(90,50,20,.25) 0 3px, transparent 4px) 0 0/16px 16px, linear-gradient(160deg, #d9b98a, #9b7448); }
 :root[data-bd="night"] .board, .boardsw[data-bd="night"] { background: linear-gradient(160deg, #3d3a70, #1d1b3d); }
 :root[data-bd="meadow"] .board, .boardsw[data-bd="meadow"] { background: linear-gradient(160deg, #e3f5c8, #a9d9a0); }
+:root[data-bd="garage"] .board, .boardsw[data-bd="garage"] { background: repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 6px, transparent 6px 14px), linear-gradient(160deg, #8a96a3, #56626f); }
 :root[data-bd="attic"] .board, .boardsw[data-bd="attic"] { background: repeating-linear-gradient(90deg, rgba(60,40,20,.28) 0 2px, transparent 2px 22px), linear-gradient(160deg, #e2c796, #b8955c); }
 :root[data-bd="closet"] .board, .boardsw[data-bd="closet"] { background: radial-gradient(circle, rgba(255,255,255,.35) 0 2px, transparent 3px) 0 0/12px 12px, linear-gradient(160deg, #f5c6dc, #d9a0c4); }
 .boardsw { display: block; width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--line); background: var(--tile); }
@@ -660,6 +697,7 @@ body.cbshapes .cbm { display: block; }
 .dd .paper dd { margin: 0; color: var(--muted); }
 .dd .paper pre { margin: 0 0 8px; font: 500 calc(11px * var(--ts, 1))/1.45 var(--mono); color: var(--muted); white-space: pre; overflow-x: auto; }
 .dd .ov.shop .btn.back { flex: none; }
+.dd .ddnote { margin: 0; max-width: 270px; font-size: 0.8rem; line-height: 1.35; text-align: center; opacity: 0.8; }
 .dd .menu .wide { grid-column: 1 / -1; }
 .dd .stat { width: 100%; display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; background: var(--soil); border: 1px solid var(--line); border-radius: 8px; font: 700 calc(13px * var(--ts, 1))/1.3 var(--body); text-align: left; }
 .dd .stat b { font: 700 calc(13px * var(--ts, 1))/1.3 var(--mono); color: var(--sock); white-space: nowrap; }
@@ -804,7 +842,7 @@ body.cbshapes .cbm { display: block; }
       <button class="abtn ghostbtn boost" type="button" id="socks-freeze">Freeze time <small>5 coins</small></button>
     </div>
     <div class="btnrow"><button class="abtn" id="socks-next" hidden>Next level</button><button class="abtn ghostbtn copyres" id="copy-socks" data-g="socks" hidden>Copy my result</button></div>
-    <p class="tip">Peek is free but costs 3 moves. Reveal flips one pair for no moves, and Freeze stops the clock for 15 seconds, which helps your best time. Coins are shared with Ferret Gems and Tunnel Dash. Cards with a gold edge are a golden pair that gives back 2 moves. A smelly decoy costs 2 moves. From level 2, the mischief ferret swaps two face-down cards every few misses. Three stars needs 1.6 moves per pair or fewer, plus 2 for each decoy.</p>
+    <p class="tip">Peek is free but costs 3 moves. Reveal flips one pair for no moves, and Freeze stops the clock for 15 seconds, which helps your best time. Coins are shared with Ferret Gems and Tunnel Dash. Cards with a gold edge are a golden pair that gives back 2 moves. A smelly decoy costs 2 moves. After every fifth try a random card tumbles face up for a second, a free look. From level 2, the mischief ferret swaps two face-down cards every few misses. Three stars needs 1.6 moves per pair or fewer, plus 2 for each decoy.</p>
   </section>
 
   <section class="panel" id="dash" hidden>
@@ -819,7 +857,8 @@ body.cbshapes .cbm { display: block; }
       <div><dt>Power</dt><dd id="d-power">&ndash;</dd></div>
       <div><dt>Best</dt><dd id="d-best">&ndash;</dd></div>
     </dl>
-    <div class="btnrow wgo"><button class="abtn" id="dash-go">Start</button></div>
+    <div class="btnrow wgo"><button class="abtn" id="dash-go">Start</button><button class="abtn ghostbtn" id="dash-daily">Daily run</button></div>
+    <p class="note" id="dash-dnote"></p>
     <canvas id="cv" aria-label="Tunnel Dash game area" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Space P"></canvas>
     <p class="keys" aria-label="Keyboard controls"><span><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>A</kbd> <kbd>D</kbd> lanes</span><span><kbd>&uarr;</kbd> or <kbd>Space</kbd> jump</span><span><kbd>&darr;</kbd> duck</span><span><kbd>P</kbd> pause</span><span><kbd>Enter</kbd> start</span></p>
     <div class="btnrow"><button class="abtn ghostbtn copyres" id="copy-dash" data-g="dash" hidden>Copy my result</button></div>
@@ -858,7 +897,7 @@ body.cbshapes .cbm { display: block; }
     <div class="holes" id="holes"></div>
     <p class="msg" id="whack-msg" aria-live="polite"></p>
     <div class="btnrow"><button class="abtn" id="whack-next" hidden>Next level</button><button class="abtn ghostbtn copyres" id="copy-whack" data-g="whack" hidden>Copy my result</button></div>
-    <p class="tip">Blue ferrets hop to another hole up to twice before they hide, and they are worth 2. A purple boss ferret with a crown takes 3 taps, is worth 10 and adds 3 seconds. The mischief ferret throws a blanket over a hole for 3 seconds, and you cannot tap it. In levels they join one by one, from level 2 on. Score the target for 1 star, 1.3 times it for 2 and 1.6 times for 3. Coins are shared with the other games.</p>
+    <p class="tip">Blue ferrets hop to another hole up to twice before they hide, and they are worth 2. A purple boss ferret with a crown takes 3 taps, is worth 10 and adds 3 seconds. The mischief ferret throws a blanket over a hole for 3 seconds, and you cannot tap it. Every 11 to 17 seconds the holes glow gold for a 5-second Happy hour, when every point counts double. In levels they join one by one, from level 2 on. Score the target for 1 star, 1.3 times it for 2 and 1.6 times for 3. Coins are shared with the other games.</p>
   </section>
 
   <section class="panel" id="gems" hidden>
@@ -909,7 +948,7 @@ body.cbshapes .cbm { display: block; }
       <button class="abtn ghostbtn boost" type="button" data-b="cross">Cross zap <small>35 coins</small></button>
     </div>
     <div class="btnrow"><button class="abtn" id="gems-next" hidden>Next level</button><button class="abtn" id="gems-retry" hidden>Retry level</button><button class="abtn ghostbtn copyres" id="copy-gems" data-g="gems" hidden>Copy my result</button></div>
-    <p class="tip">Drag a piece toward a neighbor, or tap one piece and then another. Four in a row leaves a blaster that clears its row or column. Five leaves a bomb that clears a 3 by 3 area. An L or T shape leaves a paw burst that clears every piece of its kind. Swap two special pieces together for a bigger combo. Color sweep clears every piece of one kind. Cross zap clears the row and column of one piece. Rush mode gives you 60 seconds. From level 3, tangled socks sit in place and cannot be swapped. Match next to one to free it. The mischief ferret visits every few moves in every mode, from level 2 in Levels. He may swap two pieces, steal one, or leave you a blaster. Three stars needs 40 percent of your moves left.</p>
+    <p class="tip">Drag a piece toward a neighbor, or tap one piece and then another. Four in a row leaves a blaster that clears its row or column. Five leaves a bomb that clears a 3 by 3 area. An L or T shape leaves a paw burst that clears every piece of its kind. Swap two special pieces together for a bigger combo. Color sweep clears every piece of one kind. Cross zap clears the row and column of one piece. Rush mode gives you 60 seconds. Every four moves one gem glows gold: clear it for 100 bonus points and a coin. From level 3, tangled socks sit in place and cannot be swapped. Match next to one to free it. The mischief ferret visits every few moves in every mode, from level 2 in Levels. He may swap two pieces, steal one, or leave you a blaster. Three stars needs 40 percent of your moves left.</p>
   </section>
 
   <section class="panel" id="dook" hidden>
@@ -937,6 +976,8 @@ body.cbshapes .cbm { display: block; }
     <p>Grab coins and socks. Each stumble lets the hawk get closer.</p>
     <div class="stats" id="tWallet"></div>
     <button class="btn" id="btnStart" type="button">Start run</button>
+    <button class="btn ghost" id="btnDaily" type="button">Daily run</button>
+    <p class="ddnote" id="ddNote"></p>
     <div class="menu">
       <button class="btn ghost" id="btnShopT" type="button">Upgrades</button>
       <button class="btn ghost" id="btnWardT" type="button">Wardrobe</button>
@@ -1060,12 +1101,15 @@ body.cbshapes .cbm { display: block; }
 <p>Maxing one boost length costs 5,735 coins in total. Maxing Boost Finder costs 1,935.</p>
 <p>Each row in the shop shows the upgrade name, its level, what it does, and its current value with the next value beside it.</p>
 <h3>8. WORLDS</h3>
-<p>Four environments. Each run uses one, chosen at random and never the same as the previous run. The first run uses the world shown on the start screen. The world&#x27;s name appears as a banner when the run starts and beside the distance in the top bar. The world does not change during a run.</p>
+<p>Six environments. Each run uses one, chosen at random and never the same as the previous run. The first run uses the world shown on the start screen. The world&#x27;s name appears as a banner when the run starts and beside the distance in the top bar. The world does not change during a run.</p>
 <dl><dt>Garden</dt><dd>Dusk sky with stars and hills. Trees and bushes beside the path.</dd><dt>Sewer</dt><dd>Brick ceiling with pipes and drips, a green light at the tunnel end, murky water, and glowing lamp-pipes beside the path.</dd><dt>Attic</dt><dd>Wooden rafters, a shaft of window light, drifting dust, a plank floor, and stacked cardboard boxes beside the path. Has the lights-out lane (below).</dd><dt>Rooftops</dt><dd>Night sky with a moon and stars, a lit city skyline, a tar path with parapet walls, brick chimneys and a blinking antenna.</dd><dt>Kitchen</dt><dd>Tiled wall with swinging hanging pots, a sunny window, steam, a cream tile floor, and stoves and jars beside the path.</dd><dt>Beach</dt><dd>Sunset sky with a sun on the sea, drifting clouds, palms on the horizon, a sand path, and palm trees, striped umbrellas and shells beside the path.</dd></dl>
-<p>Each world has its own sky, ground, path, walls, fog and roadside scenery. Barriers and boosts behave the same in every world.</p>
+<p>Each world has its own sky, ground, path, walls, fog and roadside scenery. Barriers and boosts behave the same in every world. Every world also has one twist that warns for a second before it happens (below).</p>
 <h4>Attic twist: lights out on one lane</h4>
 <p>Only in the Attic. The first lights-out comes 18 seconds into the run, then one every 14 to 22 seconds.</p>
 <ul><li>One lane is chosen at random. It flickers for 1 second as a warning.</li><li>Then it goes dark for 4 seconds. The lane is covered by a dark shade.</li><li>The light comes back over the next 0.3 seconds.</li><li>Anything in the dark lane (barriers, coins, boosts) is faint while far away: fully visible within 4 m, fading to a faint shape at 10 m and beyond. Things in the other two lanes look normal.</li><li>Nothing about the rules changes. The dark lane works exactly like a lit one; it is only harder to read.</li></ul>
+<h4>World twists</h4>
+<p>The first twist comes 14 seconds into the run, then one every 12 to 18 seconds. Each one flashes a banner and a one-second warning. Every twist you ride out counts toward the Weather ferret badge. They pause during a corner turn or a burrow.</p>
+<ul><li><b>Garden, fog bank:</b> for 4.5 seconds, fog hides things more than about 10 m ahead.</li><li><b>Sewer, flood:</b> one lane floods for 4 seconds. Running through it slows you to 60% speed. Jumping over it does not.</li><li><b>Attic, lights out:</b> described above.</li><li><b>Rooftops, crosswind:</b> a gust pushes you one lane in the direction of the arrow. At the edge, it does nothing.</li><li><b>Kitchen, hot plate:</b> one lane flashes red, then flares for under a second. If you are in it on the ground, you take a hit. Move out or be in the air.</li><li><b>Beach, coin tide:</b> a wave of 12 coins, four rows across all three lanes, washes in ahead of you.</li></ul>
 <h3>9. DAILY GOALS</h3>
 <p>Three goals per day. They are the same all day and change at local midnight. Each goal has a target and a coin reward. Progress adds up across every run that day and is counted when a run ends.</p>
 <h4>Goal types (three different types are picked each day)</h4>
@@ -1140,7 +1184,7 @@ body.cbshapes .cbm { display: block; }
     <p class="keys" aria-label="Keyboard controls"><span><kbd>Space</kbd> or <kbd>&darr;</kbd> drop</span><span><kbd>P</kbd> pause</span><span><kbd>Enter</kbd> start or restart</span></p>
     <p class="msg" id="stack-msg" aria-live="polite"></p>
     <div class="btnrow"><button class="abtn ghostbtn copyres" id="copy-stack" data-g="stack" hidden>Copy my result</button></div>
-    <p class="tip">Tap the picture, or press Space, to drop the swinging hammock. A drop that lands almost dead centre is perfect: nothing is lost, and three perfects in a row make the hammock wider again. Miss the pile completely and it topples. You earn 1 coin for every 3 layers, up to 25.</p>
+    <p class="tip">Tap the picture, or press Space, to drop the swinging hammock. A drop that lands almost dead centre is perfect: nothing is lost, and three perfects in a row make the hammock wider again. Every 6th hammock is caught in a gust and swings 45 percent faster. Miss the pile completely and it topples. You earn 1 coin for every 3 layers, up to 25.</p>
   </section>
 
   <section class="panel" id="hide" hidden>
@@ -1164,7 +1208,7 @@ body.cbshapes .cbm { display: block; }
     <div class="cups" id="cups" aria-label="Socks"></div>
     <p class="msg" id="hide-msg" aria-live="polite"></p>
     <div class="btnrow"><button class="abtn ghostbtn boost" id="hide-peek" type="button" disabled>Peek <small>10 coins</small></button><button class="abtn ghostbtn copyres" id="copy-hide" data-g="hide" hidden>Copy my result</button></div>
-    <p class="tip">The raisin is shown once, then the socks swap places. Tap a sock to guess. A right guess scores 10 per sock plus a bonus for your streak, and a wrong one costs a heart. Peek shows the raisin again once per round before you pick. It costs 10 coins, or one Raisin peek from the Ferret shop.</p>
+    <p class="tip">The raisin is shown once, then the socks swap places. Tap a sock to guess. A right guess scores 10 per sock plus a bonus for your streak, and a wrong one costs a heart. Every third round ends with a merry-go-round that shifts every sock one place. Peek shows the raisin again once per round before you pick. It costs 10 coins, or one Raisin peek from the Ferret shop.</p>
   </section>
 
   <section class="panel" id="shop" hidden>
@@ -1177,6 +1221,7 @@ body.cbshapes .cbm { display: block; }
     <details class="shopgrp fold" data-fold="coat"><summary><h3>Coats</h3><span class="cnt" id="cnt-coat"></span></summary><div class="shopgrid" id="shop-coat"></div></details>
     <details class="shopgrp fold" data-fold="gems"><summary><h3>Gem sets</h3><span class="cnt" id="cnt-gems"></span></summary><div class="shopgrid" id="shop-gems"></div></details>
     <details class="shopgrp fold" data-fold="board"><summary><h3>Gem board themes</h3><span class="cnt" id="cnt-board"></span></summary><div class="shopgrid" id="shop-board"></div></details>
+    <details class="shopgrp fold" data-fold="gtrail"><summary><h3>Gem match trails</h3><span class="cnt" id="cnt-gtrail"></span></summary><div class="shopgrid" id="shop-gtrail"></div></details>
     <details class="shopgrp fold" data-fold="trail"><summary><h3>Tunnel Dash trails</h3><span class="cnt" id="cnt-trail"></span></summary><div class="shopgrid" id="shop-trail"></div></details>
     <details class="shopgrp fold" data-fold="back"><summary><h3>Sock card backs</h3><span class="cnt" id="cnt-back"></span></summary><div class="shopgrid" id="shop-back"></div></details>
     <details class="shopgrp fold" data-fold="cbg"><summary><h3>Result picture backgrounds</h3><span class="cnt" id="cnt-cbg"></span></summary><div class="shopgrid" id="shop-cbg"></div></details>
@@ -1366,7 +1411,7 @@ body.cbshapes .cbm { display: block; }
         <thead><tr><th>Game</th><th>Behavior borrowed</th><th>Core loop</th><th>Numbers that set difficulty</th></tr></thead>
         <tbody>
           <tr><td>Sock Match</td><td>Stashing small objects</td><td>Flip two cards, remember where each sock was</td><td>Free play at <span data-wp="s-e">6</span>, <span data-wp="s-m">8</span> or <span data-wp="s-h">10</span> pairs, levels that grow to <span data-wp="s-max">10</span> pairs, and a daily board seeded from the date. Three stars at <span data-wp="s-st3">1.6</span> moves per pair or fewer, two at <span data-wp="s-st2">2.6</span>, with each decoy on the board adding its cost to both limits. Decoys cost <span data-wp="s-decoy">2</span> moves, a golden pair gives <span data-wp="s-gold">2</span> back, and from level <span data-wp="s-mis">2</span> a mischief ferret swaps two face-down cards every few misses. Reveal and Freeze cost <span data-wp="sock-reveal">15</span> and <span data-wp="sock-freeze">5</span> coins.</td></tr>
-          <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from <span data-wp="d-s0">170</span> to <span data-wp="d-s1">380</span> px/s over the first <span data-wp="d-rs">60</span> s, then keeps climbing to <span data-wp="d-smax">450</span> px/s while obstacles arrive faster and more often in pairs. <span data-wp="d-lives">3</span> lives, up to <span data-wp="d-maxl">5</span>. The tunnel changes every <span data-wp="d-bm">400</span> m, cycling through five biomes (Laundry room, Garden hose, Couch fort, the Craft closet, whose rolling yarn balls must be jumped, and the Attic, whose mouse traps must be jumped too), with a checkpoint every <span data-wp="d-cp">500</span> m. From <span data-wp="d-b1">600</span> m, and every <span data-wp="d-be">700</span> m after, a giant vacuum starts a boss chase of <span data-wp="d-ba0">7</span> flagged-lane attacks, growing to <span data-wp="d-bmax">12</span>. Each warning lasts <span data-wp="d-w0">1.2</span> s and shortens with every attack and every chase, to a floor of <span data-wp="d-wmin">0.6</span> s. Every second boss is a cat paw instead: it swats one lane and then a neighbouring lane half a second later, in about 30 percent fewer attacks. A golden Raisin rush pickup makes every raisin count double for <span data-wp="d-rush">6</span> s. Three missions at a time pay <span data-wp="d-mmin">10</span> to <span data-wp="d-mmax">30</span> coins each.</td></tr>
+          <tr><td>Tunnel Dash</td><td>Tunneling</td><td>Switch between 3 lanes, jump shoes and gaps, duck pipes, dodge vacuums, collect</td><td>Speed rises from <span data-wp="d-s0">170</span> to <span data-wp="d-s1">380</span> px/s over the first <span data-wp="d-rs">60</span> s, then keeps climbing to <span data-wp="d-smax">450</span> px/s while obstacles arrive faster and more often in pairs. <span data-wp="d-lives">3</span> lives, up to <span data-wp="d-maxl">5</span>. The tunnel changes every <span data-wp="d-bm">400</span> m, cycling through six biomes (the Laundry room, where a tumble now and then flips left and right for <span data-wp="d-tum">2.2</span> s, the Garden hose, whose water jets push you out of a lane, the Couch fort, whose cushions give a high bounce and <span data-wp="d-bnc">3</span> bonus raisins, the Craft closet, whose rolling yarn balls must be jumped and whose loose threads stop you jumping for <span data-wp="d-snag">1.2</span> s if you get snagged, the Attic, whose mouse traps must be jumped too and whose lights go out in one lane for <span data-wp="d-dark">3.5</span> s at a time, and the Garage, whose paint cans must be jumped as well, and where oil slicks make you skid for <span data-wp="d-skid">1.5</span> s if you drive through one), with a checkpoint every <span data-wp="d-cp">500</span> m. From <span data-wp="d-b1">600</span> m, and every <span data-wp="d-be">700</span> m after, a giant vacuum starts a boss chase of <span data-wp="d-ba0">7</span> flagged-lane attacks, growing to <span data-wp="d-bmax">12</span>. Each warning lasts <span data-wp="d-w0">1.2</span> s and shortens with every attack and every chase, to a floor of <span data-wp="d-wmin">0.6</span> s. The bosses rotate through four types: the vacuum, a cat paw that swats one lane and then a neighbouring lane half a second later, a Roomba that sweeps the three lanes in order, and a broom that covers two lanes and then a different pair. The paw and the broom have about 30 percent fewer attacks, and the Roomba about half. A golden Raisin rush pickup makes every raisin count double for <span data-wp="d-rush">6</span> s. Three missions at a time pay <span data-wp="d-mmin">10</span> to <span data-wp="d-mmax">35</span> coins each.</td></tr>
           <tr><td>Pop-Up Pals</td><td>Sudden bursts of play</td><td>Tap what pops out of a hole, keep a combo going</td><td>Timed rounds last <span data-wp="p-round">30</span> s. Golden ferrets score <span data-wp="p-gold">3</span>, hoppers <span data-wp="p-hop">2</span> and a <span data-wp="p-hp">3</span>-tap boss <span data-wp="p-boss">10</span>. Clocks add <span data-wp="p-clock">2</span> s up to <span data-wp="p-cap">45</span> s. Levels set a score target of <span data-wp="p-tb">40</span> plus <span data-wp="p-tp">6</span> per level, with stars at 1, <span data-wp="p-s2">1.3</span> and <span data-wp="p-s3">1.6</span> times the target. Endless has no clock but <span data-wp="p-lives">3</span> hearts, up to <span data-wp="p-maxl">5</span>, with the pops speeding up <span data-wp="p-speed">1.7</span> times as fast. A ferret that hides before you tap it breaks your combo, as does tapping an empty hole or a vacuum. Daily is a <span data-wp="p-round2">30</span> s round with every critter on and a date-seeded pop pattern.</td></tr>
           <tr><td>Ferret Gems</td><td>Hoarding favorite treats</td><td>Swap two neighbors to line up 3 or more of a kind and reach the level goal</td><td><span data-wp="g-n">7</span> x <span data-wp="g-n2">7</span> board, <span data-wp="g-t1">5</span> then <span data-wp="g-t2">6</span> piece types. World 1 (levels 1 to <span data-wp="g-w1">30</span>) rotates through score, collect, special-piece, tangled-sock and chain goals with <span data-wp="g-mvmin">20</span> to <span data-wp="g-mvmax">25</span> moves. World 2 (level <span data-wp="g-w2">31</span> on) adds up to <span data-wp="g-fz">10</span> frozen gems, some with two layers of ice, and up to <span data-wp="g-lk">7</span> locked gems that cannot be swapped, with thaw and unlock goals, plus a goal to set off special pieces. World 3 (level 61 on) adds sticky goo: goo gems match normally and clear when matched, but after any move that clears none, one goo spreads to a plain neighbour, up to nine at once, with scrub goals. A daily puzzle gives everyone the same seeded board and goal each day, with a medal for spare moves. Three stars needs <span data-wp="g-star3">40</span> percent of the moves left. Four in a row leaves a blaster, five a bomb, and an L or T a paw burst. Boosters (shuffle, extra moves, hammer, colour sweep and cross zap) cost <span data-wp="g-bmin">15</span> to <span data-wp="g-bmax">35</span> coins. Rush lasts <span data-wp="g-rush">60</span> seconds and Zen has no limits.</td></tr>
           <tr><td>Hammock Stack</td><td>Piling into hammocks to sleep</td><td>Drop a swinging hammock onto the pile so the overlap stays</td><td>The first hammock is <span data-wp="stack-w">190</span> px wide and each layer is <span data-wp="stack-h">22</span> px tall. The swing starts at <span data-wp="k-s0">130</span> px/s and gains <span data-wp="k-pl">7</span> px/s per layer up to <span data-wp="k-max">380</span>. A drop within <span data-wp="k-px">5</span> px of centre is perfect and loses nothing, and <span data-wp="k-after">three</span> perfects in a row widen the hammock by <span data-wp="k-widen">6</span> px, up to its first width. A complete miss ends the game. 1 coin per <span data-wp="k-pc">3</span> layers, up to <span data-wp="k-cmax">25</span>.</td></tr>
@@ -1376,14 +1421,14 @@ body.cbshapes .cbm { display: block; }
     </div>
 
     <h3>3. Difficulty without punishment</h3>
-    <p>Every game restarts with one tap, and the action games ramp up slowly. In Ferret Gems, a swap that makes no match slides back and costs no move, and the Hint button is free. In Tunnel Dash, no more than two of the three lanes are ever blocked in the same row, so a clear lane always exists, a boss chase flags at most two lanes at a time, a shield absorbs one hit, and a hit gives <span data-wp="d-grace">1.2</span> seconds of protection so one mistake does not chain into three. In Pop-Up Pals, most pop-ups are ordinary ferrets, with golden ferrets, clocks and vacuums mixed in to reward attention. Sock Match shows a clock but ranks you by moves only, so players can take their time. Hide the Raisin always shows the raisin first and gives the player a peek, and for players who find it too easy it has Twin socks, where every sock is the same colour so only position can be followed, with <span data-wp="hd-twinx">1</span> extra sock at each stage (up to <span data-wp="hd-twinmax">6</span>) and scores multiplied by <span data-wp="hd-twinm">1.5</span>. Hammock Stack forgives small misses by trimming the hammock rather than ending the game.</p>
+    <p>Each of the other games has one small twist of its own. Sock Match drops a sock out of the dryer after every fifth try, for a free look. Pop-Up Pals has a 5-second Happy hour of double points every 11 to 17 seconds. Hammock Stack sends a gust every sixth layer that makes the swing 45 percent faster. Hide the Raisin ends every third round with a merry-go-round that shifts every sock one place. Ferret Gems lights one gold gem every four moves, worth 100 points and a coin. Each has a badge. Every game restarts with one tap, and the action games ramp up slowly. In Ferret Gems, a swap that makes no match slides back and costs no move, and the Hint button is free. In Tunnel Dash, no more than two of the three lanes are ever blocked in the same row, so a clear lane always exists, a boss chase flags at most two lanes at a time, a shield absorbs one hit, and a hit gives <span data-wp="d-grace">1.2</span> seconds of protection so one mistake does not chain into three. In Pop-Up Pals, most pop-ups are ordinary ferrets, with golden ferrets, clocks and vacuums mixed in to reward attention. Sock Match shows a clock but ranks you by moves only, so players can take their time. Hide the Raisin always shows the raisin first and gives the player a peek, and for players who find it too easy it has Twin socks, where every sock is the same colour so only position can be followed, with <span data-wp="hd-twinx">1</span> extra sock at each stage (up to <span data-wp="hd-twinmax">6</span>) and scores multiplied by <span data-wp="hd-twinm">1.5</span>. Hammock Stack forgives small misses by trimming the hammock rather than ending the game.</p>
 
     <h3>4. One wallet, many places to spend it</h3>
-    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: <span data-wp="hat-n">12</span> hats (<span data-wp="hat-min">40</span> to <span data-wp="hat-max">150</span> coins), <span data-wp="coat-n">6</span> coats (<span data-wp="coat-min">60</span> to <span data-wp="coat-max">120</span>), gem sets (<span data-wp="gems-min">70</span> to <span data-wp="gems-max">90</span>), board themes (<span data-wp="board-min">50</span> to <span data-wp="board-max">80</span>), Tunnel Dash trails that stream behind the runner (<span data-wp="trail-min">60</span> to <span data-wp="trail-max">90</span>; the paw-print trail is free), sock card backs (<span data-wp="back-min">50</span> to <span data-wp="back-max">90</span>), and backgrounds (<span data-wp="cbg-min">50</span> to <span data-wp="cbg-max">70</span>) and frames (<span data-wp="cfr-min">50</span> to <span data-wp="cfr-max">90</span>) for the pictures made by Copy my result. It also sells boost packs for <span data-wp="boost-min">15</span> to <span data-wp="boost-max">90</span> coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
+    <p>All six games pay into the same coin wallet, and it is spent in four places: Gem boosters, Sock Match power-ups, Hide the Raisin peeks, and the Ferret shop. The shop sells cosmetics, which never change scoring: <span data-wp="hat-n">12</span> hats (<span data-wp="hat-min">40</span> to <span data-wp="hat-max">150</span> coins), <span data-wp="coat-n">6</span> coats (<span data-wp="coat-min">60</span> to <span data-wp="coat-max">120</span>), gem sets (<span data-wp="gems-min">70</span> to <span data-wp="gems-max">90</span>), board themes (<span data-wp="board-min">50</span> to <span data-wp="board-max">80</span>), Gem match trails that burst from cleared gems (<span data-wp="gtrail-min">45</span> to <span data-wp="gtrail-max">80</span>), Tunnel Dash trails that stream behind the runner (<span data-wp="trail-min">60</span> to <span data-wp="trail-max">90</span>; the paw-print trail is free, and five more are earned for free by reaching each biome after the Laundry room), sock card backs (<span data-wp="back-min">50</span> to <span data-wp="back-max">90</span>), and backgrounds (<span data-wp="cbg-min">50</span> to <span data-wp="cbg-max">70</span>) and frames (<span data-wp="cfr-min">50</span> to <span data-wp="cfr-max">90</span>) for the pictures made by Copy my result. It also sells boost packs for <span data-wp="boost-min">15</span> to <span data-wp="boost-max">90</span> coins. Packs are small conveniences, such as a starting shield, an extra heart, or a peek, and they are used up before any coins are spent. The aim is for coins to feel like a thank-you for playing any game, not a reason to grind one.</p>
 
     <h3>5. Identity and long-term goals</h3>
-    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">17</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">72</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">150</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
-    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">72</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a bonus goal of <span data-wp="wg-med">5</span> daily medals in the week worth <span data-wp="wg-medr">25</span> coins, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday. Each daily can also earn a medal, kept per day and counted on the page: Sock Match gives gold, silver or bronze for three, two or one stars, Pop-Up Pals for <span data-wp="pm-g">250</span>, <span data-wp="pm-s">150</span> or <span data-wp="pm-b">80</span> points, and Hide the Raisin for <span data-wp="h-mb3">10</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb1">5</span> raisins found, and the Ferret Gems daily puzzle for finishing with <span data-wp="g-dg">30</span> or <span data-wp="g-ds">15</span> percent of the moves left, or any clear for bronze.</p>
+    <p>The Collection page lets a player try on any item, even ones they do not own, before buying. It also holds a ferret name of up to <span data-wp="name-max">16</span> characters and <span data-wp="title-n">17</span> titles, such as Sock Bandit or Frost Walker, which unlock from play stats. The name and title appear under the ferret on shared result pictures. There are <span data-wp="ach-n">94</span> badges across the arcade, each paying <span data-wp="ach-min">10</span> to <span data-wp="ach-max">150</span> coins once. Dook Dash counts here too: its runs, distance, corners, close calls and daily goals feed badges, two titles and the quests, although its coins stay in its own wallet. Three daily quests, picked from different games by a generator seeded from the date, add a reason to try a game you have not played lately: each pays <span data-wp="q-min">15</span> to <span data-wp="q-max">35</span> coins, and finishing all three adds a bonus and a streak. Badges and titles are computed from the same stats that fill the My stats page, so nothing is tracked twice.</p>
+    <p>The My ferret page (the ferret button in the header) pulls this identity together on one screen: the ferret in its current outfit, its name and title, <span data-wp="ach-n">94</span> badges and <span data-wp="title-n">17</span> titles with the ones closest to unlocking, the daily streaks for quests, Sock Match, Pop-Up Pals, Hide the Raisin and Dook Dash goals, a weekly recap of games and coins that you can copy as a picture, three weekly goals (play on <span data-wp="wg-days">5</span> days, play <span data-wp="wg-games">20</span> games, earn <span data-wp="wg-coins">100</span> coins, counted Monday to Sunday) that pay <span data-wp="wg-reward">20</span> coins each plus <span data-wp="wg-sweep">30</span> more for all three, a bonus goal of <span data-wp="wg-med">5</span> daily medals in the week worth <span data-wp="wg-medr">25</span> coins, a look back at last week, streak rewards of <span data-wp="sr-ra">40</span> coins for a <span data-wp="sr-a">7</span>-day, <span data-wp="sr-rc">80</span> for a <span data-wp="sr-c">14</span>-day and <span data-wp="sr-rb">150</span> for a <span data-wp="sr-b">30</span>-day daily quest streak (each claimed once per streak), an all-time view of your best weeks, and a copyable ferret card. Streaks only count while they are alive, meaning played today or yesterday. Each daily can also earn a medal, kept per day and counted on the page: Sock Match gives gold, silver or bronze for three, two or one stars, Pop-Up Pals for <span data-wp="pm-g">250</span>, <span data-wp="pm-s">150</span> or <span data-wp="pm-b">80</span> points, and Hide the Raisin for <span data-wp="h-mb3">10</span>, <span data-wp="h-mb2">8</span> or <span data-wp="h-mb1">5</span> raisins found, and the Ferret Gems daily puzzle for finishing with <span data-wp="g-dg">30</span> or <span data-wp="g-ds">15</span> percent of the moves left, or any clear for bronze.</p>
 
     <p>Progress lives in the browser, so the arcade gives players some control over it. The Settings page (the gear in the header) sets sound and volume, reduced motion, text size shape markers for the gems and letter labels for sock cards. It also makes a backup code: a block of text, with a check value to catch copying errors, that carries all progress, Dook Dash included. Pasting a code on another device shows a summary first. The player can then merge it, keeping the higher value of each item, with items and badges from both sides kept and coins not added together, or replace everything outright. Nothing changes until one is chosen. The code is not encrypted, so anyone holding it can load the progress. A Share today block on the quests page turns the day&rsquo;s quests and daily boards into a few lines of text or a picture, with no server involved, so players can compare days with friends.</p>
 
@@ -1416,7 +1461,7 @@ body.cbshapes .cbm { display: block; }
       </table>
     </div>
     <p>Two features break up the long middle of a run. About every <span data-wp="dd-corner">2,500</span> m the path ends in a corner wall with an arrow: swipe that way in time and you turn the corner for 50 points and drop into a burrow, about <span data-wp="dd-burrow">300</span> m of barrier-free earth tunnel full of coins where the hawk bar drains six times faster. Miss it and you stumble. Once per run, when the hawk would end it, you can pay coins to continue: <span data-wp="dd-cbase">100</span>, plus <span data-wp="dd-cstep">25</span> for every full <span data-wp="dd-cevery">500</span> m, up to <span data-wp="dd-cmax">500</span>. It empties the hawk bar and gives three seconds of safety.</p>
-    <p>Each run uses one of six worlds, never the same as the last: Garden, Sewer, Attic, Rooftops, Kitchen and Beach. They change the look and nothing else, except the Attic, where one lane at a time flickers and then goes dark for four seconds. The dark lane works normally and is only harder to read.</p>
+    <p>Each run uses one of six worlds, never the same as the last: Garden, Sewer, Attic, Rooftops, Kitchen and Beach. Each also has a twist that warns for a second before it happens: fog in the Garden, a flooded lane in the Sewer, lights-out in the Attic, a crosswind on the Rooftops, a hot plate in the Kitchen and a wave of coins on the Beach. Barriers and boosts work the same everywhere.</p>
     <p>Dook Dash has its own long-term loop, kept separate from the arcade&rsquo;s. Coins from a run pay for five upgrades: the length of each of the four upgradeable boosts (<span data-wp="dd-bbase">10</span> seconds at level 0, <span data-wp="dd-binc">5</span> more per level, <span data-wp="dd-bmin">2</span> minutes at level <span data-wp="dd-blvl">22</span>) and Boost Finder, which makes boosts appear more often. Every upgrade follows one price curve, from <span data-wp="dd-upfirst">20</span> coins for the first level to <span data-wp="dd-uplast">625</span> for the last. Maxing one boost costs <span data-wp="dd-maxcost">5,735</span> coins. A wardrobe of furs, hats and trails is cosmetic only and costs <span data-wp="dd-ward">3,890</span> coins in all. Three daily goals, picked from <span data-wp="dd-gtypes">ten</span> types and worth <span data-wp="dd-g0">25</span>, <span data-wp="dd-g1">40</span> or <span data-wp="dd-g2">60</span> coins, add a 50-coin bonus for finishing all three and a streak of consecutive days.</p>
     <p>The two halves are connected in a few places and not in others. Dook Dash&rsquo;s runs, distance, corners, close calls and goals feed the arcade&rsquo;s quests, badges, titles and My stats page, and one backup code carries its progress too. Its coins, upgrades and wardrobe stay in its own wallet and do not mix with the arcade&rsquo;s. The sound switch, volume, reduced-motion and text-size settings apply to it, although the big countdown and pop-ups drawn on its track stay at a fixed size. Like the other games, none of its numbers have been playtested with other people.</p>
 
@@ -1474,6 +1519,28 @@ body.cbshapes .cbm { display: block; }
   function syOf(k) { return HOR + (GND - HOR) * k; }
   function rnd(a, b) { return a + Math.random() * (b - a); }
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  // Daily run: the date seeds a hazard stream (g) and a twist stream (t); outside a daily run both are Math.random.
+  var gs = Math.random, ts = Math.random, isDaily = false;
+  function gR() { return gs(); } function gP(a) { return a[Math.floor(gs() * a.length)]; } function gD(a, b) { return a + gs() * (b - a); }
+  function tR() { return ts(); } function tP(a) { return a[Math.floor(ts() * a.length)]; } function tD(a, b) { return a + ts() * (b - a); }
+  function mb(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var DDM = { B: 500, S: 1000, G: 1800, min: 100, coins: 30, coinsStreak: 10 };
+  var DY = { date: '', best: 0, streak: 0, last: '', plays: 0 };
+  try {
+    var dyj = JSON.parse(localStorage.getItem('fa-dddaily') || 'null');
+    if (dyj && typeof dyj === 'object') {
+      if (typeof dyj.date === 'string') DY.date = dyj.date; if (typeof dyj.last === 'string') DY.last = dyj.last;
+      ['best', 'streak', 'plays'].forEach(function (k) { if (typeof dyj[k] === 'number' && dyj[k] >= 0) DY[k] = Math.floor(dyj[k]); });
+    }
+  } catch (e) {}
+  function dySave() { try { localStorage.setItem('fa-dddaily', JSON.stringify(DY)); } catch (e) {} }
+  function dyToday() { var t = today(); if (DY.date !== t) { DY.date = t; DY.best = 0; DY.plays = 0; } return DY; }
+  function dyStreak() { return (DY.last === today() || DY.last === yesterday()) ? DY.streak : 0; }
+  function dyMedal(n) { return n >= DDM.G ? 'Gold' : n >= DDM.S ? 'Silver' : n >= DDM.B ? 'Bronze' : ''; }
+  function dyNote() {
+    var D = dyToday(), s = dyStreak(), el = document.getElementById('ddNote');
+    if (el) el.textContent = 'Daily run: today\u2019s world, hazards and twists are the same for everyone. Run ' + DDM.min + ' m or more to count. Best today ' + (D.best || '\u2013') + ' \u00b7 streak ' + s + (s === 1 ? ' day' : ' days') + '.';
+  }
   function clampLane(l) { return Math.max(-1, Math.min(1, l)); }
 
   // ---------- audio ----------
@@ -1554,7 +1621,7 @@ body.cbshapes .cbm { display: block; }
   var TPATH = {};
   var SAVE = { coins: 0, up: { dance: 0, magnet: 0, shield: 0, gold: 0, finder: 0 },
     fur: 'sable', hat: 'none', trail: 'none', own: { fur: { sable: 1 }, hat: { none: 1 }, trail: { none: 1, paws: 1 } }, day: null, streak: { last: '', n: 0 },
-    stats: { runs: 0, bestDist: 0, dist: 0, coins: 0, jumps: 0, slides: 0, smash: 0, boosts: 0, close: 0, turns: 0, stumbles: 0, continues: 0, goals: 0, bestStreak: 0, burrows: 0, turbos: 0, kitchen: 0, beach: 0, trailRuns: 0 } };
+    stats: { runs: 0, bestDist: 0, dist: 0, coins: 0, jumps: 0, slides: 0, smash: 0, boosts: 0, close: 0, turns: 0, stumbles: 0, continues: 0, goals: 0, bestStreak: 0, burrows: 0, turbos: 0, kitchen: 0, beach: 0, trailRuns: 0, twists: 0, dailies: 0, bestDaily: 0 } };
   try {
     var rawSave = localStorage.getItem('dookdash-save');
     if (rawSave) {
@@ -1663,8 +1730,8 @@ body.cbshapes .cbm { display: block; }
   function newState(mode) {
     return { mode: mode, z: 0, speed: mode === 'play' ? 14 : 6, lane: 0, px: 0, py: 0, vy: 0, slide: 0, queueSlide: false,
       coins: 0, bonus: 0, hawk: 0, ents: [], next: 38, dance: 0, stumble: 0, shake: 0, flash: 0, parts: [], t: 0, phase: 0, wi: 0, pickT: 10, magnet: 0, shield: 0, gold: 0, turbo: 0, grace: 0, toast: null,
-      dark: null, nextDark: 1e9, continued: false, turnFx: null, hold: false, burrow: null, turnZ: CORNER_GAP + rnd(-300, 300), turnDir: Math.random() < 0.5 ? -1 : 1,
-      st: { coins: 0, slides: 0, jumps: 0, boosts: 0, smash: 0, close: 0, turns: 0, stumbles: 0, burrows: 0, turbos: 0 } };
+      dark: null, nextDark: 1e9, tw: null, nextTw: 1e9, continued: false, turnFx: null, hold: false, burrow: null, turnZ: CORNER_GAP + gD(-300, 300), turnDir: gR() < 0.5 ? -1 : 1,
+      st: { coins: 0, slides: 0, jumps: 0, boosts: 0, smash: 0, close: 0, turns: 0, stumbles: 0, burrows: 0, turbos: 0, twists: 0 } };
   }
   var best = 0;
   try { best = parseInt(localStorage.getItem('dookdash-best') || '0', 10) || 0; } catch (e) { best = 0; }
@@ -1678,13 +1745,13 @@ body.cbshapes .cbm { display: block; }
   function add(type, lane, z, y) { var e = { type: type, lane: lane, z: z, y: y || 0, dead: false }; S.ents.push(e); return e; }
   function coinLine(lane, z0, n, step, y) { for (var i = 0; i < n; i++) add('coin', lane, z0 + i * step, y || 0.55); }
   function spawn(z) {
-    var LN = [-1, 0, 1], L = pick(LN), r = Math.random(), sp = S.speed, ext = 6, i, g, o;
+    var LN = [-1, 0, 1], L = gP(LN), r = gR(), sp = S.speed, ext = 6, i, g, o;
     var late = S.z > 250;
-    function shuffled() { return ['log', pick(['gate', 'pipe']), 'crate'].sort(function () { return Math.random() - 0.5; }); }
+    function shuffled() { return ['log', gP(['gate', 'pipe']), 'crate'].sort(function () { return gR() - 0.5; }); }
     if (r < 0.08) {
       // single barrier, coins in a free lane
-      add(pick(['log', 'pipe', 'gate', 'crate']), L, z);
-      coinLine(pick(LN.filter(function (l) { return l !== L; })), z - 2, 4, 2.2);
+      add(gP(['log', 'pipe', 'gate', 'crate']), L, z);
+      coinLine(gP(LN.filter(function (l) { return l !== L; })), z - 2, 4, 2.2);
     } else if (r < 0.20) {
       // two crates, one open lane
       LN.forEach(function (l) { if (l !== L) add('crate', l, z); });
@@ -1695,7 +1762,7 @@ body.cbshapes .cbm { display: block; }
       add('coin', L, z - 1.8, 1.1); add('coin', L, z, 1.6); add('coin', L, z + 1.8, 1.1);
     } else if (r < 0.38) {
       // wall of overhead barriers: slide under (gates) or slide/jump (bars)
-      var rt = Math.random() < 0.6 ? 'gate' : 'pipe';
+      var rt = gR() < 0.6 ? 'gate' : 'pipe';
       LN.forEach(function (l) { add(rt, l, z); });
       coinLine(L, z - 3, 5, 1.4, 0.5);
     } else if (r < 0.54) {
@@ -1713,12 +1780,12 @@ body.cbshapes .cbm { display: block; }
         var zz = z + i * g;
         LN.forEach(function (l) { if (l !== gl) add('crate', l, zz); });
         add('coin', gl, zz, 0.55);
-        gl = gl === 0 ? pick([-1, 1]) : (Math.random() < 0.7 ? 0 : gl);
+        gl = gl === 0 ? gP([-1, 1]) : (gR() < 0.7 ? 0 : gl);
       }
       ext = n * g;
     } else if (r < 0.80) {
       // spiked rollers sweeping across the path: jump them
-      o = add('roller', 0, z); o.ph = rnd(0, TAU);
+      o = add('roller', 0, z); o.ph = gD(0, TAU);
       if (late) { var o2 = add('roller', 0, z + 6); o2.ph = o.ph + Math.PI; }
       coinLine(L, z + (late ? 13 : 9), 3, 2, 0.55);
       ext = late ? 20 : 14;
@@ -1738,12 +1805,12 @@ body.cbshapes .cbm { display: block; }
       for (i = 0; i < 8; i++) {
         if (i === 4) { add('log', l2, z + i * 2); add('coin', l2, z + i * 2, 1.6); }
         else add('coin', l2, z + i * 2, 0.55);
-        if (i % 3 === 2) l2 = clampLane(l2 + pick([-1, 1]));
+        if (i % 3 === 2) l2 = clampLane(l2 + gP([-1, 1]));
       }
       ext = 16;
     }
-    if (S.pickT <= 0 && Math.random() < 0.2 + 0.03 * lvl('finder')) {
-      add(pick(['sock', 'sock', 'magnet', 'magnet', 'shield', 'shield', 'gold', 'turbo']), pick(LN), z + ext + 3, 0.9);
+    if (S.pickT <= 0 && gR() < 0.2 + 0.03 * lvl('finder')) {
+      add(gP(['sock', 'sock', 'magnet', 'magnet', 'shield', 'shield', 'gold', 'turbo']), gP(LN), z + ext + 3, 0.9);
       S.pickT = finderGap(); ext += 4;
     }
     return ext;
@@ -1794,16 +1861,16 @@ body.cbshapes .cbm { display: block; }
   }
   // Burrow bonus: a stretch with no barriers and only coins.
   function spawnBurrow(z) {
-    var r = Math.random(), i, l, n;
+    var r = gR(), i, l, n;
     if (r < 0.3) {
       n = 6; for (i = 0; i < n; i++) [-1, 0, 1].forEach(function (ln) { add('coin', ln, z + i * 2, 0.55); });
       return n * 2;
     } else if (r < 0.7) {
-      l = pick([-1, 0, 1]); n = 14;
-      for (i = 0; i < n; i++) { add('coin', l, z + i * 2, 0.55); if (i % 4 === 3) l = clampLane(l + pick([-1, 1])); }
+      l = gP([-1, 0, 1]); n = 14;
+      for (i = 0; i < n; i++) { add('coin', l, z + i * 2, 0.55); if (i % 4 === 3) l = clampLane(l + gP([-1, 1])); }
       return n * 2;
     }
-    n = 8; l = pick([-1, 0, 1]);
+    n = 8; l = gP([-1, 0, 1]);
     for (i = 0; i < n; i++) add('coin', l, z + i * 2.2, 0.55 + 1.3 * Math.sin(i / (n - 1) * Math.PI));
     return n * 2.2;
   }
@@ -1826,7 +1893,7 @@ body.cbshapes .cbm { display: block; }
     S.ents = S.ents.filter(function (e) { return e.z < tz - 8; });
     S.ents.push({ type: 'turn', lane: 0, z: tz, y: 0, dead: false, dir: S.turnDir, ok: false, done: false });
     S.hold = true; // no new patterns until the turn is resolved
-    S.turnZ = tz + CORNER_GAP + rnd(-300, 300); S.turnDir = Math.random() < 0.5 ? -1 : 1;
+    S.turnZ = tz + CORNER_GAP + gD(-300, 300); S.turnDir = gR() < 0.5 ? -1 : 1;
   }
   function act(a) {
     if (S.mode !== 'play') return;
@@ -1875,28 +1942,51 @@ body.cbshapes .cbm { display: block; }
     S.st.coins = S.coins;
     var glines = applyGoals(S.st, Math.floor(S.z)), ps = SAVE.stats, rd = Math.floor(S.z);
     ps.runs++; ps.dist += rd; ps.bestDist = Math.max(ps.bestDist, rd); ps.coins += S.coins;
-    ['jumps', 'slides', 'smash', 'boosts', 'close', 'turns', 'stumbles', 'burrows', 'turbos'].forEach(function (k) { ps[k] = (ps[k] || 0) + S.st[k]; });
+    ['jumps', 'slides', 'smash', 'boosts', 'close', 'turns', 'stumbles', 'burrows', 'turbos', 'twists'].forEach(function (k) { ps[k] = (ps[k] || 0) + S.st[k]; });
     if (rd >= 100 && SAVE.trail !== 'none') ps.trailRuns = (ps.trailRuns || 0) + 1;
     if (rd >= 300 && (curWorld === 4 || curWorld === 5)) { var wk = curWorld === 4 ? 'kitchen' : 'beach'; ps[wk] = (ps[wk] || 0) + 1; }
     ps.goals += glines.filter(function (l) { return l.indexOf('Goal done') === 0; }).length;
     touchStreak(); save(); refreshWallet(); refreshBadges();
     var total = Math.floor(S.z) + S.coins * 10 + S.bonus;
     if (total > best) { best = total; try { localStorage.setItem('dookdash-best', String(best)); } catch (e) {} }
+    var dyLine = '';
+    if (isDaily && rd >= DDM.min) {
+      var D = dyToday(), firstD = D.plays === 0, bonus = 0;
+      D.plays++;
+      if (firstD) {
+        D.streak = D.last === yesterday() ? D.streak + 1 : 1; D.last = today();
+        bonus = DDM.coins + DDM.coinsStreak * Math.min(D.streak - 1, 6); SAVE.coins += bonus;
+        ps.dailies = (ps.dailies || 0) + 1;
+      }
+      if (total > D.best) D.best = total;
+      ps.bestDaily = Math.max(ps.bestDaily || 0, total);
+      var dm = dyMedal(total); dySave(); save(); refreshWallet(); refreshBadges();
+      try { if (window.faAward && dm) window.faAward('dook', dm); } catch (e) {}
+      dyLine = ' \u00b7 Daily' + (dm ? ' ' + dm : '') + (bonus ? ' +' + bonus + ' coins' : '');
+    }
+    dyNote();
     document.getElementById('goScore').textContent = total + ' pts';
-    document.getElementById('goStats').textContent = Math.floor(S.z) + ' m · ' + S.coins + ' coins saved · best ' + best;
+    document.getElementById('goStats').textContent = Math.floor(S.z) + ' m · ' + S.coins + ' coins saved · best ' + best + dyLine;
     document.getElementById('goGoals').innerHTML = glines.length ? glines.join('<br>') : '';
     document.getElementById('hud').hidden = true;
     document.getElementById('ovOver').hidden = false;
     cv.style.touchAction = 'auto';
     sfx('over');
   }
-  function start() {
+  function start(daily) {
     ac();
+    isDaily = daily === true;
+    if (isDaily) {
+      var dsd = parseInt(today().replace(/-/g, ''), 10);
+      gs = mb(dsd * 31 + 7); ts = mb(dsd * 17 + 3);
+    } else { gs = Math.random; ts = Math.random; }
     S = newState('play');
-    if (!firstStart) { var nw; do { nw = Math.floor(Math.random() * WORLDS.length); } while (nw === curWorld); curWorld = nw; }
+    if (isDaily) curWorld = Math.floor(hash(parseInt(today().replace(/-/g, ''), 10) + 91) * WORLDS.length) % WORLDS.length;
+    else if (!firstStart) { var nw; do { nw = Math.floor(Math.random() * WORLDS.length); } while (nw === curWorld); curWorld = nw; }
     firstStart = false;
     S.toast = { text: WORLDS[curWorld].name, t: 2 };
     S.nextDark = curWorld === 2 ? 18 : 1e9;
+    S.nextTw = curWorld === 2 ? 1e9 : TW.first;
     document.getElementById('ovTitle').hidden = true;
     document.getElementById('ovOver').hidden = true;
     ['ovShop', 'ovWard', 'ovGoals', 'ovPaper', 'ovStats', 'ovCont'].forEach(function (id) { document.getElementById(id).hidden = true; });
@@ -1949,6 +2039,67 @@ body.cbshapes .cbm { display: block; }
   }
 
   var CCT = ['log', 'pipe', 'gate', 'crate', 'roller'];
+  // World twists. The Attic has lights-out (below). Garden: fog bank. Sewer: flooded lane slows you. Rooftops: crosswind pushes a lane.
+  // Kitchen: hot plate flares in one lane. Beach: a tide washes in a wave of coins. Each one warns for a second first.
+  var TW = { first: 14, gapMin: 12, gapMax: 18, warn: 1, fog: 4.5, flood: 4, flare: 0.8, tide: 0.7, slow: 0.6 };
+  var TWN = { 0: 'FOG BANK', 1: 'FLOOD!', 3: 'CROSSWIND', 4: 'HOT PLATE!', 5: 'COIN TIDE!' };
+  function floodMul() { var w = S.tw; return (w && w.k === 1 && w.ph === 'on' && Math.abs(S.px - w.lane) < 0.5 && S.py < 0.3) ? TW.slow : 1; }
+  function fogA() {
+    var w = S.tw; if (!w || w.k !== 0) return 0;
+    if (w.ph === 'warn') return Math.min(1, w.t / TW.warn);
+    return Math.max(0, Math.min(1, (TW.fog - w.t) / 0.5));
+  }
+  function twTick(dt) {
+    if (curWorld === 2 || S.mode !== 'play') return;
+    var w = S.tw;
+    if (!w) {
+      S.nextTw -= dt;
+      if (S.nextTw <= 0) {
+        if (S.hold || S.burrow) { S.nextTw = 1; return; }
+        var dir = tR() < 0.5 ? -1 : 1;
+        S.tw = { k: curWorld, ph: 'warn', t: 0, lane: tP([-1, 0, 1]), dir: dir };
+        toast(TWN[curWorld] + (curWorld === 3 ? (dir < 0 ? ' \u2190' : ' \u2192') : ''));
+      }
+      return;
+    }
+    w.t += dt;
+    if (w.ph === 'warn') {
+      if (w.t < TW.warn) return;
+      w.ph = 'on'; w.t = 0;
+      if (w.k === 3) { if (!((w.dir < 0 && S.lane <= -1) || (w.dir > 0 && S.lane >= 1))) S.lane = clampLane(S.lane + w.dir); }
+      else if (w.k === 4) { if (Math.abs(S.px - w.lane) < 0.5 && S.py < 0.3 && S.dance <= 0 && S.turbo <= 0 && S.grace <= 0) hurt(); }
+      else if (w.k === 5) { for (var r = 0; r < 4; r++) [-1, 0, 1].forEach(function (l) { add('coin', l, S.z + 38 + r * 5, 0.55); }); sfx('power'); }
+      return;
+    }
+    var dur = w.k === 0 ? TW.fog : (w.k === 1 ? TW.flood : (w.k === 4 ? TW.flare : TW.tide));
+    if (w.t >= dur) { S.tw = null; S.nextTw = tD(TW.gapMin, TW.gapMax); S.st.twists++; }
+  }
+  function laneBand(l, col) {
+    var kH = kOf(NB * BAND), yH = syOf(kH), kB = kOf(-3.3), yB = syOf(kB);
+    ctx.fillStyle = col;
+    poly([CX + (l - 0.5) * LW * kH, yH, CX + (l + 0.5) * LW * kH, yH, CX + (l + 0.5) * LW * kB, yB, CX + (l - 0.5) * LW * kB, yB]);
+  }
+  function drawTw() {
+    var w = S.tw; if (!w) return;
+    var blink = reduce ? true : Math.floor(S.t * 10) % 2 === 0, i;
+    if (w.k === 0) {
+      var a = fogA(); if (a <= 0.01) return;
+      var g = ctx.createLinearGradient(0, HOR - 30, 0, GND + 20);
+      g.addColorStop(0, 'rgba(214,206,232,' + (0.5 * a).toFixed(2) + ')'); g.addColorStop(1, 'rgba(214,206,232,' + (0.12 * a).toFixed(2) + ')');
+      ctx.fillStyle = g; ctx.fillRect(0, HOR - 30, W, GND - HOR + 50);
+    } else if (w.k === 1) {
+      if (w.ph === 'warn') laneBand(w.lane, blink ? 'rgba(60,170,150,.4)' : 'rgba(60,170,150,.1)');
+      else { laneBand(w.lane, 'rgba(50,150,130,.5)'); ctx.strokeStyle = 'rgba(190,255,240,.35)'; ctx.lineWidth = 2; for (i = 0; i < 5; i++) { var ry = GND - 20 - ((S.t * 60 + i * 60) % 300); ctx.beginPath(); ctx.ellipse(CX + w.lane * LW * (1 - (GND - ry) / 800), ry, 24 * (ry - HOR) / 330 + 4, 3, 0, 0, TAU); ctx.stroke(); } }
+    } else if (w.k === 3) {
+      ctx.strokeStyle = 'rgba(255,255,255,' + (w.ph === 'warn' ? 0.35 : 0.5) + ')'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+      for (i = 0; i < 12; i++) { var wy = HOR + 20 + ((i * 53) % (GND - HOR - 40)), wx = (((S.t * 380 * w.dir) + i * 97) % (W + 160) + (W + 160)) % (W + 160) - 80; ctx.beginPath(); ctx.moveTo(wx, wy); ctx.lineTo(wx + w.dir * 46, wy); ctx.stroke(); }
+    } else if (w.k === 4) {
+      if (w.ph === 'warn') laneBand(w.lane, blink ? 'rgba(230,70,40,.5)' : 'rgba(230,70,40,.14)');
+      else laneBand(w.lane, 'rgba(255,160,40,' + (0.75 * (1 - w.t / TW.flare)).toFixed(2) + ')');
+    } else if (w.k === 5) {
+      if (w.ph === 'warn') for (i = -1; i <= 1; i++) laneBand(i, blink ? 'rgba(120,220,230,.3)' : 'rgba(120,220,230,.1)');
+    }
+  }
   function step(dt) {
     S.t += dt;
     if (S.mode === 'title') { S.z += 6 * dt; S.phase += dt * 10; return; }
@@ -1962,7 +2113,7 @@ body.cbshapes .cbm { display: block; }
 
     var base = Math.min(SPDMAX, SPD0 + S.z * SPDK), zMax = (SPDMAX - SPD0) / SPDK;
     if (S.z > zMax) base = Math.min(SPDTOP, SPDMAX + (S.z - zMax) * SPDLATE);
-    var target = base * (S.stumble > 0 ? 0.6 : 1) * (S.dance > 0 ? 1.2 : 1) * (S.turbo > 0 ? TURBO.speed : 1);
+    var target = base * (S.stumble > 0 ? 0.6 : 1) * (S.dance > 0 ? 1.2 : 1) * (S.turbo > 0 ? TURBO.speed : 1) * floodMul();
     S.speed += (target - S.speed) * Math.min(1, dt * 4);
     S.z += S.speed * dt;
     S.phase += dt * (7 + S.speed * 0.35);
@@ -1978,9 +2129,10 @@ body.cbshapes .cbm { display: block; }
     S.magnet = Math.max(0, S.magnet - dt); S.shield = Math.max(0, S.shield - dt); S.gold = Math.max(0, S.gold - dt); S.turbo = Math.max(0, S.turbo - dt); S.grace = Math.max(0, S.grace - dt);
     if (S.toast) S.toast.t -= dt;
     if (S.turnFx) { S.turnFx.t += dt; if (S.turnFx.t > 0.5) S.turnFx = null; }
+    twTick(dt); if (S.mode !== 'play') return;
     S.nextDark -= dt;
-    if (S.dark) { S.dark.t += dt; if (S.dark.t > 5.3) { S.dark = null; S.nextDark = rnd(14, 22); } }
-    else if (S.nextDark <= 0) S.dark = { lane: pick([-1, 0, 1]), t: 0 };
+    if (S.dark) { S.dark.t += dt; if (S.dark.t > 5.3) { S.dark = null; S.nextDark = tD(14, 22); S.st.twists++; } }
+    else if (S.nextDark <= 0) S.dark = { lane: tP([-1, 0, 1]), t: 0 };
     S.shake = Math.max(0, S.shake - dt);
     S.flash = Math.max(0, S.flash - dt);
     if (S.stumble > 0) S.stumble -= dt; else S.hawk = Math.max(0, S.hawk - dt * (S.burrow && burrowAlpha() > 0 ? 0.12 : 0.02));
@@ -2306,7 +2458,7 @@ body.cbshapes .cbm { display: block; }
 
   function drawEnt(e, dz) {
     var d = Math.max(dz, -3.3), k = kOf(d), x = CX + e.lane * LW * k, y = syOf(k), u = UNIT * k, w = LW * k;
-    ctx.globalAlpha = (dz > 85 ? Math.max(0, (110 - dz) / 25) : 1) * darkMul(e, dz);
+    ctx.globalAlpha = (dz > 85 ? Math.max(0, (110 - dz) / 25) : 1) * darkMul(e, dz) * (1 - 0.8 * fogA() * Math.max(0, Math.min(1, (dz - 8) / 12)));
     if (e.type !== 'coin' && e.type !== 'turn' && PICKS.indexOf(e.type) < 0) {
       ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(x, y, w * 0.42, u * 0.14, 0, 0, TAU); ctx.fill();
     }
@@ -2539,7 +2691,7 @@ body.cbshapes .cbm { display: block; }
     ctx.save();
     if (S.shake > 0 && !reduce) ctx.translate((Math.random() - 0.5) * 12 * S.shake, (Math.random() - 0.5) * 12 * S.shake);
     if (S.turnFx && !reduce) { ctx.translate(CX, GND); ctx.rotate(S.turnFx.dir * 0.2 * Math.sin(S.turnFx.t / 0.5 * Math.PI)); ctx.translate(-CX, -GND); }
-    drawSky(); drawGround(); drawBurrow(); drawDark();
+    drawSky(); drawGround(); drawBurrow(); drawDark(); drawTw();
     var list = S.ents.filter(function (e) { return !e.dead && e.z - S.z < 112 && !(e.type === 'turn' && e.done); });
     list.sort(function (a, b) { return b.z - a.z; });
     var drawn = false;
@@ -2600,8 +2752,9 @@ body.cbshapes .cbm { display: block; }
     else if (k === 'ArrowDown' || k === 's' || k === 'S') a = 'D';
     if (a) { e.preventDefault(); act(a); }
   });
-  document.getElementById('btnStart').addEventListener('click', start);
-  document.getElementById('btnAgain').addEventListener('click', start);
+  document.getElementById('btnStart').addEventListener('click', function () { start(false); });
+  document.getElementById('btnDaily').addEventListener('click', function () { start(true); });
+  document.getElementById('btnAgain').addEventListener('click', function () { start(isDaily); });
 
   // ---------- upgrade shop ----------
   var panelFrom = 'ovTitle';
@@ -2707,7 +2860,7 @@ body.cbshapes .cbm { display: block; }
     var st = SAVE.stats, n = function (v) { return Number(v).toLocaleString('en-US'); };
     var rows = [['Best score', best], ['Runs', st.runs], ['Best distance', n(st.bestDist) + ' m'], ['Total distance', n(st.dist) + ' m'],
       ['Coins collected', st.coins], ['Barriers jumped', st.jumps], ['Barriers slid under', st.slides], ['Barriers smashed', st.smash],
-      ['Boosts picked up', st.boosts], ['Turbos', st.turbos || 0], ['Runs with a trail (100 m+)', st.trailRuns || 0], ['Kitchen runs (300 m+)', st.kitchen || 0], ['Beach runs (300 m+)', st.beach || 0], ['Close calls', st.close], ['Corners turned', st.turns], ['Stumbles', st.stumbles],
+      ['Boosts picked up', st.boosts], ['Turbos', st.turbos || 0], ['World twists ridden out', st.twists || 0], ['Daily runs done / best daily score', (st.dailies || 0) + ' / ' + (st.bestDaily || 0)], ['Runs with a trail (100 m+)', st.trailRuns || 0], ['Kitchen runs (300 m+)', st.kitchen || 0], ['Beach runs (300 m+)', st.beach || 0], ['Close calls', st.close], ['Corners turned', st.turns], ['Stumbles', st.stumbles],
       ['Burrows entered', st.burrows], ['Continues used', st.continues], ['Goals finished', st.goals], ['Best streak', st.bestStreak + (st.bestStreak === 1 ? ' day' : ' days')]];
     document.getElementById('statList').innerHTML = rows.map(function (r) { return '<div class="stat"><span>' + r[0] + '</span><b>' + (typeof r[1] === 'number' ? n(r[1]) : r[1]) + '</b></div>'; }).join('');
   }
@@ -2729,7 +2882,7 @@ body.cbshapes .cbm { display: block; }
     sfx('power');
     renderShop();
   });
-  refreshWallet();
+  refreshWallet(); dyNote();
   var muteBtn = document.getElementById('mute');
   muteBtn.textContent = muted ? 'Sound off' : 'Sound on';
   muteBtn.addEventListener('click', function () {
@@ -2765,7 +2918,7 @@ body.cbshapes .cbm { display: block; }
     if (S.mode === 'play' || S.mode === 'cont' || S.mode === 'count') { var m = muted; muted = true; over(); muted = m; }
     S = newState('title');
     ['ovOver', 'ovCont', 'ovShop', 'ovWard', 'ovGoals', 'ovPaper', 'ovStats'].forEach(function (id) { document.getElementById(id).hidden = true; });
-    document.getElementById('ovTitle').hidden = false;
+    document.getElementById('ovTitle').hidden = false; dyNote();
     document.getElementById('hud').hidden = true;
     cv.style.touchAction = ''; panelFrom = 'ovTitle';
     refreshWallet(); refreshBadges();
@@ -2804,13 +2957,13 @@ body.cbshapes .cbm { display: block; }
   /* ---------- Stats store ---------- */
   var ST_DEFAULT = function () {
     return {
-      socks: { played: 0, won: 0, moves: 0, pairs: 0, peeks: 0, bestStreak: 0, threeStars: 0, fast: {}, levelsWon: 0, dailies: 0, bestDaily: 0, mischief: 0, decoys: 0, golds: 0, reveals: 0, freezes: 0 },
-      dash: { runs: 0, raisins: 0, meters: 0, longest: 0, bestRaisins: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, ducks: 0, leaps: 0, yarns: 0, closets: 0, slows: 0, checkpoints: 0, missions: 0, chases: 0, bossWins: 0, bossHits: 0, paws: 0, trailRuns: 0, traps: 0, rushes: 0, attics: 0 },
-      whack: { rounds: 0, hits: 0, taps: 0, score: 0, golds: 0, clocks: 0, vac: 0, maxCombo: 0, hops: 0, bosses: 0, covers: 0, levelsWon: 0, endlessBest: 0, endlessRuns: 0, dailies: 0, bestDaily: 0, boosts: 0 },
+      socks: { tumbles: 0, played: 0, won: 0, moves: 0, pairs: 0, peeks: 0, bestStreak: 0, threeStars: 0, fast: {}, levelsWon: 0, dailies: 0, bestDaily: 0, mischief: 0, decoys: 0, golds: 0, reveals: 0, freezes: 0 },
+      dash: { runs: 0, raisins: 0, meters: 0, longest: 0, bestRaisins: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, ducks: 0, leaps: 0, yarns: 0, closets: 0, slows: 0, checkpoints: 0, missions: 0, chases: 0, bossWins: 0, bossHits: 0, paws: 0, trailRuns: 0, traps: 0, rushes: 0, attics: 0, cans: 0, garages: 0, oils: 0, skids: 0, bounces: 0, threads: 0, snags: 0, tumbles: 0, jets: 0, soaks: 0, darks: 0, roombas: 0, brooms: 0, dailies: 0, bestDaily: 0 },
+      whack: { happyHits: 0, happyHours: 0, rounds: 0, hits: 0, taps: 0, score: 0, golds: 0, clocks: 0, vac: 0, maxCombo: 0, hops: 0, bosses: 0, covers: 0, levelsWon: 0, endlessBest: 0, endlessRuns: 0, dailies: 0, bestDaily: 0, boosts: 0 },
       quests: { claimed: 0, sweeps: 0, bestStreak: 0 },
-      stack: { games: 0, layers: 0, tallest: 0, perfects: 0, bestStreak: 0, coinsEarned: 0 },
-      hide: { games: 0, rounds: 0, found: 0, twinFound: 0, bestTwin: 0, bestRound: 0, bestScore: 0, bestStreak: 0, dailies: 0, peeks: 0 },
-      gems: { dailies: 0, dailyGolds: 0, games: 0, cleared: 0, pieces: 0, blasters: 0, bombs: 0, maxChain: 0, hints: 0, bestTotal: 0, zenBest: 0, boosters: 0, mischief: 0, coinsEarned: 0, bursts: 0, freed: 0, scrubbed: 0, rushBest: 0, rushes: 0, combos: 0, thawed: 0, unlocked: 0 }
+      stack: { gusts: 0, games: 0, layers: 0, tallest: 0, perfects: 0, bestStreak: 0, coinsEarned: 0 },
+      hide: { spins: 0, spinsFound: 0, games: 0, rounds: 0, found: 0, twinFound: 0, bestTwin: 0, bestRound: 0, bestScore: 0, bestStreak: 0, dailies: 0, peeks: 0 },
+      gems: { lucky: 0, dailies: 0, dailyGolds: 0, games: 0, cleared: 0, pieces: 0, blasters: 0, bombs: 0, maxChain: 0, hints: 0, bestTotal: 0, zenBest: 0, boosters: 0, mischief: 0, coinsEarned: 0, bursts: 0, freed: 0, scrubbed: 0, rushBest: 0, rushes: 0, combos: 0, thawed: 0, unlocked: 0, trailBursts: 0, bigBursts: 0 }
     };
   };
   var ST = ST_DEFAULT();
@@ -2851,7 +3004,7 @@ body.cbshapes .cbm { display: block; }
   // Balance numbers. The games read them from here, and so does the whitepaper.
   var BAL = {
     socks: { maxPairs: 10, star3: 1.6, star2: 2.6, decoy: 2, goldBack: 2, misFrom: 2 },
-    dash: { speed0: 170, ramp: 3.5, rampSecs: 60, ramp2: 0.6, speedMax: 450, spawn0: 0.95, spawnPer: 0.0065, spawnMin: 0.3, fill0: 0.35, fillMin: 0.1, fillPer: 0.0028, dbl0: 0.3, dblMax: 0.7, dblPer: 0.0036, lives: 3, maxLives: 5, biomeM: 400, rushSecs: 6, cpM: 500, boss1: 600, bossEvery: 700, bossBase: 5, bossPerLvl: 2, bossMax: 12, warn0: 1.2, warnAtk: 0.05, warnLvl: 0.08, warnMin: 0.6, grace: 1.2 },
+    dash: { speed0: 170, ramp: 3.5, rampSecs: 60, ramp2: 0.6, speedMax: 450, spawn0: 0.95, spawnPer: 0.0065, spawnMin: 0.3, fill0: 0.35, fillMin: 0.1, fillPer: 0.0028, dbl0: 0.3, dblMax: 0.7, dblPer: 0.0036, lives: 3, maxLives: 5, biomeM: 400, rushSecs: 6, skidSecs: 1.5, skidDelay: 0.28, snagSecs: 1.2, bounceBonus: 3, tumbleSecs: 2.2, darkSecs: 3.5, cpM: 500, boss1: 600, bossEvery: 700, bossBase: 5, bossPerLvl: 2, bossMax: 12, warn0: 1.2, warnAtk: 0.05, warnLvl: 0.08, warnMin: 0.6, grace: 1.2, dailyB: 300, dailyS: 600, dailyG: 1000, dailyMin: 100 },
     pals: { medalB: 80, medalS: 150, medalG: 250, round: 30, gold: 3, hop: 2, boss: 10, bossHp: 3, clock: 2, cap: 45, targetBase: 40, targetPer: 6, targetMax: 160, star2: 1.3, star3: 1.6, lives: 3, maxLives: 5, speed: 1.7 },
     gems: { star3: 0.4, rushMs: 60000, dailyG: 0.3, dailyS: 0.15, dailyCoins: [15, 25, 40] },
     stack: { speed0: 130, perLayer: 7, max: 380, perfectPx: 5, widen: 6, widenAfter: 3, perCoin: 3, coinMax: 25 },
@@ -2864,7 +3017,7 @@ body.cbshapes .cbm { display: block; }
   var SCOST = { reveal: 15, freeze: 5 };
   var sockMode = 'easy', sockType = 'free';
   var grid = $('#grid');
-  var first = null, lock = false, moves = 0, pairs = 0, total = 6, peeked = false, won = false, streak = 0, cfg = null, misLeft = 0;
+  var first = null, lock = false, moves = 0, pairs = 0, total = 6, peeked = false, won = false, streak = 0, cfg = null, misLeft = 0, tumbleLeft = 5;
   var st0 = 0, sacc = 0, stimer = 0, scounted = false, frozen = false, freezeT = 0;
 
   // Level progress and the daily board are saved separately from the best-moves record.
@@ -2904,6 +3057,7 @@ body.cbshapes .cbm { display: block; }
     var k = dayKey(), d = MED.d[k] || (MED.d[k] = {});
     if ((MRANK[d[game]] || 0) < MRANK[m]) { d[game] = m; medalSave(); }
   }
+  window.faAward = function (g, m) { awardMedal(g, m); };
   function medalToday(game) { var d = MED.d[dayKey()]; return (d && d[game]) || ''; }
   function medalTotal() { var c = medalCounts(); return c.Gold + c.Silver + c.Bronze; }
   function tripleGold() { return Object.keys(MED.d).some(function (k) { var d = MED.d[k]; return d.socks === 'Gold' && d.whack === 'Gold' && d.hide === 'Gold'; }); }
@@ -3027,7 +3181,7 @@ body.cbshapes .cbm { display: block; }
     grid.innerHTML = items.map(cardHTML).join('');
     hideCopy('socks');
     first = null; lock = false; moves = 0; pairs = 0; peeked = false; won = false; streak = 0; sacc = 0; scounted = false;
-    misLeft = cfg.mis ? 4 + Math.floor(srng() * 3) : 0;
+    misLeft = cfg.mis ? 4 + Math.floor(srng() * 3) : 0; tumbleLeft = 5;
     pauseTimer();
     $('#s-moves').textContent = '0';
     $('#socks-msg').textContent = '';
@@ -3080,6 +3234,18 @@ body.cbshapes .cbm { display: block; }
     ST.socks.mischief++; sSave();
     $('#socks-msg').textContent = 'The mischief ferret swapped two face-down cards!';
   }
+  // Dryer tumble: after every fifth try, a random face-down card tumbles face up for a second. A free look.
+  function dryerTumble() {
+    if (won) return;
+    tumbleLeft--; if (tumbleLeft > 0) return;
+    tumbleLeft = 5;
+    var cs = Array.prototype.filter.call(grid.children, function (c) { return c.classList && c.classList.contains('card') && !c.classList.contains('up') && !c.classList.contains('done'); });
+    if (cs.length < 3) return;
+    var c = cs[Math.floor(Math.random() * cs.length)];
+    c.classList.add('up'); ST.socks.tumbles = (ST.socks.tumbles || 0) + 1; sSave();
+    $('#socks-msg').textContent = 'A sock tumbled out of the dryer! Remember it.';
+    setTimeout(function () { if (c.classList.contains('done') || c === first) return; c.classList.remove('up'); }, 1100);
+  }
   grid.addEventListener('click', function (e) {
     var b = e.target.closest('.card');
     if (!b || lock || won || b.classList.contains('up')) return;
@@ -3104,7 +3270,7 @@ body.cbshapes .cbm { display: block; }
       var gm = '';
       if (a.classList.contains('gold')) { moves = Math.max(0, moves - BAL.socks.goldBack); setMoves(); ST.socks.golds++; gm = ' Golden pair, ' + BAL.socks.goldBack + ' moves back!'; }
       if (pairs === total) sockWin();
-      else $('#socks-msg').textContent = (streak > 1 ? 'Pair! Streak of ' + streak + '.' : 'Pair!') + gm;
+      else { $('#socks-msg').textContent = (streak > 1 ? 'Pair! Streak of ' + streak + '.' : 'Pair!') + gm; dryerTumble(); }
     } else {
       streak = 0;
       $('#socks-msg').textContent = '';
@@ -3113,7 +3279,7 @@ body.cbshapes .cbm { display: block; }
         a.classList.remove('up'); b.classList.remove('up');
         a.setAttribute('aria-label', 'Card, face down'); b.setAttribute('aria-label', 'Card, face down');
         if (cfg && cfg.mis && !won) { misLeft--; if (misLeft <= 0) { mischiefSocks(); misLeft = 4 + Math.floor(srng() * 3); } }
-        lock = false;
+        lock = false; dryerTumble();
       }, 750);
     }
   });
@@ -3183,19 +3349,20 @@ body.cbshapes .cbm { display: block; }
   var W = 320, H = 460, dpr = Math.min(window.devicePixelRatio || 1, 2);
   cv.width = W * dpr; cv.height = H * dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  var FY = H - 120, JDUR = 0.55, DDUR = 0.5;
+  var FY = H - 120, JDUR = 0.55, DDUR = 0.5, BDUR = 0.95;
   var dpaused = false, dst = 'ready', lane = 1, fx = 0, objs = [], dt0 = 0, spawnT = 0, dist = 0, raisins = 0, lives = 3, inv = 0, last = 0, raf = 0, col = {};
-  var jt = 0, dkt = 0, magnetT = 0, slowT = 0, rushT = 0, shield = false, toastT = 0, toastTxt = '', nextCp = 500, curBiome = 0, gfx = 0, gtr = [], mdone = {};
-  function newRs() { return { pawWins: 0, yarns: 0, closet: 0, traps: 0, rushes: 0, attic: 0, chases: 0, bossWins: 0, bossHits: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, slows: 0, shoes: 0, ducks: 0, leaps: 0, powers: 0, checkpoints: 0 }; }
+  var jt = 0, dkt = 0, magnetT = 0, slowT = 0, rushT = 0, skidT = 0, bjt = 0, snagT = 0, twT = 12, twPh = '', twP = 0, twLane = 1, pend = [], shield = false, toastT = 0, toastTxt = '', nextCp = 500, curBiome = 0, gfx = 0, gtr = [], mdone = {};
+  function newRs() { return { roombaWins: 0, broomWins: 0, tumbles: 0, jets: 0, soaks: 0, darks: 0, bounces: 0, threads: 0, snags: 0, oils: 0, skids: 0, cans: 0, garage: 0, pawWins: 0, yarns: 0, closet: 0, traps: 0, rushes: 0, attic: 0, chases: 0, bossWins: 0, bossHits: 0, jumps: 0, hits: 0, magnets: 0, shields: 0, hearts: 0, slows: 0, shoes: 0, ducks: 0, leaps: 0, powers: 0, checkpoints: 0 }; }
   var rs = newRs();
   var boss = null, nextBossAt = BAL.dash.boss1, bossLvl = 0, bossX = 160;
   // The tunnel changes every 400 m. Each stretch leans on different hazards.
   var BIOMES = [
     { name: 'Laundry room', bg: null, rib: null, w: { shoe: 0.5, vac: 0.32, bar: 0.18 } },
     { name: 'Garden hose', bg: '#12301f', rib: '#1e4a2f', w: { shoe: 0.15, vac: 0.1, gap: 0.4, mvac: 0.25, bar: 0.1 } },
-    { name: 'Couch fort', bg: '#2b1d3d', rib: '#43305c', w: { shoe: 0.15, vac: 0.2, bar: 0.35, gap: 0.15, mvac: 0.15 } },
-    { name: 'Craft closet', bg: '#3a2236', rib: '#5c3558', w: { shoe: 0.12, vac: 0.14, bar: 0.22, gap: 0.14, mvac: 0.1, yarn: 0.28 } },
-    { name: 'Attic', bg: '#2a2418', rib: '#4d4029', w: { shoe: 0.12, vac: 0.14, bar: 0.22, gap: 0.12, mvac: 0.1, trap: 0.3 } }
+    { name: 'Couch fort', bg: '#2b1d3d', rib: '#43305c', w: { shoe: 0.13, vac: 0.17, bar: 0.3, gap: 0.13, mvac: 0.12, cush: 0.15 } },
+    { name: 'Craft closet', bg: '#3a2236', rib: '#5c3558', w: { shoe: 0.1, vac: 0.12, bar: 0.2, gap: 0.12, mvac: 0.08, yarn: 0.22, thread: 0.16 } },
+    { name: 'Attic', bg: '#2a2418', rib: '#4d4029', w: { shoe: 0.12, vac: 0.14, bar: 0.22, gap: 0.12, mvac: 0.1, trap: 0.3 } },
+    { name: 'Garage', bg: '#1c2530', rib: '#38485a', w: { shoe: 0.08, vac: 0.1, bar: 0.14, gap: 0.18, mvac: 0.1, can: 0.2, oil: 0.2 } }
   ];
   // Missions: three at a time, finished ones are replaced after the run. They pay into the shared coin wallet.
   var MPOOL = [
@@ -3207,10 +3374,23 @@ body.cbshapes .cbm { display: block; }
     { id: 'powers', text: 'Grab 3 power-ups in one run', key: 'powers', n: 3, c: 10 },
     { id: 'clean', text: 'Run 300 m without taking a hit', key: 'clean', n: 300, c: 15 },
     { id: 'fort', text: 'Reach the Couch fort (800 m)', key: 'meters', n: 800, c: 20 },
+    { id: 'roomba', text: 'Outrun a Roomba run (the third boss)', key: 'roombaWins', n: 1, c: 30 },
+    { id: 'broom', text: 'Outrun a Broom sweep (the fourth boss)', key: 'broomWins', n: 1, c: 35 },
     { id: 'paw', text: 'Outrun a Cat Swat (the second boss)', key: 'pawWins', n: 1, c: 30 },
     { id: 'yarn', text: 'Hop 2 yarn balls in one run', key: 'yarns', n: 2, c: 20 },
     { id: 'closet', text: 'Reach the Craft closet (1200 m)', key: 'meters', n: 1200, c: 30 },
     { id: 'trap', text: 'Hop 2 mouse traps in one run', key: 'traps', n: 2, c: 20 },
+    { id: 'can', text: 'Hop 2 paint cans in one run', key: 'cans', n: 2, c: 20 },
+    { id: 'garage', text: 'Reach the Garage (2000 m)', key: 'meters', n: 2000, c: 35 },
+    { id: 'tumble', text: 'Ride out 2 Laundry room tumbles in one run', key: 'tumbles', n: 2, c: 20 },
+    { id: 'jet', text: 'Dodge 4 water jets in one run', key: 'jets', n: 4, c: 20 },
+    { id: 'dark', text: 'Survive 2 Attic lights-outs in one run', key: 'darks', n: 2, c: 25 },
+    { id: 'bounce4', text: 'Bounce on 4 couch cushions in one run', key: 'bounces', n: 4, c: 30 },
+    { id: 'thread6', text: 'Hop 6 loose threads in one run', key: 'threads', n: 6, c: 25 },
+    { id: 'oil6', text: 'Hop 6 oil slicks in one run', key: 'oils', n: 6, c: 25 },
+    { id: 'bounce', text: 'Bounce on 2 couch cushions in one run', key: 'bounces', n: 2, c: 20 },
+    { id: 'thread', text: 'Hop 3 loose threads in one run', key: 'threads', n: 3, c: 20 },
+    { id: 'oil', text: 'Hop 3 oil slicks in one run', key: 'oils', n: 3, c: 20 },
     { id: 'rush', text: 'Grab a Raisin rush', key: 'rushes', n: 1, c: 15 },
     { id: 'attic', text: 'Reach the Attic (1600 m)', key: 'meters', n: 1600, c: 30 },
     { id: 'boss', text: 'Outrun a boss chase', key: 'bossWins', n: 1, c: 25 }
@@ -3272,8 +3452,27 @@ body.cbshapes .cbm { display: block; }
   function readColors() {
     col = { tunnel: cssv('--tunnel'), rib: cssv('--rib'), sable: cssv('--sable'), cream: cssv('--cream'), mask: cssv('--mask'), nose: cssv('--nose') };
   }
+  // Daily run: the date seeds three separate streams (hazards, twists, bosses), so everyone gets the same course.
+  var drnd = Math.random, trnd = Math.random, brnd = Math.random, ddaily = false;
+  var DDY = { date: '', best: 0, streak: 0, last: '', plays: 0 };
+  (function () {
+    var v = load('fa-ddaily');
+    if (v && typeof v === 'object') {
+      if (typeof v.date === 'string') DDY.date = v.date;
+      ['best', 'streak', 'plays'].forEach(function (k) { if (typeof v[k] === 'number' && v[k] >= 0) DDY[k] = Math.floor(v[k]); });
+      if (typeof v.last === 'string') DDY.last = v.last;
+    }
+  })();
+  function ddySave() { save('fa-ddaily', DDY); }
+  function ddyToday() { if (DDY.date !== dayKey()) { DDY.date = dayKey(); DDY.best = 0; DDY.plays = 0; } return DDY; }
+  function ddyStreak() { return (DDY.last === dayKey() || DDY.last === yesterdayKey()) ? DDY.streak : 0; }
+  function dashMedal(n) { var B = BAL.dash; return n >= B.dailyG ? 'Gold' : n >= B.dailyS ? 'Silver' : n >= B.dailyB ? 'Bronze' : ''; }
+  function ddyNote() {
+    var D = ddyToday(), s = ddyStreak(), el = $('#dash-dnote');
+    if (el) el.textContent = 'Daily run: the same hazards, twists and bosses for everyone today. Run ' + BAL.dash.dailyMin + ' m or more to count. Best today: ' + (D.best || '\u2013') + ' \u00b7 streak ' + s + (s === 1 ? ' day' : ' days') + '.';
+  }
   function dScore() { return Math.floor(dist / 20) + raisins * 5; }
-  function jumpY() { return jt > 0 ? Math.sin(Math.PI * (1 - jt / JDUR)) : 0; }
+  function jumpY() { var a = jt > 0 ? Math.sin(Math.PI * (1 - jt / JDUR)) : 0, b = bjt > 0 ? 1.35 * Math.sin(Math.PI * (1 - bjt / BDUR)) : 0; return Math.max(a, b); }
   function dToast(t) { toastTxt = t; toastT = 1.3; }
   function setHud() {
     $('#d-score').textContent = dScore();
@@ -3283,12 +3482,16 @@ body.cbshapes .cbm { display: block; }
     if (magnetT > 0) pw.push('Magnet ' + Math.ceil(magnetT) + 's');
     if (slowT > 0) pw.push('Slow ' + Math.ceil(slowT) + 's');
     if (rushT > 0) pw.push('Rush ' + Math.ceil(rushT) + 's');
+    if (skidT > 0) pw.push('Skid ' + Math.ceil(skidT) + 's');
+    if (snagT > 0) pw.push('Snag ' + Math.ceil(snagT) + 's');
+    if (twPh === 'on' && curBiome === 0) pw.push('Tumble ' + Math.ceil(twP) + 's');
+    if (twPh === 'on' && curBiome === 4) pw.push('Dark ' + Math.ceil(twP) + 's');
     if (shield) pw.push('Shield');
     $('#d-power').textContent = pw.length ? pw.join(' + ') : '–';
     renderMissions();
   }
   function initDash() {
-    dt0 = 0; spawnT = 0.5; dist = 0; raisins = 0; lives = BAL.dash.lives; inv = 0; jt = 0; dkt = 0; magnetT = 0; slowT = 0; rushT = 0; shield = false; toastT = 0;
+    dt0 = 0; spawnT = 0.5; dist = 0; raisins = 0; lives = BAL.dash.lives; inv = 0; jt = 0; dkt = 0; magnetT = 0; slowT = 0; rushT = 0; skidT = 0; bjt = 0; snagT = 0; twT = 12; twPh = ''; twP = 0; pend = []; shield = false; toastT = 0;
     rs = newRs(); boss = null; nextBossAt = BAL.dash.boss1; bossLvl = 0; nextCp = BAL.dash.cpM; curBiome = 0; gtr = []; mdone = {}; gfx = laneX(1);
     lane = 1; fx = laneX(1); objs = [];
   }
@@ -3296,50 +3499,110 @@ body.cbshapes .cbm { display: block; }
     cancelAnimationFrame(raf); dpaused = false;
     if (dst === 'playing') finishRun();
     dst = 'ready'; initDash(); cv.style.touchAction = '';
-    hideCopy('dash');
+    hideCopy('dash'); ddyNote();
     setHud(); readColors(); drawDash();
   }
   function showBoard(sel) { try { $(sel).scrollIntoView({ block: 'nearest', behavior: 'auto' }); } catch (e) {} }
-  function startDash() {
+  function startDash(daily) {
+    daily = daily === true;
     showBoard('#cv');
     cancelAnimationFrame(raf); dpaused = false;
     if (dst === 'playing') finishRun();
     dst = 'playing'; initDash(); cv.style.touchAction = 'none'; hideCopy('dash');
+    ddaily = daily;
+    if (daily) { var sd = dayKey() + '-dash'; drnd = mulberry(seedOf(sd + 'h')); trnd = mulberry(seedOf(sd + 't')); brnd = mulberry(seedOf(sd + 'b')); }
+    else { drnd = trnd = brnd = Math.random; }
     if (stockN('dshield') > 0) { SHOP.stock.dshield--; shield = true; shopSave(); }
     if (stockN('dheart') > 0) { SHOP.stock.dheart--; lives = 4; shopSave(); }
     readColors(); setHud();
-    $('#dash-go').textContent = 'Restart';
+    $('#dash-go').textContent = 'Restart'; $('#dash-daily').textContent = daily ? 'Restart daily' : 'Daily run';
     last = performance.now();
     raf = requestAnimationFrame(loopDash);
   }
+  // Biome twists: Laundry room tumble (left and right flip), Garden hose water jets, Attic lights-out lane.
+  function twistTick(dt) {
+    if (curBiome !== 0 && curBiome !== 1 && curBiome !== 4) { twPh = ''; return; }
+    if (twPh === '') {
+      if (boss || dst !== 'playing') return;
+      twT -= dt;
+      if (twT <= 0) {
+        twPh = 'warn'; twP = 1; twLane = Math.floor(trnd() * 3);
+        dToast(curBiome === 0 ? 'TUMBLE! CONTROLS FLIP' : (curBiome === 1 ? 'WATER JET!' : 'LIGHTS OUT!'));
+      }
+      return;
+    }
+    twP -= dt;
+    if (twP > 0) return;
+    if (twPh === 'warn') {
+      twPh = 'on'; twP = curBiome === 0 ? BAL.dash.tumbleSecs : (curBiome === 1 ? 0.6 : BAL.dash.darkSecs);
+      if (curBiome === 1) {
+        if (Math.abs(lane - twLane) < 0.5 && pend.length === 0) { lane = twLane === 1 ? (trnd() < 0.5 ? 0 : 2) : 1; rs.soaks++; dToast('SOAKED!'); }
+        else rs.jets++;
+      }
+    } else {
+      if (curBiome === 0) rs.tumbles++; else if (curBiome === 4) rs.darks++;
+      twPh = ''; twT = 9 + trnd() * 5;
+    }
+  }
+  function drawTwist() {
+    if (!twPh) return;
+    var lx = twLane * W / 3, lw = W / 3, blink = Math.floor(dist / 6) % 2 === 0;
+    ctx.save();
+    if (curBiome === 0) {
+      var a = twPh === 'on' ? 0.3 : (blink ? 0.35 : 0.1);
+      ctx.fillStyle = twPh === 'on' ? 'rgba(120,160,255,.1)' : 'rgba(0,0,0,0)'; ctx.fillRect(0, 0, W, H);
+      ctx.translate(W / 2, 96); ctx.rotate(dist * 0.012); ctx.globalAlpha = a; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 5; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.arc(0, 0, 34, 0.3, 2.6); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, 34, 3.44, 5.74); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(30, 18); ctx.lineTo(36, 30); ctx.lineTo(22, 28); ctx.stroke(); ctx.beginPath(); ctx.moveTo(-30, -18); ctx.lineTo(-36, -30); ctx.lineTo(-22, -28); ctx.stroke();
+    } else if (curBiome === 1) {
+      ctx.fillStyle = twPh === 'on' ? 'rgba(150,220,255,.55)' : (blink ? 'rgba(110,190,255,.28)' : 'rgba(110,190,255,.12)'); ctx.fillRect(lx, 0, lw, H);
+      ctx.fillStyle = 'rgba(255,255,255,.7)';
+      for (var di = 0; di < 12; di++) { var dy = ((dist * 3 + di * 83) % H); ctx.beginPath(); ctx.arc(lx + 10 + ((di * 37) % (lw - 20)), dy, 3, 0, 7); ctx.fill(); }
+      if (twPh === 'warn') { ctx.fillStyle = '#ffffff'; ctx.font = '700 22px "DM Sans", sans-serif'; ctx.textAlign = 'center'; ctx.fillText('!', lx + lw / 2, FY - 70); }
+    } else {
+      ctx.fillStyle = twPh === 'on' ? 'rgba(8,6,3,.84)' : (blink ? 'rgba(8,6,3,.6)' : 'rgba(8,6,3,0)'); ctx.fillRect(lx, 0, lw, H);
+    }
+    ctx.restore();
+  }
+  function grantBiomeTrail(bi) {
+    var it = SHOP_ITEMS.filter(function (i) { return i.biome === bi; })[0];
+    if (!it || SHOP.owned[it.kind + ':' + it.key]) return;
+    SHOP.owned[it.kind + ':' + it.key] = true; shopSave();
+    setTimeout(function () { if (dst === 'playing') dToast('NEW TRAIL: ' + it.name.toUpperCase()); }, 1500);
+  }
   function mk(l, type) {
-    var h = { raisin: 18, shoe: 56, vac: 44, mvac: 44, bar: 14, gap: 44, yarn: 44, trap: 44 }[type] || 30;
-    return { lane: l, y: -40, type: type, h: h, dead: false, hit: false, dir: type === 'yarn' && Math.random() < 0.5 ? -1 : 1 };
+    var h = { raisin: 18, shoe: 56, vac: 44, mvac: 44, bar: 14, gap: 44, yarn: 44, trap: 44, can: 44, oil: 30, thread: 20, cush: 36 }[type] || 30;
+    return { lane: l, y: -40, type: type, h: h, dead: false, hit: false, dir: type === 'yarn' && drnd() < 0.5 ? -1 : 1 };
   }
   function pickHazard() {
     var bi = Math.floor(dist / 20 / BAL.dash.biomeM) % BIOMES.length, w = BIOMES[bi].w;
     if (bi === 0 && dist / 20 < 100) w = { shoe: 0.6, vac: 0.4 };
-    var r = Math.random(), s = 0, k;
+    var r = drnd(), s = 0, k;
     for (k in w) { s += w[k]; if (r < s) return k; }
     return 'shoe';
   }
   // Boss chase: a giant vacuum hovers over one or two lanes, flashes a warning, then sucks the lane clean.
   function startBoss() {
     bossLvl++; nextBossAt = 1e9;
-    boss = { lvl: bossLvl, total: Math.min(BAL.dash.bossMax, BAL.dash.bossBase + bossLvl * BAL.dash.bossPerLvl), n: 0, phase: 'intro', t: 1.4, lanes: [1], wt: 1, fired: false, paw: bossLvl % 2 === 0, seq: [] };
+    boss = { lvl: bossLvl, total: Math.min(BAL.dash.bossMax, BAL.dash.bossBase + bossLvl * BAL.dash.bossPerLvl), n: 0, phase: 'intro', t: 1.4, lanes: [1], wt: 1, fired: false, type: ['vac', 'paw', 'roomba', 'broom'][(bossLvl - 1) % 4], seq: [] };
+    boss.paw = boss.type === 'paw';
     if (boss.paw) boss.total = Math.max(4, Math.round(boss.total * 0.7));
-    rs.chases++; dToast(boss.paw ? 'CAT SWAT!' : 'BOSS CHASE!');
+    else if (boss.type === 'roomba') boss.total = Math.max(3, Math.round(boss.total * 0.5));
+    else if (boss.type === 'broom') boss.total = Math.max(4, Math.round(boss.total * 0.7));
+    rs.chases++; dToast({ vac: 'BOSS CHASE!', paw: 'CAT SWAT!', roomba: 'ROOMBA RUN!', broom: 'BROOM SWEEP!' }[boss.type]);
   }
   function pickBossLanes() {
-    var B = boss, two = B.lvl >= 2 && B.n >= 2 && Math.random() < 0.45, safe = Math.floor(Math.random() * 3);
-    B.lanes = two ? [0, 1, 2].filter(function (l) { return l !== safe; }) : [safe === 1 && Math.random() < 0.5 ? 0 : Math.floor(Math.random() * 3)];
+    var B = boss, two = B.lvl >= 2 && B.n >= 2 && brnd() < 0.45, safe = Math.floor(brnd() * 3);
+    B.lanes = two ? [0, 1, 2].filter(function (l) { return l !== safe; }) : [safe === 1 && brnd() < 0.5 ? 0 : Math.floor(brnd() * 3)];
     B.wt = Math.max(BAL.dash.warnMin, BAL.dash.warn0 - BAL.dash.warnAtk * B.n - BAL.dash.warnLvl * B.lvl);
-    if (B.paw) { var pa = Math.floor(Math.random() * 3); B.lanes = [pa]; B.seq = [pa === 1 ? (Math.random() < 0.5 ? 0 : 2) : 1]; }
+    if (B.paw) { var pa = Math.floor(brnd() * 3); B.lanes = [pa]; B.seq = [pa === 1 ? (brnd() < 0.5 ? 0 : 2) : 1]; }
+    if (B.type === 'roomba') { var sq = brnd() < 0.5 ? [0, 1, 2] : [2, 1, 0]; B.lanes = [sq.shift()]; B.seq = sq; }
+    if (B.type === 'broom') { var rv = brnd() < 0.5; B.lanes = rv ? [1, 2] : [0, 1]; B.seq = [rv ? [0, 1] : [1, 2]]; }
     B.phase = 'warn'; B.t = B.wt;
   }
   function bossWin() {
     var c = 20 + 5 * Math.min(4, boss.lvl - 1);
-    if (boss.paw) rs.pawWins++;
+    if (boss.paw) rs.pawWins++; else if (boss.type === 'roomba') rs.roombaWins++; else if (boss.type === 'broom') rs.broomWins++;
     boss = null; rs.bossWins++; wallet(c);
     nextBossAt = Math.floor(dist / 20) + BAL.dash.bossEvery;
     objs.push(mk(1, lives < BAL.dash.lives ? 'heart' : 'shield'));
@@ -3356,7 +3619,7 @@ body.cbshapes .cbm { display: block; }
       }
       if (B.t <= 0) { B.phase = 'rest'; B.t = 0.35; }
     }
-    if (B.phase === 'rest' && B.t <= 0 && B.seq && B.seq.length) { B.lanes = [B.seq.shift()]; B.phase = 'warn'; B.t = Math.max(0.5, B.wt * 0.8); return; }
+    if (B.phase === 'rest' && B.t <= 0 && B.seq && B.seq.length) { var nx = B.seq.shift(); B.lanes = Array.isArray(nx) ? nx : [nx]; B.phase = 'warn'; B.t = Math.max(0.5, B.wt * 0.8); return; }
     if (B.phase === 'rest' && B.t <= 0) { B.n++; if (B.n >= B.total) bossWin(); else pickBossLanes(); }
   }
   function drawBossLanes() {
@@ -3388,6 +3651,23 @@ body.cbshapes .cbm { display: block; }
       ctx.strokeStyle = '#7a4a2a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, by + 4, 34, 0, 7); ctx.stroke();
       return;
     }
+    if (B.type === 'roomba') {
+      ctx.fillStyle = '#3b4250'; ctx.beginPath(); ctx.arc(x, by, 40, 0, 7); ctx.fill();
+      ctx.strokeStyle = '#7e8a9c'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(x, by, 40, 0, 7); ctx.stroke();
+      ctx.strokeStyle = '#5a6578'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, by, 28, 0.4, 2.7); ctx.stroke(); ctx.beginPath(); ctx.arc(x, by, 28, 3.5, 5.8); ctx.stroke();
+      ctx.fillStyle = B.phase === 'fire' ? '#ffffff' : '#4cd06a'; ctx.beginPath(); ctx.arc(x, by, 9, 0, 7); ctx.fill();
+      ctx.strokeStyle = '#c8d0dc'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+      for (var ra = 0; ra < 2; ra++) { var ang = dt0 * 18 + ra * Math.PI; ctx.beginPath(); ctx.moveTo(x + Math.cos(ang) * 44, by + Math.sin(ang) * 44); ctx.lineTo(x + Math.cos(ang + 0.5) * 56, by + Math.sin(ang + 0.5) * 56); ctx.stroke(); }
+      return;
+    }
+    if (B.type === 'broom') {
+      var bw = Math.max(1, B.lanes.length) * W / 3 - 34;
+      ctx.strokeStyle = '#8a5a2b'; ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x, by - 52); ctx.lineTo(x, by + 4); ctx.stroke();
+      ctx.fillStyle = '#e4b441'; ctx.fillRect(x - bw / 2, by + 2, bw, 30);
+      ctx.strokeStyle = '#a97c1c'; ctx.lineWidth = 2; for (var bk = 1; bk < 9; bk++) { ctx.beginPath(); ctx.moveTo(x - bw / 2 + bk * bw / 9, by + 8); ctx.lineTo(x - bw / 2 + bk * bw / 9, by + 30); ctx.stroke(); }
+      ctx.fillStyle = B.phase === 'fire' ? '#ffffff' : '#c0392b'; ctx.fillRect(x - bw / 2, by - 2, bw, 8);
+      return;
+    }
     ctx.fillStyle = '#cfd8e2'; ctx.beginPath(); ctx.arc(x, by, 42, 0, 7); ctx.fill();
     ctx.fillStyle = '#33414f'; ctx.beginPath(); ctx.arc(x, by + 6, 22, 0, 7); ctx.fill();
     ctx.fillStyle = B.phase === 'fire' ? '#ffffff' : '#e0523f'; ctx.beginPath(); ctx.arc(x, by + 6, 8, 0, 7); ctx.fill();
@@ -3396,25 +3676,25 @@ body.cbshapes .cbm { display: block; }
   }
   function spawn() {
     if (boss) {
-      if (Math.random() < 0.5) { var bl = Math.floor(Math.random() * 3); for (var bi2 = 0; bi2 < 3; bi2++) { var br = mk(bl, 'raisin'); br.y = -40 - bi2 * 42; objs.push(br); } }
+      if (drnd() < 0.5) { var bl = Math.floor(drnd() * 3); for (var bi2 = 0; bi2 < 3; bi2++) { var br = mk(bl, 'raisin'); br.y = -40 - bi2 * 42; objs.push(br); } }
       return;
     }
-    var l = Math.floor(Math.random() * 3), r = Math.random(), i;
+    var l = Math.floor(drnd() * 3), r = drnd(), i;
     if (r < 0.04) {
-      var q = Math.random();
-      objs.push(mk(l, q < 0.26 ? 'magnet' : (q < 0.52 ? 'shield' : (q < 0.74 ? 'slow' : (q < 0.88 ? 'rush' : 'heart')))));
+      var q = drnd();
+      objs.push(mk(l, q < 0.22 ? 'magnet' : (q < 0.44 ? 'shield' : (q < 0.62 ? 'slow' : (q < 0.84 ? 'rush' : 'heart')))));
     } else if (r < 0.19) {
       for (i = 0; i < 3; i++) { var rr = mk(l, 'raisin'); rr.y = -40 - i * 42; objs.push(rr); }
     } else {
-      var kind = Math.random() < Math.max(BAL.dash.fillMin, BAL.dash.fill0 - dt0 * BAL.dash.fillPer) ? 'raisin' : pickHazard();
+      var kind = drnd() < Math.max(BAL.dash.fillMin, BAL.dash.fill0 - dt0 * BAL.dash.fillPer) ? 'raisin' : pickHazard();
       var o = mk(l, kind);
-      if (kind === 'mvac') o.dir = l === 0 ? 1 : (l === 2 ? -1 : (Math.random() < 0.5 ? 1 : -1));
+      if (kind === 'mvac') o.dir = l === 0 ? 1 : (l === 2 ? -1 : (drnd() < 0.5 ? 1 : -1));
       objs.push(o);
-      if (kind !== 'mvac' && Math.random() < Math.min(BAL.dash.dblMax, BAL.dash.dbl0 + dt0 * BAL.dash.dblPer)) {
-        var l2 = (l + 1 + Math.floor(Math.random() * 2)) % 3, pool = ['shoe'];
+      if (kind !== 'mvac' && drnd() < Math.min(BAL.dash.dblMax, BAL.dash.dbl0 + dt0 * BAL.dash.dblPer)) {
+        var l2 = (l + 1 + Math.floor(drnd() * 2)) % 3, pool = ['shoe'];
         if (dist / 20 >= 100) pool.push('bar');
         if (Math.floor(dist / 20 / BAL.dash.biomeM) % BIOMES.length > 0) pool.push('gap');
-        objs.push(mk(l2, Math.random() < 0.5 ? 'raisin' : pool[Math.floor(Math.random() * pool.length)]));
+        objs.push(mk(l2, drnd() < 0.5 ? 'raisin' : pool[Math.floor(drnd() * pool.length)]));
       }
     }
   }
@@ -3425,8 +3705,24 @@ body.cbshapes .cbm { display: block; }
     var D = ST.dash, meters = Math.floor(dist / 20);
     D.runs++; D.raisins += raisins; D.meters += meters; D.longest = Math.max(D.longest, meters); D.bestRaisins = Math.max(D.bestRaisins, raisins);
     D.jumps += rs.jumps; D.hits += rs.hits; D.magnets += rs.magnets; D.shields += rs.shields; D.hearts += rs.hearts;
-    D.ducks += rs.ducks; D.leaps += rs.leaps; D.yarns += rs.yarns; D.paws = (D.paws || 0) + rs.pawWins; D.closets += rs.closet; D.attics += rs.attic; D.traps += rs.traps; D.rushes += rs.rushes; D.slows += rs.slows; D.checkpoints += rs.checkpoints;
+    D.ducks += rs.ducks; D.leaps += rs.leaps; D.yarns += rs.yarns; D.paws = (D.paws || 0) + rs.pawWins; D.closets += rs.closet; D.attics += rs.attic; D.traps += rs.traps; D.cans = (D.cans || 0) + rs.cans; D.oils = (D.oils || 0) + rs.oils; D.bounces = (D.bounces || 0) + rs.bounces; D.tumbles = (D.tumbles || 0) + rs.tumbles; D.roombas = (D.roombas || 0) + rs.roombaWins; D.brooms = (D.brooms || 0) + rs.broomWins; D.jets = (D.jets || 0) + rs.jets; D.soaks = (D.soaks || 0) + rs.soaks; D.darks = (D.darks || 0) + rs.darks; D.threads = (D.threads || 0) + rs.threads; D.snags = (D.snags || 0) + rs.snags; D.skids = (D.skids || 0) + rs.skids; D.garages = (D.garages || 0) + rs.garage; D.rushes += rs.rushes; D.slows += rs.slows; D.checkpoints += rs.checkpoints;
     D.chases += rs.chases; D.bossWins += rs.bossWins; D.bossHits += rs.bossHits;
+    var dyMsg = '', dyMed = '';
+    if (ddaily && meters >= BAL.dash.dailyMin) {
+      var DY = ddyToday(), firstD = DY.plays === 0, coinsY = 0;
+      DY.plays++;
+      if (firstD) {
+        D.dailies = (D.dailies || 0) + 1;
+        DY.streak = DY.last === yesterdayKey() ? DY.streak + 1 : 1; DY.last = dayKey();
+        coinsY = 15 + 3 * Math.min(DY.streak - 1, 6); wallet(coinsY);
+      }
+      if (sc > DY.best) DY.best = sc;
+      D.bestDaily = Math.max(D.bestDaily || 0, sc); ddySave();
+      dyMed = dashMedal(sc); awardMedal('dash', dyMed);
+      dyMsg = 'Daily ' + (dyMed ? dyMed + ' medal. ' : '') + 'Best today ' + DY.best + ', streak ' + DY.streak + (DY.streak === 1 ? ' day' : ' days') + (coinsY ? '. +' + coinsY + ' coins' : '. Coins are paid for the first daily run each day') + '.';
+      dToast(coinsY ? 'DAILY DONE +' + coinsY : 'DAILY DONE');
+    }
+    ddyNote();
     if (meters >= 100 && SHOP.trail !== 'none') D.trailRuns = (D.trailRuns || 0) + 1;
     if (best.dash === null || sc > best.dash) {
       best.dash = sc; save('fa-dash', sc);
@@ -3434,8 +3730,8 @@ body.cbshapes .cbm { display: block; }
       showBest();
     }
     sSave();
-    setCard('dash', { game: 'Tunnel Dash', sub: 'Reached the ' + BIOMES[curBiome].name, big: sc, bigLabel: 'points', stats: [['Distance', meters + ' m'], ['Raisins', raisins], ['Jumps', rs.jumps]] });
-    showCopy('dash', HEAD + '\nTunnel Dash\nScore ' + sc + ' \u00b7 ' + meters + ' m \u00b7 ' + raisins + ' raisins\nReached the ' + BIOMES[curBiome].name);
+    setCard('dash', { game: 'Tunnel Dash', sub: (dyMsg ? 'Daily ' + dayKey() + ' \u00b7 ' : '') + 'Reached the ' + BIOMES[curBiome].name, big: sc, bigLabel: 'points', stats: [['Distance', meters + ' m'], ['Raisins', raisins], ['Jumps', rs.jumps]] });
+    showCopy('dash', HEAD + '\nTunnel Dash' + (dyMsg ? ' Daily ' + dayKey() : '') + (dyMed ? ' \u00b7 ' + dyMed : '') + '\nScore ' + sc + ' \u00b7 ' + meters + ' m \u00b7 ' + raisins + ' raisins\nReached the ' + BIOMES[curBiome].name);
     replaceMissions(); renderMissions();
   }
   function hurt() {
@@ -3451,21 +3747,24 @@ body.cbshapes .cbm { display: block; }
     dist += speed * wdt;
     spawnT -= wdt;
     if (spawnT <= 0) { spawnT = Math.max(BAL.dash.spawnMin, BAL.dash.spawn0 - dt0 * BAL.dash.spawnPer); spawn(); }
-    fx += (laneX(lane) - fx) * Math.min(1, dt * 18);
+    fx += (laneX(lane) - fx) * Math.min(1, dt * (skidT > 0 ? 7 : 18));
     inv = Math.max(0, inv - dt);
-    jt = Math.max(0, jt - dt);
+    jt = Math.max(0, jt - dt); bjt = Math.max(0, bjt - dt); snagT = Math.max(0, snagT - dt);
     dkt = Math.max(0, dkt - dt);
     magnetT = Math.max(0, magnetT - dt);
     rushT = Math.max(0, rushT - dt);
+    skidT = Math.max(0, skidT - dt);
+    twistTick(dt);
+    for (var pi = pend.length - 1; pi >= 0; pi--) { pend[pi].t -= dt; if (pend[pi].t <= 0) { lane = Math.max(0, Math.min(2, lane + pend[pi].d)); pend.splice(pi, 1); } }
     toastT = Math.max(0, toastT - dt);
-    if (dt0 >= gtr.length * 0.25) gtr.push(String.fromCharCode(97 + lane + (jt > 0 ? 3 : 0) + (dkt > 0 ? 6 : 0)));
+    if (dt0 >= gtr.length * 0.25) gtr.push(String.fromCharCode(97 + lane + (jt > 0 || bjt > 0 ? 3 : 0) + (dkt > 0 ? 6 : 0)));
     var mt = Math.floor(dist / 20);
     if (mt >= nextCp) {
       rs.checkpoints++; nextCp += BAL.dash.cpM;
       if (lives < BAL.dash.lives) { lives++; dToast('CHECKPOINT +1 LIFE'); } else dToast('CHECKPOINT ' + mt + ' m');
     }
     var bi = Math.max(0, Math.floor(mt / BAL.dash.biomeM)) % BIOMES.length;
-    if (bi !== curBiome) { curBiome = bi; dToast(BIOMES[bi].name.toUpperCase()); if (bi === 3) rs.closet = 1; if (bi === 4) rs.attic = 1; }
+    if (bi !== curBiome) { curBiome = bi; dToast(BIOMES[bi].name.toUpperCase()); if (bi === 3) rs.closet = 1; if (bi === 4) rs.attic = 1; if (bi === 5) rs.garage = 1; grantBiomeTrail(bi); twPh = ''; twT = 6 + trnd() * 3; }
     if (!boss && mt >= nextBossAt) startBoss();
     if (boss) bossUpdate(dt);
     objs.forEach(function (o) {
@@ -3475,13 +3774,15 @@ body.cbshapes .cbm { display: block; }
         if (o.lane <= 0) { o.lane = 0; o.dir = 1; } else if (o.lane >= 2) { o.lane = 2; o.dir = -1; }
       }
       if (magnetT > 0 && o.type === 'raisin' && o.y > FY - 230 && o.y < FY + 60) o.lane += (lane - o.lane) * Math.min(1, dt * 9);
-      if (o.type === 'shoe' || o.type === 'gap' || o.type === 'bar' || o.type === 'yarn' || o.type === 'trap') {
+      if (o.type === 'shoe' || o.type === 'gap' || o.type === 'bar' || o.type === 'yarn' || o.type === 'trap' || o.type === 'can' || o.type === 'oil' || o.type === 'thread') {
         // Judged once, as it passes the ferret's middle: shoes and gaps need a jump, low pipes need a duck.
         if (!o.passed && o.y >= FY + 14) {
           o.passed = true;
           if (Math.abs(o.lane - lane) < 0.5) {
             var ok = o.type === 'bar' ? dkt > 0 : jumpY() > 0.3;
-            if (ok) rs[o.type === 'shoe' ? 'shoes' : (o.type === 'gap' ? 'leaps' : (o.type === 'yarn' ? 'yarns' : (o.type === 'trap' ? 'traps' : 'ducks')))]++;
+            if (o.type === 'oil') { if (ok) rs.oils++; else { skidT = BAL.dash.skidSecs; rs.skids++; dToast('SKID!'); } }
+            else if (o.type === 'thread') { if (ok) rs.threads++; else { snagT = BAL.dash.snagSecs; rs.snags++; dToast('SNAGGED!'); } }
+            else if (ok) rs[o.type === 'shoe' ? 'shoes' : (o.type === 'gap' ? 'leaps' : (o.type === 'yarn' ? 'yarns' : (o.type === 'trap' ? 'traps' : (o.type === 'can' ? 'cans' : 'ducks'))))]++;
             else if (inv <= 0) { o.hit = true; hurt(); }
           }
         }
@@ -3489,6 +3790,7 @@ body.cbshapes .cbm { display: block; }
       }
       if (o.dead || o.hit || Math.abs(o.lane - lane) >= 0.5 || Math.abs(o.y - (FY + 20)) >= o.h / 2 + 28) return;
       if (o.type === 'raisin') { o.dead = true; raisins += rushT > 0 ? 2 : 1; playFx('raisin'); }
+      else if (o.type === 'cush') { o.dead = true; bjt = BDUR; jt = 0; dkt = 0; raisins += BAL.dash.bounceBonus; rs.bounces++; dToast('BOUNCE! +' + BAL.dash.bounceBonus); playFx('jump'); }
       else if (o.type === 'magnet') { o.dead = true; magnetT = 7; rs.magnets++; rs.powers++; dToast('MAGNET'); }
       else if (o.type === 'shield') { o.dead = true; shield = true; rs.shields++; rs.powers++; dToast('SHIELD'); }
       else if (o.type === 'rush') { o.dead = true; rushT = BAL.dash.rushSecs; rs.rushes++; rs.powers++; dToast('RAISIN RUSH x2'); }
@@ -3501,7 +3803,7 @@ body.cbshapes .cbm { display: block; }
     setHud();
     if (lives <= 0) {
       finishRun();
-      $('#dash-go').textContent = 'Play again';
+      $('#dash-go').textContent = 'Play again'; $('#dash-daily').textContent = 'Daily run';
       drawDash();
       return;
     }
@@ -3598,6 +3900,29 @@ body.cbshapes .cbm { display: block; }
       ctx.strokeStyle = '#9aa3ad'; ctx.lineWidth = 4; ctx.lineCap = 'round';
       ctx.beginPath(); ctx.moveTo(x - 22, y - 2); ctx.lineTo(x - 22, y - 30); ctx.lineTo(x + 18, y - 30); ctx.lineTo(x + 18, y - 4); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(x - 22, y + 4); ctx.lineTo(x - 10, y + 4); ctx.stroke();
+    } else if (o.type === 'cush') {
+      ctx.fillStyle = '#8f6fd6'; ctx.beginPath(); ctx.moveTo(x - 24, y - 10); ctx.quadraticCurveTo(x, y - 20, x + 24, y - 10); ctx.quadraticCurveTo(x + 30, y + 4, x + 24, y + 16); ctx.quadraticCurveTo(x, y + 24, x - 24, y + 16); ctx.quadraticCurveTo(x - 30, y + 4, x - 24, y - 10); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#5b3fa8'; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.strokeStyle = '#c9b6f5'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x - 18, y - 4); ctx.quadraticCurveTo(x, y - 12, x + 18, y - 4); ctx.moveTo(x - 18, y + 12); ctx.quadraticCurveTo(x, y + 18, x + 18, y + 12); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#f2c94c'; ctx.beginPath(); ctx.arc(x, y + 4, 4, 0, 7); ctx.fill();
+    } else if (o.type === 'thread') {
+      ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.strokeStyle = '#e0568a'; ctx.beginPath(); ctx.moveTo(x - 36, y);
+      ctx.bezierCurveTo(x - 24, y - 14, x - 14, y + 14, x - 2, y - 4); ctx.bezierCurveTo(x + 10, y - 16, x + 18, y + 12, x + 36, y - 2); ctx.stroke();
+      ctx.strokeStyle = '#ffd1e3'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x - 30, y + 4); ctx.bezierCurveTo(x - 10, y - 8, x + 6, y + 10, x + 30, y + 6); ctx.stroke();
+      ctx.fillStyle = '#f2c94c'; ctx.fillRect(x + 30, y - 10, 10, 14); ctx.fillStyle = '#c99a1c'; ctx.fillRect(x + 30, y - 6, 10, 3);
+    } else if (o.type === 'oil') {
+      ctx.fillStyle = '#0b0f14'; ctx.beginPath(); ctx.ellipse(x, y, 34, 17, 0, 0, 7); ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = '#6a5acd'; ctx.beginPath(); ctx.ellipse(x - 4, y - 2, 22, 9, 0, 3.4, 5.4); ctx.stroke();
+      ctx.strokeStyle = '#2fb5a3'; ctx.beginPath(); ctx.ellipse(x + 4, y + 1, 16, 6, 0, 0.3, 2.4); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.beginPath(); ctx.ellipse(x - 14, y - 6, 5, 2, -0.4, 0, 7); ctx.fill();
+    } else if (o.type === 'can') {
+      ctx.fillStyle = '#c9ced6'; ctx.fillRect(x - 20, y - 14, 40, 36);
+      ctx.fillStyle = '#e4572e'; ctx.fillRect(x - 20, y - 2, 40, 14);
+      ctx.strokeStyle = '#6b7480'; ctx.lineWidth = 3; ctx.strokeRect(x - 20, y - 14, 40, 36);
+      ctx.fillStyle = '#9aa3ad'; ctx.beginPath(); ctx.ellipse(x, y - 14, 20, 6, 0, 0, 7); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#e4572e'; ctx.beginPath(); ctx.ellipse(x, y - 14, 14, 3.5, 0, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(x + 6, y - 12); ctx.quadraticCurveTo(x + 14, y - 4, x + 12, y + 8); ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.strokeStyle = '#e4572e'; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(x + 12, y + 26, 11, 4, 0, 0, 7); ctx.fill();
     } else if (o.type === 'yarn') {
       ctx.strokeStyle = '#e8a0c0'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, y + 20); ctx.quadraticCurveTo(x + o.dir * 16, y + 40, x - o.dir * 6, y + 58); ctx.stroke();
       ctx.fillStyle = '#e0568a'; ctx.beginPath(); ctx.arc(x, y, 22, 0, 7); ctx.fill();
@@ -3638,6 +3963,7 @@ body.cbshapes .cbm { display: block; }
     ctx.setLineDash([]);
     objs.forEach(drawObj);
     if (dst === 'playing') drawBossLanes();
+    drawTwist();
     if (dst === 'playing' && ghost) {
       var gi = Math.floor(dt0 / 0.25);
       if (gi < ghost.length) {
@@ -3674,8 +4000,8 @@ body.cbshapes .cbm { display: block; }
       }
     }
   }
-  function moveLane(d) { if (dpaused) return; lane = Math.max(0, Math.min(2, lane + d)); }
-  function jump() { if (!dpaused && jt <= 0) { jt = JDUR; dkt = 0; rs.jumps++; playFx('jump'); } }
+  function moveLane(d) { if (dpaused) return; if (twPh === 'on' && curBiome === 0) d = -d; if (skidT > 0) { if (pend.length < 3) pend.push({ t: BAL.dash.skidDelay, d: d }); return; } lane = Math.max(0, Math.min(2, lane + d)); }
+  function jump() { if (!dpaused && jt <= 0 && bjt <= 0 && snagT <= 0) { jt = JDUR; dkt = 0; rs.jumps++; playFx('jump'); } }
   function duck() { if (!dpaused && dkt <= 0 && jt <= 0) { dkt = DDUR; playFx('duck'); } }
   function pauseOverlay(c, w, h) {
     c.fillStyle = 'rgba(8,12,18,.6)'; c.fillRect(0, 0, w, h); c.fillStyle = '#ffffff'; c.textAlign = 'center';
@@ -3704,7 +4030,8 @@ body.cbshapes .cbm { display: block; }
     tp = null;
   });
   cv.addEventListener('pointercancel', function () { tp = null; });
-  $('#dash-go').addEventListener('click', startDash);
+  $('#dash-go').addEventListener('click', function () { startDash(false); });
+  $('#dash-daily').addEventListener('click', function () { startDash(true); });
   window.addEventListener('keydown', function (e) {
     if ($('#dash').hidden || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
@@ -3731,7 +4058,7 @@ body.cbshapes .cbm { display: block; }
   };
   var wmode = 'normal', wtype = 'free';
   var holesEl = $('#holes'), holeBtns = [], until = [], hops = [], hopAt = [], hpv = [], cover = [], running = false;
-  var wscore = 0, wstart = 0, wend = 0, wnext = 0, wtimer = 0, wcombo = 0, wmaxc = 0, whits = 0, wtaps = 0, wgold = 0, wclk = 0, wvac = 0;
+  var wscore = 0, wstart = 0, wend = 0, wnext = 0, wtimer = 0, wcombo = 0, wmaxc = 0, whits = 0, wtaps = 0, wgold = 0, wclk = 0, wvac = 0, whh = 0, whNext = 0;
   var wcoverNext = 0, wrun = null, wreached = false, wmsgT = 0, wbosses = 0, whops = 0, wlives = 3, wr = Math.random, WARM = {};
   // Daily round: one seed per calendar day, saved with a streak.
   var WD = { date: '', best: 0, streak: 0, last: '', plays: 0 };
@@ -3808,6 +4135,7 @@ body.cbshapes .cbm { display: block; }
     if (ms) wmsgT = setTimeout(function () { if (running) $('#whack-msg').textContent = ''; }, ms);
   }
   function mult() { return Math.min(4, 1 + Math.floor(wcombo / 5)); }
+  function hh() { return whh && performance.now() < whh ? 2 : 1; }
   function setW() {
     $('#w-score').textContent = wscore;
     $('#w-combo').textContent = wcombo + (mult() > 1 ? ' (x' + mult() + ')' : '');
@@ -3827,7 +4155,7 @@ body.cbshapes .cbm { display: block; }
       hpv[i]--; whits++; wcombo++; wmaxc = Math.max(wmaxc, wcombo);
       if (hpv[i] > 0) { h.querySelector('.hp').textContent = hearts(hpv[i]); floatText(h, 'Hit!', 'plus'); setW(); return; }
       h.removeAttribute('data-t'); until[i] = 0; wbosses++;
-      var bp = BAL.pals.boss * mult(); wscore += bp; if (!wrun.endless) wend = Math.min(wend + 3000, performance.now() + BAL.pals.cap * 1000);
+      var bp = BAL.pals.boss * mult() * hh(); if (hh() > 1) ST.whack.happyHits++; wscore += bp; if (!wrun.endless) wend = Math.min(wend + 3000, performance.now() + BAL.pals.cap * 1000);
       floatText(h, '+' + bp, 'plus'); wNote(wrun.endless ? 'Boss ferret down!' : 'Boss ferret down! +3 seconds.', 1800); setW();
       return;
     }
@@ -3835,7 +4163,7 @@ body.cbshapes .cbm { display: block; }
     until[i] = 0; hops[i] = 0; hopAt[i] = 0;
     if (t === 'f' || t === 'g' || t === 'h') {
       playFx('hit'); whits++; wcombo++; wmaxc = Math.max(wmaxc, wcombo);
-      var pts = (t === 'g' ? BAL.pals.gold : (t === 'h' ? BAL.pals.hop : 1)) * mult();
+      var pts = (t === 'g' ? BAL.pals.gold : (t === 'h' ? BAL.pals.hop : 1)) * mult() * hh(); if (hh() > 1) ST.whack.happyHits++;
       wscore += pts; if (t === 'g') wgold++; if (t === 'h') whops++;
       floatText(h, '+' + pts, 'plus');
     } else if (t === 'c') {
@@ -3859,6 +4187,8 @@ body.cbshapes .cbm { display: block; }
     var left = Math.max(0, (wend - now) / 1000);
     if (wrun.endless) { $('#w-time').textContent = hearts(wlives); $('#w-meter').style.transform = 'scaleX(' + Math.max(0, wlives) / 5 + ')'; }
     else { $('#w-time').textContent = Math.ceil(left); $('#w-meter').style.transform = 'scaleX(' + Math.min(1, left / 30) + ')'; }
+    if (whh && now >= whh) { whh = 0; $('#whack').classList.remove('happy'); ST.whack.happyHours++; wNote('Happy hour is over.', 1500); whNext = now + 11000 + Math.random() * 6000; }
+    else if (!whh && now >= whNext && left > 6) { whh = now + 5000; $('#whack').classList.add('happy'); wNote('HAPPY HOUR! Double points for 5 seconds.', 2200); }
     var el = (now - wstart) / 1000, sp = el * (wrun.speed || 1);
     var hopOn = wrun.hop !== null ? wrun.hop : el > 8, coverOn = wrun.cover !== null ? wrun.cover : el > 10, bossOn = wrun.boss !== null ? wrun.boss : el > 14;
     holeBtns.forEach(function (h, i) {
@@ -3954,7 +4284,7 @@ body.cbshapes .cbm { display: block; }
     showBest();
   }
   function endW() {
-    clearInterval(wtimer); running = false; $('#whack').classList.remove('playing'); clearHoles(); clearTimeout(wmsgT);
+    clearInterval(wtimer); running = false; $('#whack').classList.remove('playing', 'happy'); whh = 0; clearHoles(); clearTimeout(wmsgT);
     $('#w-time').textContent = '0';
     $('#w-meter').style.transform = 'scaleX(0)';
     var acc = wtaps ? Math.round(whits / wtaps * 100) : 0, survived = performance.now() - wstart;
@@ -4009,7 +4339,7 @@ body.cbshapes .cbm { display: block; }
     clearInterval(wtimer); clearHoles(); clearTimeout(wmsgT);
     wscore = 0; wcombo = 0; wmaxc = 0; whits = 0; wtaps = 0; wgold = 0; wclk = 0; wvac = 0; wbosses = 0; whops = 0; wreached = false; setW(); running = true; $('#whack').classList.add('playing');
     try { $('#holes').scrollIntoView({ block: 'nearest', behavior: 'auto' }); } catch (e) {}
-    wrun = wCfg(); wlives = BAL.pals.lives; wr = wrun.daily ? mulberry(seedOf('pals-' + dayKey())) : Math.random;
+    wrun = wCfg(); whh = 0; whNext = performance.now() + 10000; wlives = BAL.pals.lives; wr = wrun.daily ? mulberry(seedOf('pals-' + dayKey())) : Math.random;
     var usedB = 0, bonusT = 0;
     WBOOSTS.forEach(function (b) {
       if (!WARM[b.k] || !wBoostOk(b)) return;
@@ -4028,7 +4358,7 @@ body.cbshapes .cbm { display: block; }
     tickW();
   }
   function stopW() {
-    clearInterval(wtimer); running = false; $('#whack').classList.remove('playing'); clearHoles(); clearTimeout(wmsgT);
+    clearInterval(wtimer); running = false; $('#whack').classList.remove('playing', 'happy'); whh = 0; clearHoles(); clearTimeout(wmsgT);
     $('#w-time').textContent = wtype === 'endless' ? hearts(BAL.pals.lives) : String(BAL.pals.round); $('#w-meter').style.transform = 'scaleX(1)';
     $('#whack-go').textContent = 'Start';
   }
@@ -4386,7 +4716,7 @@ body.cbshapes .cbm { display: block; }
     } else { grand = realRand; }
     GS.goal = goalFor(GS.level); GS.types = levelTypes(GS.level);
     GS.moves = GS.goal.moves; GS.startMoves = GS.moves;
-    GS.mis = GS.level >= 2 ? 4 + Math.floor(Math.random() * 4) : 0;
+    GS.mis = GS.level >= 2 ? 4 + Math.floor(Math.random() * 4) : 0; GS.lmoves = 0; GS.luckyCoins = 0;
     GS.busy = false;
     try { fillBoard(); placeObstacles(obsFor(GS.level)); } finally { Math.random = realRand; }
     gb.classList.toggle('w2', worldOf(GS.level) >= 2); gb.classList.toggle('w3', worldOf(GS.level) === 3); noteLevel(); renderMap();
@@ -4414,7 +4744,7 @@ body.cbshapes .cbm { display: block; }
   }
   function startRush(auto) {
     resetRound(); rushStop(); zenStop();
-    gb.classList.remove('w2'); gb.classList.remove('w3'); GS.daily = false; GS.mode = 'rush'; GS.types = 6; GS.goal = null; GS.moves = 0; GS.startMoves = 0; GS.mis = 5 + Math.floor(Math.random() * 4);
+    gb.classList.remove('w2'); gb.classList.remove('w3'); GS.lmoves = 0; GS.luckyCoins = 0; GS.daily = false; GS.mode = 'rush'; GS.types = 6; GS.goal = null; GS.moves = 0; GS.startMoves = 0; GS.mis = 5 + Math.floor(Math.random() * 4);
     GS.rushLeft = BAL.gems.rushMs; GS.rushOn = false; GS.busy = false;
     fillBoard();
     coverFor('Rush', '60 seconds. The clock starts on your first move.', auto);
@@ -4429,7 +4759,7 @@ body.cbshapes .cbm { display: block; }
   }
   function startZen(auto) {
     resetRound(); rushStop(); zenStop();
-    gb.classList.remove('w2'); gb.classList.remove('w3'); GS.daily = false; GS.mode = 'zen'; GS.types = 6; GS.goal = null; GS.moves = 0; GS.startMoves = 0; GS.mis = 5 + Math.floor(Math.random() * 4);
+    gb.classList.remove('w2'); gb.classList.remove('w3'); GS.lmoves = 0; GS.luckyCoins = 0; GS.daily = false; GS.mode = 'zen'; GS.types = 6; GS.goal = null; GS.moves = 0; GS.startMoves = 0; GS.mis = 5 + Math.floor(Math.random() * 4);
     GS.busy = false; GS.zenMs = 0; GS.shuffles = 0;
     fillBoard();
     coverFor('Zen', 'No goal and no move limit. The clock and shuffle count run while you play.', auto);
@@ -4473,8 +4803,49 @@ body.cbshapes .cbm { display: block; }
     return { list: list, rem: rem, blasted: blasted };
   }
   // Pop the cells, leave any new special pieces behind, let the rest fall and refill.
+  var gtBig = false;
+  function gemTrail(list) {
+    var t = TRAILS[SHOP.gtrail], big = gtBig; gtBig = false;
+    if (!t || !gb || SHOP.gtrail === 'none') return;
+    ST.gems.trailBursts = (ST.gems.trailBursts || 0) + 1;
+    if (big) ST.gems.bigBursts = (ST.gems.bigBursts || 0) + 1;
+    var per = big ? (list.length > 14 ? 2 : 3) : (list.length > 14 ? 1 : 2);
+    list.forEach(function (p) {
+      for (var i = 0; i < per; i++) {
+        var e = document.createElement('span'), c = t.c[Math.floor(Math.random() * t.c.length)], a = Math.random() * 6.283, d = (18 + Math.random() * 26) * (big ? 1.7 : 1);
+        e.className = 'gtr';
+        e.style.left = ((p[1] + 0.5) * 100 / N) + '%'; e.style.top = ((p[0] + 0.5) * 100 / N) + '%';
+        e.style.setProperty('--dx', (Math.cos(a) * d).toFixed(0) + 'px'); e.style.setProperty('--dy', (Math.sin(a) * d - 14).toFixed(0) + 'px'); e.style.setProperty('--rot', Math.floor(Math.random() * 360 - 180) + 'deg');
+        e.style.opacity = t.a || 1;
+        e.innerHTML = '<svg viewBox="-7 -7 14 14" aria-hidden="true"><path d="' + TSH[t.sh] + '" fill="' + c + '" stroke="rgba(0,0,0,.35)" stroke-width=".7"/></svg>';
+        gb.appendChild(e);
+        setTimeout(function () { if (e.parentNode) e.parentNode.removeChild(e); }, 760);
+      }
+    });
+  }
+  // Lucky gem: every few moves one gem glows gold. Clear it for 100 points and a coin (up to 3 coins a game).
+  function luckyTile() { var f = null; GS.board.forEach(function (row) { row.forEach(function (t) { if (t && t.ly) f = t; }); }); return f; }
+  function spawnLucky() {
+    var tiles = [];
+    GS.board.forEach(function (row) { row.forEach(function (t) { if (t && !t.sp && !t.tg && !t.fz && !t.lk && !t.gu) tiles.push(t); }); });
+    if (!tiles.length) return;
+    var t = tiles[Math.floor(Math.random() * tiles.length)];
+    t.ly = true; t.el.classList.add('lucky');
+  }
+  function luckyHit(list) {
+    list.forEach(function (p) {
+      var t = GS.board[p[0]][p[1]];
+      if (!t || !t.ly) return;
+      t.ly = false; t.el.classList.remove('lucky');
+      GS.lscore += 100; GS.total += 100; ST.gems.lucky = (ST.gems.lucky || 0) + 1;
+      var coin = (GS.luckyCoins || 0) < 3; if (coin) { GS.luckyCoins = (GS.luckyCoins || 0) + 1; wallet(1); }
+      gMsg('Lucky gem! +100' + (coin ? ' and 1 coin.' : '.')); gHud();
+    });
+  }
   async function removeAndDrop(list, spawns) {
     var c, r;
+    luckyHit(list);
+    gemTrail(list);
     list.forEach(function (p) { GS.board[p[0]][p[1]].el.classList.add('pop'); });
     await wait(270);
     list.forEach(function (p) { GS.board[p[0]][p[1]].el.remove(); GS.board[p[0]][p[1]] = null; });
@@ -4562,6 +4933,7 @@ body.cbshapes .cbm { display: block; }
       if (thawedN) note.push(thawedN === 1 ? 'A gem thawed!' : thawedN + ' gems thawed!');
       if (spawns.some(function (sp) { return sp.kind === 'x'; })) note.push('Paw burst made!');
       gMsg(note.join(' '));
+      gtBig = casc >= 3;
       await removeAndDrop(R.list, spawns);
     }
     GS.lastSwap = null;
@@ -4671,6 +5043,7 @@ body.cbshapes .cbm { display: block; }
     gHud();
   }
   async function afterMove(usedMove) {
+    if (usedMove && GS.started && !GS.over) { GS.lmoves = (GS.lmoves || 0) + 1; if (GS.lmoves >= 4 && !luckyTile()) { spawnLucky(); GS.lmoves = 0; } }
     if (GS.mode === 'zen' || GS.mode === 'rush') {
       if (GS.mode === 'zen' && GS.total > ST.gems.zenBest) ST.gems.zenBest = GS.total;
       if (GS.mode === 'rush' && GS.rushLeft <= 0) { rushEnd(); return; }
@@ -4741,6 +5114,7 @@ body.cbshapes .cbm { display: block; }
     GS.total += gain; GS.lscore += gain;
     tally(R.list); looseAround(R);
     gMsg('Special combo! ' + R.list.length + ' pieces.'); gHud();
+    gtBig = true;
     await removeAndDrop(R.list, []);
     GS.lastSwap = null;
     await resolve();
@@ -4961,6 +5335,7 @@ body.cbshapes .cbm { display: block; }
     var top = klayers[klayers.length - 1], n = klayers.length;
     kcur = { x: Math.random() < 0.5 ? 0 : KW - top.w, w: top.w, dir: 1, speed: Math.min(BAL.stack.max, BAL.stack.speed0 + n * BAL.stack.perLayer) };
     kcur.dir = kcur.x === 0 ? 1 : -1;
+    if (n >= 6 && n % 6 === 0) { kcur.gust = true; kcur.speed *= 1.45; ktoast = 'GUST!'; ktoastT = 0.9; }
     kcamT = Math.max(0, (n - 7) * KLH);
   }
   function kStart() {
@@ -4988,6 +5363,7 @@ body.cbshapes .cbm { display: block; }
       else kfalls.push({ x: top.x + top.w, w: c.x + c.w - (top.x + top.w), y: kWorldY(klayers.length), vy: 0, n: klayers.length });
       nl = { x: l, w: ov };
     }
+    if (c.gust) ST.stack.gusts = (ST.stack.gusts || 0) + 1;
     klayers.push(nl); kSetHud(); kNewPiece();
   }
   function kEnd() {
@@ -5034,6 +5410,10 @@ body.cbshapes .cbm { display: block; }
     kx.fillStyle = 'rgba(0,0,0,.25)'; kx.fillRect(0, KH - 40 + kcam, KW, 40 + 400);
     klayers.forEach(function (L, i) { kHammock(L.x, kWorldY(i) + kcam, L.w, i, i === klayers.length - 1 && kst !== 'playing'); });
     if (kcur) kHammock(kcur.x, kWorldY(klayers.length) + kcam, kcur.w, klayers.length, false);
+    if (kcur && kcur.gust && kst === 'playing') {
+      kx.strokeStyle = 'rgba(255,255,255,.4)'; kx.lineWidth = 2; kx.lineCap = 'round';
+      for (var gi = 0; gi < 7; gi++) { var gy = 40 + gi * 46, gx = (((performance.now() / 3) * -kcur.dir + gi * 71) % (KW + 80) + (KW + 80)) % (KW + 80) - 40; kx.beginPath(); kx.moveTo(gx, gy); kx.lineTo(gx - kcur.dir * 34, gy); kx.stroke(); }
+    }
     kfalls.forEach(function (f) { kHammock(f.x, f.y + kcam, f.w, f.n, false); });
     if (kst === 'playing') {
       kx.font = '600 12px "DM Sans", sans-serif'; kx.fillStyle = 'rgba(255,255,255,.75)'; kx.textAlign = 'left'; kx.fillText('Tap or press Space to drop', 10, 18);
@@ -5135,13 +5515,19 @@ body.cbshapes .cbm { display: block; }
       hLift(hcups[hrz], false);
       if (!(await hWait(450, id))) return;
       hphase = 'shuffle'; hMsg('Shuffling...'); hSetHud();
-      var swaps = swapsFor(hround), ms = msFor(hround);
+      var swaps = swapsFor(hround), ms = msFor(hround), spin = hround >= 3 && hround % 3 === 0;
+      if (spin) hMsg('Shuffling... then a merry-go-round!');
       for (r = 0; r < swaps; r++) {
         var a = Math.floor(hrng() * n), b = Math.floor(hrng() * (n - 1)); if (b >= a) b++;
         var ca = hcups.filter(function (c) { return c.slot === a; })[0], cb = hcups.filter(function (c) { return c.slot === b; })[0];
         ca.slot = b; cb.slot = a; playFx('shuffle');
         [ca, cb].forEach(function (c) { c.el.style.transitionDuration = ms + 'ms'; c.el.style.left = ((c.slot + 0.5) * 100 / n) + '%'; });
         if (!(await hWait(ms + 40, id))) return;
+      }
+      if (spin) {
+        hMsg('Merry-go-round! Everyone shifts one place.'); ST.hide.spins = (ST.hide.spins || 0) + 1; playFx('shuffle');
+        hcups.forEach(function (c) { c.slot = (c.slot + 1) % n; c.el.style.transitionDuration = Math.max(420, ms) + 'ms'; c.el.style.left = ((c.slot + 0.5) * 100 / n) + '%'; });
+        if (!(await hWait(Math.max(420, ms) + 120, id))) return;
       }
       hphase = 'pick'; hMsg('Which sock hides the raisin?'); hSetHud();
       var el = await new Promise(function (res) { hpick = res; });
@@ -5151,7 +5537,7 @@ body.cbshapes .cbm { display: block; }
       var chosen = hCupByEl(el), ok = chosen === hcups[hrz];
       hLift(chosen, true); hLift(hcups[hrz], true);
       if (ok) {
-        hstreak++; hmaxs = Math.max(hmaxs, hstreak); hfound++; if (isTwin()) ST.hide.twinFound = (ST.hide.twinFound || 0) + 1;
+        hstreak++; hmaxs = Math.max(hmaxs, hstreak); hfound++; if (spin) ST.hide.spinsFound = (ST.hide.spinsFound || 0) + 1; if (isTwin()) ST.hide.twinFound = (ST.hide.twinFound || 0) + 1;
         var gain = BAL.hide.sock * n + BAL.hide.streak * Math.min(hstreak, BAL.hide.streakMax); if (isTwin()) gain = Math.round(gain * BAL.hide.twinMult); hscore += gain;
         playFx('found');
         hMsg('Found it! +' + gain + (hstreak > 1 ? ' (streak ' + hstreak + ')' : ''));
@@ -5410,6 +5796,7 @@ body.cbshapes .cbm { display: block; }
     { kind: 'board', key: 'beach', name: 'Beach day', price: 60 },
     { kind: 'board', key: 'goo', name: 'Sticky goo', price: 75 },
     { kind: 'board', key: 'attic', name: 'Dusty attic', price: 65 },
+    { kind: 'board', key: 'garage', name: 'Garage floor', price: 65 },
     { kind: 'board', key: 'evfrost', name: 'Snowfall (Frost Fest)', price: 0, event: 'frost' },
     { kind: 'board', key: 'evbloom', name: 'Petals (Bloom Days)', price: 0, event: 'bloom' },
     { kind: 'board', key: 'evsun', name: 'Sunbeams (Sun Splash)', price: 0, event: 'sun' },
@@ -5423,6 +5810,13 @@ body.cbshapes .cbm { display: block; }
     { kind: 'board', key: 'evcamp', name: 'Campfire (Camp Out)', price: 0, event: 'camp' },
     { kind: 'board', key: 'evschool', name: 'Notebook (Back to Burrow)', price: 0, event: 'school' },
     { kind: 'board', key: 'evnuts', name: 'Forest floor (Nutty November)', price: 0, event: 'nuts' },
+    { kind: 'gtrail', key: 'none', name: 'No match trail', price: 0 },
+    { kind: 'gtrail', key: 'paws', name: 'Paw puffs', price: 45 },
+    { kind: 'gtrail', key: 'bubbles', name: 'Bubble pop', price: 55 },
+    { kind: 'gtrail', key: 'leaves', name: 'Leaf burst', price: 55 },
+    { kind: 'gtrail', key: 'sparks', name: 'Star burst', price: 65 },
+    { kind: 'gtrail', key: 'hearts', name: 'Heart burst', price: 70 },
+    { kind: 'gtrail', key: 'rainbow', name: 'Confetti', price: 80 },
     { kind: 'trail', key: 'none', name: 'No trail', price: 0 },
     { kind: 'trail', key: 'paws', name: 'Paw prints', price: 0 },
     { kind: 'trail', key: 'bubbles', name: 'Bubbles', price: 60 },
@@ -5430,6 +5824,11 @@ body.cbshapes .cbm { display: block; }
     { kind: 'trail', key: 'sparks', name: 'Spark trail', price: 70 },
     { kind: 'trail', key: 'hearts', name: 'Heart trail', price: 75 },
     { kind: 'trail', key: 'rainbow', name: 'Rainbow ribbon', price: 90 },
+    { kind: 'trail', key: 'tdew', name: 'Dewdrops', price: 0, event: 'biome', biome: 1 },
+    { kind: 'trail', key: 'tcush', name: 'Pillow puffs', price: 0, event: 'biome', biome: 2 },
+    { kind: 'trail', key: 'tthread', name: 'Thread ribbon', price: 0, event: 'biome', biome: 3 },
+    { kind: 'trail', key: 'tdust', name: 'Dust bunnies', price: 0, event: 'biome', biome: 4 },
+    { kind: 'trail', key: 'tpaint', name: 'Paint splats', price: 0, event: 'biome', biome: 5 },
     { kind: 'back', key: 'classic', name: 'Classic', price: 0 },
     { kind: 'back', key: 'stripes', name: 'Candy stripes', price: 50 },
     { kind: 'back', key: 'night', name: 'Night sky', price: 50 },
@@ -5458,9 +5857,9 @@ body.cbshapes .cbm { display: block; }
     { kind: 'boost', key: 'hpeek', name: 'Raisin peek', price: 15, desc: 'Used in Hide the Raisin: shows the raisin again before you pick.', bag: ['hpeek'], give: { hpeek: 1 } },
     { kind: 'boost', key: 'spack', name: 'Sock power pack', price: 25, desc: 'Two reveals and two freezes.', bag: ['sreveal', 'sfreeze'], give: { sreveal: 2, sfreeze: 2 } }
   ];
-  var DEFAULTS = { hat: 'none', coat: 'sable', gems: 'classic', board: 'classic', trail: 'none', back: 'classic', cbg: 'purple', cfr: 'none' };
-  var SKIN_KINDS = ['hat', 'coat', 'gems', 'board', 'trail', 'back', 'cbg', 'cfr'];
-  var SHOP = { owned: {}, stock: {}, hat: 'none', coat: 'sable', gems: 'classic', board: 'classic', trail: 'none', back: 'classic', cbg: 'purple', cfr: 'none' };
+  var DEFAULTS = { hat: 'none', coat: 'sable', gems: 'classic', board: 'classic', trail: 'none', gtrail: 'none', back: 'classic', cbg: 'purple', cfr: 'none' };
+  var SKIN_KINDS = ['hat', 'coat', 'gems', 'board', 'trail', 'gtrail', 'back', 'cbg', 'cfr'];
+  var SHOP = { owned: {}, stock: {}, hat: 'none', coat: 'sable', gems: 'classic', board: 'classic', trail: 'none', gtrail: 'none', back: 'classic', cbg: 'purple', cfr: 'none' };
   function shopHas(kind, key) { return SHOP_ITEMS.some(function (i) { return i.kind === kind && i.key === key; }); }
   (function () {
     var v = load('fa-shop');
@@ -5541,7 +5940,12 @@ body.cbshapes .cbm { display: block; }
     leaves: { sh: 'leaf', c: ['#7fcf5a', '#c9ec9a', '#e6a23c'], wob: 1, rot: 1 },
     sparks: { sh: 'star', c: ['#ffd24a', '#fff3b0'], wob: 1 },
     hearts: { sh: 'heart', c: ['#ef4d56', '#f4a3b5'], wob: 1 },
-    rainbow: { sh: 'bar', c: ['#ef4d56', '#f5a03c', '#f2d23a', '#6cc96a', '#58a6ef', '#9b6fe0'], rib: 1 }
+    rainbow: { sh: 'bar', c: ['#ef4d56', '#f5a03c', '#f2d23a', '#6cc96a', '#58a6ef', '#9b6fe0'], rib: 1 },
+    tdew: { sh: 'dot', c: ['#7fe0c0', '#c5f5e4'], a: 0.65, wob: 1 },
+    tcush: { sh: 'dot', c: ['#b79cf0', '#e2d6ff'], a: 0.75, wob: 1 },
+    tthread: { sh: 'bar', c: ['#e0568a', '#f4a3c4', '#ffd1e3'], rib: 1 },
+    tdust: { sh: 'dot', c: ['#cdbd9c', '#a89878'], a: 0.55, wob: 1 },
+    tpaint: { sh: 'dot', c: ['#e4572e', '#3a8de0', '#f2c94c', '#4cb86a'], wob: 1 }
   };
   function trailSvg(key) {
     var t = TRAILS[key];
@@ -5581,7 +5985,7 @@ body.cbshapes .cbm { display: block; }
     if (it.kind === 'cfr') return '<img class="thumb" alt="" src="' + thumb(SHOP.cbg, it.key) + '">';
     if (it.kind === 'boost') return '<svg viewBox="0 0 100 100" aria-hidden="true">' + BOOST_ICO[it.key] + '</svg>';
     if (it.kind === 'coat') return prevFerret('none', it.key);
-    if (it.kind === 'trail') return trailSvg(it.key);
+    if (it.kind === 'trail' || it.kind === 'gtrail') return trailSvg(it.key);
     if (it.kind === 'board') return '<i class="boardsw" data-bd="' + it.key + '"></i>';
     if (it.kind === 'hat') return prevFerret(it.key, SHOP.coat);
     if (it.kind === 'gems') return GEMSETS[it.key].map(function (c) { return '<i class="dotsw" style="background:' + c + '"></i>'; }).join('');
@@ -5627,7 +6031,7 @@ body.cbshapes .cbm { display: block; }
   });
 
   /* ---------- Ferret collection ---------- */
-  var KIND_TITLES = { hat: 'Hats', coat: 'Coats', gems: 'Gem sets', board: 'Gem board themes', trail: 'Tunnel Dash trails', back: 'Sock card backs', cbg: 'Result picture backgrounds', cfr: 'Result picture frames' };
+  var KIND_TITLES = { hat: 'Hats', coat: 'Coats', gems: 'Gem sets', board: 'Gem board themes', trail: 'Tunnel Dash trails', gtrail: 'Gem match trails', back: 'Sock card backs', cbg: 'Result picture backgrounds', cfr: 'Result picture frames' };
   var COLSEL = {};
   function itemOwned(it) { return (it.price === 0 && !it.event) || !!SHOP.owned[it.kind + ':' + it.key]; }
   function skinItems(kind) { return SHOP_ITEMS.filter(function (i) { return i.kind === kind; }); }
@@ -5651,7 +6055,7 @@ body.cbshapes .cbm { display: block; }
         else if (kind === 'hat') pv = prevFerret(it.key, COLSEL.coat);
         else if (kind === 'coat') pv = prevFerret(COLSEL.hat, it.key);
         else pv = shopPreview(it);
-        return '<button type="button" class="sitem pick' + (on ? ' on' : '') + (own ? '' : ' locked') + '" data-ck="' + kind + '" data-ci="' + it.key + '" aria-pressed="' + on + '"><span class="spv">' + pv + '</span><b>' + it.name + '</b><small>' + (wear ? 'Wearing' : own ? 'Owned' : (it.event ? 'Event reward' : 'Locked · ' + it.price)) + '</small></button>';
+        return '<button type="button" class="sitem pick' + (on ? ' on' : '') + (own ? '' : ' locked') + '" data-ck="' + kind + '" data-ci="' + it.key + '" aria-pressed="' + on + '"><span class="spv">' + pv + '</span><b>' + it.name + '</b><small>' + (wear ? 'Wearing' : own ? 'Owned' : (it.biome ? 'Reach the ' + BIOMES[it.biome].name : it.event ? 'Event reward' : 'Locked · ' + it.price)) + '</small></button>';
       }).join('') + '</div></div>';
     }).join('');
     foldGroups('#col-groups', 'col');
@@ -5893,7 +6297,7 @@ body.cbshapes .cbm { display: block; }
       ['Longest streak of pairs', nf(S1.bestStreak)], ['Peeks used', nf(S1.peeks)],
       ['Levels cleared', nf(SP.cleared)], ['Stars earned', nf(spStars)],
       ['Daily boards done', nf(S1.dailies)], ['Daily streak (now / best)', nf(dailyStreak()) + ' / ' + nf(S1.bestDaily)],
-      ['Mischief swaps', nf(S1.mischief)], ['Smelly decoys flipped', nf(S1.decoys)], ['Golden pairs', nf(S1.golds)],
+      ['Mischief swaps', nf(S1.mischief)], ['Dryer tumbles seen', nf(S1.tumbles || 0)], ['Smelly decoys flipped', nf(S1.decoys)], ['Golden pairs', nf(S1.golds)],
       ['Pairs revealed / time freezes', nf(S1.reveals) + ' / ' + nf(S1.freezes)]]);
     h += block('Tunnel Dash', 'dash', [
       ['Runs', nf(D1.runs)], ['Best score', best.dash !== null ? nf(best.dash) : '–'],
@@ -5901,15 +6305,15 @@ body.cbshapes .cbm { display: block; }
       ['Raisins collected', nf(D1.raisins)], ['Most raisins in a run', nf(D1.bestRaisins)],
       ['Jumps', nf(D1.jumps)], ['Hits taken', nf(D1.hits)],
       ['Magnets / shields / hearts', nf(D1.magnets) + ' / ' + nf(D1.shields) + ' / ' + nf(D1.hearts)],
-      ['Slow-mos grabbed', nf(D1.slows)], ['Low pipes ducked', nf(D1.ducks)], ['Gaps leaped', nf(D1.leaps)], ['Yarn balls hopped', nf(D1.yarns)], ['Mouse traps hopped', nf(D1.traps || 0)], ['Raisin rushes', nf(D1.rushes || 0)], ['Cat Swats outrun', nf(D1.paws || 0)], ['Runs with a trail', nf(D1.trailRuns || 0)], ['Runs reaching the Craft closet', nf(D1.closets)],
+      ['Slow-mos grabbed', nf(D1.slows)], ['Low pipes ducked', nf(D1.ducks)], ['Gaps leaped', nf(D1.leaps)], ['Yarn balls hopped', nf(D1.yarns)], ['Mouse traps hopped', nf(D1.traps || 0)], ['Paint cans hopped', nf(D1.cans || 0)], ['Tumbles ridden out', nf(D1.tumbles || 0)], ['Water jets dodged / soaked', nf(D1.jets || 0) + ' / ' + nf(D1.soaks || 0)], ['Lights-outs survived', nf(D1.darks || 0)], ['Cushion bounces', nf(D1.bounces || 0)], ['Threads hopped / snags', nf(D1.threads || 0) + ' / ' + nf(D1.snags || 0)], ['Oil slicks hopped / skids', nf(D1.oils || 0) + ' / ' + nf(D1.skids || 0)], ['Garage visits', nf(D1.garages || 0)], ['Raisin rushes', nf(D1.rushes || 0)], ['Cat Swats outrun', nf(D1.paws || 0)], ['Runs with a trail', nf(D1.trailRuns || 0)], ['Runs reaching the Craft closet', nf(D1.closets)],
       ['Checkpoints reached', nf(D1.checkpoints)], ['Missions completed', nf(D1.missions)],
-      ['Boss chases (outrun / started)', nf(D1.bossWins) + ' / ' + nf(D1.chases)], ['Boss hits taken', nf(D1.bossHits)]]);
+      ['Boss chases (outrun / started)', nf(D1.bossWins) + ' / ' + nf(D1.chases)], ['Boss hits taken', nf(D1.bossHits)], ['Daily runs done / best daily score', nf(D1.dailies || 0) + ' / ' + nf(D1.bestDaily || 0)], ['Roombas / brooms outrun', nf(D1.roombas || 0) + ' / ' + nf(D1.brooms || 0)]]);
     h += block('Pop-Up Pals', 'whack', [
       ['Rounds played', nf(W1.rounds)], ['Best score (calm / normal / frantic)', triple(wb, ['calm', 'normal', 'frantic'])],
       ['Total score', nf(W1.score)], ['Ferrets and clocks tapped', nf(W1.hits)], ['Accuracy', acc],
       ['Best combo', nf(W1.maxCombo)], ['Golden ferrets', nf(W1.golds)], ['Clocks', nf(W1.clocks)], ['Vacuums hit', nf(W1.vac)],
       ['Levels cleared', nf(WL.cleared)], ['Stars earned', nf(wStars)], ['Sneaky hoppers tapped', nf(W1.hops)],
-      ['Boss ferrets beaten', nf(W1.bosses)], ['Blankets thrown on you', nf(W1.covers)],
+      ['Boss ferrets beaten', nf(W1.bosses)], ['Happy hour taps (hours)', nf(W1.happyHits || 0) + ' (' + nf(W1.happyHours || 0) + ')'], ['Blankets thrown on you', nf(W1.covers)],
       ['Endless best / runs', nf(W1.endlessBest) + ' / ' + nf(W1.endlessRuns)], ['Daily rounds (best / streak)', nf(W1.dailies) + ' (' + nf(W1.bestDaily) + ' / ' + nf(wdStreak()) + ')'], ['Boosts used', nf(W1.boosts)]]);
     h += block('Ferret Gems', 'gems', [
       ['Games started', nf(G1.games)], ['Best level reached', best.gems !== null ? nf(best.gems) : '–'],
@@ -5917,15 +6321,15 @@ body.cbshapes .cbm { display: block; }
       ['Highest level cleared', nf(GP.cleared)],
       ['Stars earned', nf(starTotal) + ' (' + nf(threeStar) + ' levels at 3 stars)'],
       ['Blasters / bombs / paw bursts made', nf(G1.blasters) + ' / ' + nf(G1.bombs) + ' / ' + nf(G1.bursts)], ['Tangled socks freed', nf(G1.freed)], ['Biggest chain', nf(G1.maxChain)],
-      ['Zen best score', nf(G1.zenBest)], ['Rush best score', nf(G1.rushBest)], ['Rush rounds finished', nf(G1.rushes)], ['Special combos', nf(G1.combos)], ['Mischief ferret visits', nf(G1.mischief)],
+      ['Zen best score', nf(G1.zenBest)], ['Rush best score', nf(G1.rushBest)], ['Rush rounds finished', nf(G1.rushes)], ['Special combos', nf(G1.combos)], ['Lucky gems cleared', nf(G1.lucky || 0)], ['Matches with a trail', nf(G1.trailBursts || 0)], ['Big bursts', nf(G1.bigBursts || 0)], ['Mischief ferret visits', nf(G1.mischief)],
       ['Frozen gems thawed / locked gems cleared', nf(G1.thawed) + ' / ' + nf(G1.unlocked)], ['Daily puzzles cleared (Gold)', nf(G1.dailies || 0) + ' (' + nf(G1.dailyGolds || 0) + ')'], ['Goo gems scrubbed', nf(G1.scrubbed || 0)], ['Boosters used', nf(G1.boosters)], ['Coins earned here', nf(G1.coinsEarned)], ['Coins in the shared wallet', nf(GP.coins)], ['Hints used', nf(G1.hints)]]);
     h += block('Hammock Stack', 'stack', [
       ['Games started', nf(ST.stack.games)], ['Tallest tower', nf(ST.stack.tallest) + ' layers'], ['Layers stacked in all', nf(ST.stack.layers)],
-      ['Perfect drops', nf(ST.stack.perfects)], ['Best perfect streak', nf(ST.stack.bestStreak)], ['Coins earned here', nf(ST.stack.coinsEarned)]]);
+      ['Perfect drops', nf(ST.stack.perfects)], ['Best perfect streak', nf(ST.stack.bestStreak)], ['Gust drops landed', nf(ST.stack.gusts || 0)], ['Coins earned here', nf(ST.stack.coinsEarned)]]);
     h += block('Hide the Raisin', 'hide', [
       ['Games started', nf(ST.hide.games)], ['Best round', nf(ST.hide.bestRound)], ['Best Twin socks round', nf(ST.hide.bestTwin || 0)], ['Best score', nf(ST.hide.bestScore)],
       ['Raisins found', nf(ST.hide.found)], ['Rounds played', nf(ST.hide.rounds)], ['Best streak', nf(ST.hide.bestStreak)],
-      ['Daily rounds (streak)', nf(ST.hide.dailies) + ' (' + nf(hdStreak()) + ')'], ['Peeks used', nf(ST.hide.peeks)]]);
+      ['Merry-go-rounds found / seen', nf(ST.hide.spinsFound || 0) + ' / ' + nf(ST.hide.spins || 0)], ['Daily rounds (streak)', nf(ST.hide.dailies) + ' (' + nf(hdStreak()) + ')'], ['Peeks used', nf(ST.hide.peeks)]]);
     var dd = ddS();
     h += block('Dook Dash (see its own screen for more)', 'dook', [['Runs', nf(dd.runs)], ['Best distance', nf(dd.bestDist) + ' m'], ['Total distance', nf(dd.dist) + ' m'], ['Corners turned', nf(dd.turns)], ['Close calls', nf(dd.close)], ['Daily goals finished', nf(dd.goals)]]);
     h += block('Daily quests', 'quest', [['Quests claimed', nf(ST.quests.claimed)], ['Days with all three done', nf(ST.quests.sweeps)], ['Streak (now / best)', nf(qStreakNow()) + ' / ' + nf(ST.quests.bestStreak)]]);
@@ -5949,7 +6353,7 @@ body.cbshapes .cbm { display: block; }
   $('#stats-yes').addEventListener('click', function () {
     ST = ST_DEFAULT();
     best.socks = null; best.dash = null; best.whack = null; best.gems = null;
-    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-hdaily', 'fa-gdaily', 'fa-event', 'fa-quests', 'fa-week', 'fa-wgoal', 'fa-sreward', 'fa-weeks', 'fa-stamps', 'fa-medals'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    ['fa-stats', 'fa-socks2', 'fa-dash', 'fa-whack2', 'fa-gems2', 'fa-gems3', 'fa-socks3', 'fa-sdaily', 'fa-dmis', 'fa-dghost', 'fa-wlvl', 'fa-wdaily', 'fa-ddaily', 'fa-dddaily', 'fa-hdaily', 'fa-gdaily', 'fa-event', 'fa-quests', 'fa-week', 'fa-wgoal', 'fa-sreward', 'fa-weeks', 'fa-stamps', 'fa-medals'].forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
     $('#stats-confirm').hidden = true; $('#stats-reset').hidden = false;
     GP.cleared = 0; GP.stars = {}; GP.coins = 40; GS.level = 1; GS.mode = 'levels'; GS.busy = false;
     Array.prototype.forEach.call($('#gems-modes').children, function (x) { x.setAttribute('aria-pressed', x.dataset.d === 'levels' ? 'true' : 'false'); });
@@ -6194,7 +6598,7 @@ body.cbshapes .cbm { display: block; }
   }
   var MX = {
     'fa-stats': mxDeep, 'fa-week': mxDeep, 'fa-gems3': mxDeep, 'fa-socks3': mxDeep, 'fa-wlvl': mxDeep, 'fa-ach': mxDeep, 'fa-whack2': mxDeep, 'fa-dash': mxDeep, 'fa-gems2': mxDeep, 'dookdash-best': mxDeep,
-    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-wgoal': mxWGoal, 'fa-sreward': mxSReward, 'fa-weeks': mxDeep, 'fa-medals': mxMedals, 'fa-stamps': mxDeep, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-hdaily': mxDaily, 'fa-gdaily': mxDaily, 'fa-event': mxEvent, 'dookdash-save': mxDook,
+    'fa-socks2': mxMin, 'fa-shop': mxShop, 'fa-quests': mxQuests, 'fa-wgoal': mxWGoal, 'fa-sreward': mxSReward, 'fa-weeks': mxDeep, 'fa-medals': mxMedals, 'fa-stamps': mxDeep, 'fa-sdaily': mxDaily, 'fa-wdaily': mxDaily, 'fa-ddaily': mxDaily, 'fa-dddaily': mxDaily, 'fa-hdaily': mxDaily, 'fa-gdaily': mxDaily, 'fa-event': mxEvent, 'dookdash-save': mxDook,
     'fa-prof': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { if (a[k] !== '' && a[k] !== null && a[k] !== undefined) o[k] = a[k]; }); return o; },
     'fa-dmis': function (a, b) { var o = {}; Object.keys(b).forEach(function (k) { o[k] = b[k]; }); Object.keys(a).forEach(function (k) { o[k] = a[k]; }); ['done', 'next'].forEach(function (k) { if (typeof a[k] === 'number' || typeof b[k] === 'number') o[k] = Math.max(a[k] || 0, b[k] || 0); }); return o; }
   };
@@ -6266,7 +6670,7 @@ body.cbshapes .cbm { display: block; }
     v['title-n'] = titleList().length;
     v['name-max'] = parseInt($('#prof-name').getAttribute('maxlength'), 10);
     v['q-min'] = Math.min.apply(null, q); v['q-max'] = Math.max.apply(null, q);
-    ['hat', 'coat', 'gems', 'board', 'trail', 'back', 'cbg', 'cfr', 'boost'].forEach(function (k) {
+    ['hat', 'coat', 'gems', 'board', 'trail', 'gtrail', 'back', 'cbg', 'cfr', 'boost'].forEach(function (k) {
       var pr = SHOP_ITEMS.filter(function (i) { return i.kind === k && i.price > 0; }).map(function (i) { return i.price; });
       v[k + '-n'] = pr.length; v[k + '-min'] = Math.min.apply(null, pr); v[k + '-max'] = Math.max.apply(null, pr);
     });
@@ -6275,7 +6679,7 @@ body.cbshapes .cbm { display: block; }
     var ms = MPOOL.map(function (m) { return m.c; }), c3 = 1, c4 = 1;
     for (L = 1; L <= 40; L++) { if (cupsFor(L) === 3) c3 = L; if (cupsFor(L) === 4) c4 = L; }
     v['s-e'] = SMODES.easy.pairs; v['s-m'] = SMODES.medium.pairs; v['s-h'] = SMODES.hard.pairs; v['s-max'] = B.socks.maxPairs; v['s-st3'] = B.socks.star3; v['s-st2'] = B.socks.star2; v['s-decoy'] = B.socks.decoy; v['s-gold'] = B.socks.goldBack; v['s-mis'] = B.socks.misFrom;
-    v['d-s0'] = B.dash.speed0; v['d-s1'] = B.dash.speed0 + B.dash.ramp * B.dash.rampSecs; v['d-rs'] = B.dash.rampSecs; v['d-smax'] = B.dash.speedMax; v['d-lives'] = B.dash.lives; v['d-maxl'] = B.dash.maxLives; v['d-bm'] = B.dash.biomeM; v['d-rush'] = B.dash.rushSecs; v['d-cp'] = B.dash.cpM;
+    v['d-s0'] = B.dash.speed0; v['d-s1'] = B.dash.speed0 + B.dash.ramp * B.dash.rampSecs; v['d-rs'] = B.dash.rampSecs; v['d-smax'] = B.dash.speedMax; v['d-lives'] = B.dash.lives; v['d-maxl'] = B.dash.maxLives; v['d-bm'] = B.dash.biomeM; v['d-rush'] = B.dash.rushSecs; v['d-skid'] = B.dash.skidSecs; v['d-snag'] = B.dash.snagSecs; v['d-tum'] = B.dash.tumbleSecs; v['d-dark'] = B.dash.darkSecs; v['d-bnc'] = B.dash.bounceBonus; v['d-cp'] = B.dash.cpM;
     v['d-b1'] = B.dash.boss1; v['d-be'] = B.dash.bossEvery; v['d-ba0'] = B.dash.bossBase + B.dash.bossPerLvl; v['d-bmax'] = B.dash.bossMax; v['d-w0'] = B.dash.warn0; v['d-wmin'] = B.dash.warnMin; v['d-grace'] = B.dash.grace; v['d-mmin'] = Math.min.apply(null, ms); v['d-mmax'] = Math.max.apply(null, ms);
     v['p-round'] = B.pals.round; v['p-round2'] = B.pals.round; v['p-gold'] = B.pals.gold; v['p-hop'] = B.pals.hop; v['p-hp'] = B.pals.bossHp; v['p-boss'] = B.pals.boss; v['p-clock'] = B.pals.clock; v['p-cap'] = B.pals.cap; v['p-tb'] = B.pals.targetBase; v['p-tp'] = B.pals.targetPer; v['p-s2'] = B.pals.star2; v['p-s3'] = B.pals.star3; v['p-lives'] = B.pals.lives; v['p-maxl'] = B.pals.maxLives; v['p-speed'] = B.pals.speed;
     v['g-n'] = N; v['g-n2'] = N; v['g-t1'] = levelTypes(1); v['g-t2'] = levelTypes(99); v['g-w1'] = w1; v['g-w2'] = w1 + 1; v['g-mvmin'] = Math.min.apply(null, mv); v['g-mvmax'] = Math.max.apply(null, mv); v['g-fz'] = fz; v['g-lk'] = lk; v['g-star3'] = Math.round(B.gems.star3 * 100);
@@ -6665,11 +7069,11 @@ body.cbshapes .cbm { display: block; }
     $('#me-name').textContent = name; $('#me-title').textContent = ct.label;
     // streaks
     var dd = {}; try { var j = JSON.parse(localStorage.getItem('dookdash-save') || 'null'); dd = (j && j.streak) || {}; } catch (e) {}
-    var st = [['Daily quests', qStreakNow(), ST.quests.bestStreak], ['Sock Match daily', liveStreak(SD.streak, SD.last), SD.streak], ['Pop-Up Pals daily', liveStreak(WD.streak, WD.last), WD.streak], ['Hide the Raisin daily', liveStreak(HD.streak, HD.last), HD.streak], ['Dook Dash goals', liveStreak(dd.n, dd.last), dd.n || 0]];
+    var st = [['Daily quests', qStreakNow(), ST.quests.bestStreak], ['Sock Match daily', liveStreak(SD.streak, SD.last), SD.streak], ['Pop-Up Pals daily', liveStreak(WD.streak, WD.last), WD.streak], ['Hide the Raisin daily', liveStreak(HD.streak, HD.last), HD.streak], ['Tunnel Dash daily', liveStreak(DDY.streak, DDY.last), DDY.streak], ['Dook Dash daily', liveStreak(dkd().streak, dkd().last), dkd().streak], ['Dook Dash goals', liveStreak(dd.n, dd.last), dd.n || 0]];
     var bestNow = Math.max.apply(null, st.map(function (r) { return r[1]; }));
     var h = meBlock('Streaks', st.map(function (r) { return [r[0], r[1] + (r[1] === 1 ? ' day' : ' days') + (r[2] > r[1] ? ' <small>(last run ' + r[2] + ')</small>' : '')]; }));
     h += srBlock();
-    var mc = medalCounts(), mt = [['Sock Match', 'socks'], ['Pop-Up Pals', 'whack'], ['Hide the Raisin', 'hide'], ['Ferret Gems', 'gems']];
+    var mc = medalCounts(), mt = [['Sock Match', 'socks'], ['Pop-Up Pals', 'whack'], ['Hide the Raisin', 'hide'], ['Ferret Gems', 'gems'], ['Tunnel Dash', 'dash'], ['Dook Dash', 'dook']];
     h += meBlock('Daily medals', mt.map(function (g) { return [g[0] + ' today', medalToday(g[1]) || '<small>not yet</small>']; }).concat([['All time', mc.Gold + ' gold \u00b7 ' + mc.Silver + ' silver \u00b7 ' + mc.Bronze + ' bronze']]));
     // weekly recap
     wkSync();
@@ -6680,7 +7084,7 @@ body.cbshapes .cbm { display: block; }
     CARD.week = { game: 'My week', sub: name + ' \u00b7 ' + rng, big: w0.g, bigLabel: w0.g === 1 ? 'game played' : 'games played', stats: [['Coins earned', nf(w0.c)], ['Days played', w0.days + ' / 7'], ['Weekly goals', wgb.n + ' / 3']] };
     RES.week = HEAD + '\nMy week \u00b7 ' + rng + '\n' + w0.g + ' games \u00b7 ' + w0.c + ' coins \u00b7 ' + w0.days + '/7 days \u00b7 ' + wgb.n + '/3 weekly goals';
     // outfit
-    h += meBlock('Outfit', [['Hat', skinName('hat')], ['Coat', skinName('coat')], ['Gem set', skinName('gems')], ['Board theme', skinName('board')], ['Dash trail', skinName('trail')], ['Sock card back', skinName('back')], ['Picture background', skinName('cbg')], ['Picture frame', skinName('cfr')], ['Items owned', have + ' / ' + total]], ['#col', 'Change']);
+    h += meBlock('Outfit', [['Hat', skinName('hat')], ['Coat', skinName('coat')], ['Gem set', skinName('gems')], ['Board theme', skinName('board')], ['Dash trail', skinName('trail')], ['Match trail', skinName('gtrail')], ['Sock card back', skinName('back')], ['Picture background', skinName('cbg')], ['Picture frame', skinName('cfr')], ['Items owned', have + ' / ' + total]], ['#col', 'Change']);
     // badges closest to claiming
     var open = defs.filter(function (a) { return !ACH.claimed[a.id]; }).map(function (a) { return { a: a, f: Math.min(1, a.val / a.goal) }; }).sort(function (x, y) { return y.f - x.f; }).slice(0, 3);
     h += '<section class="sblock"><div class="shead"><h3>Next badges</h3><a href="#ach">All badges</a></div><div class="achlist">' + (open.length ? open.map(function (o) {
@@ -6701,7 +7105,7 @@ body.cbshapes .cbm { display: block; }
   /* ---------- Daily quests ---------- */
   // Dook Dash keeps its own save. Read it fresh each time, so quests and badges see runs as soon as they end.
   function ddS() {
-    var o = { runs: 0, bestDist: 0, dist: 0, close: 0, turns: 0, boosts: 0, goals: 0, bestStreak: 0, turbos: 0, kitchen: 0, beach: 0, trailRuns: 0, trails: 0, trailsAll: 0 };
+    var o = { runs: 0, bestDist: 0, dist: 0, close: 0, turns: 0, boosts: 0, goals: 0, bestStreak: 0, turbos: 0, kitchen: 0, beach: 0, trailRuns: 0, trails: 0, trailsAll: 0, twists: 0, dailies: 0, bestDaily: 0 };
     try {
       var j = JSON.parse(localStorage.getItem('dookdash-save') || 'null');
       if (j && j.stats && typeof j.stats === 'object') Object.keys(o).forEach(function (k) { var v = j.stats[k]; if (typeof v === 'number' && v >= 0) o[k] = v; });
@@ -6711,10 +7115,10 @@ body.cbshapes .cbm { display: block; }
   }
   function qStats() {
     var DD = ddS();
-    return { sw: ST.socks.won, sp: ST.socks.pairs, sd: ST.socks.dailies, dm: ST.dash.meters, dr: ST.dash.raisins, dl: ST.dash.leaps, dy: ST.dash.yarns, dtp: ST.dash.traps || 0, dt: ST.dash.trailRuns || 0, dms: ST.dash.missions, db: ST.dash.bossWins,
-      wh: ST.whack.hits, wb: ST.whack.bosses, wd: ST.whack.dailies, wr: ST.whack.rounds, gc: ST.gems.cleared, gp: ST.gems.pieces, gb: ST.gems.blasters,
+    return { sw: ST.socks.won, sp: ST.socks.pairs, sd: ST.socks.dailies, dm: ST.dash.meters, dr: ST.dash.raisins, dl: ST.dash.leaps, dy: ST.dash.yarns, ddy: ST.dash.dailies || 0, dtp: ST.dash.traps || 0, dtc: ST.dash.cans || 0, dtb: ST.dash.bounces || 0, dto: ST.dash.oils || 0, dth: ST.dash.threads || 0, dt: ST.dash.trailRuns || 0, dms: ST.dash.missions, db: ST.dash.bossWins,
+      wh: ST.whack.hits, wb: ST.whack.bosses, wd: ST.whack.dailies, wr: ST.whack.rounds, gc: ST.gems.cleared, gp: ST.gems.pieces, gb: ST.gems.blasters, gtb: ST.gems.trailBursts || 0,
       kl: ST.stack.layers, kp: ST.stack.perfects, hf: ST.hide.found, hd: ST.hide.dailies, gd: ST.gems.dailies, tf: ST.hide.twinFound || 0, md: medalTotal(), th: gameCounts()[themeNow()[0]] || 0,
-      ddr: DD.runs, ddm: DD.dist, ddc: DD.close, ddt: DD.turns, ddb: DD.boosts, ddg: DD.goals, ddtr: DD.trailRuns };
+      ddy2: DD.dailies, ddtw: DD.twists, ddr: DD.runs, ddm: DD.dist, ddc: DD.close, ddt: DD.turns, ddb: DD.boosts, ddg: DD.goals, ddtr: DD.trailRuns };
   }
   var QPOOL = [
     { id: 'sw', game: 'Sock Match', hash: 'socks', text: 'Win 2 Sock Match games', goal: 2, reward: 20 },
@@ -6724,9 +7128,15 @@ body.cbshapes .cbm { display: block; }
     { id: 'dr', game: 'Tunnel Dash', hash: 'dash', text: 'Collect 60 raisins in Tunnel Dash', goal: 60, reward: 20 },
     { id: 'dl', game: 'Tunnel Dash', hash: 'dash', text: 'Leap 6 gaps in Tunnel Dash', goal: 6, reward: 20 },
     { id: 'dt', game: 'Tunnel Dash', hash: 'dash', text: 'Run 100 m in Tunnel Dash with a trail on', goal: 1, reward: 25 },
+    { id: 'gtb', game: 'Ferret Gems', hash: 'gems', text: 'Make 20 matches with a match trail on', goal: 20, reward: 25 },
+    { id: 'dto', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 4 oil slicks in Tunnel Dash', goal: 4, reward: 25 },
+    { id: 'dth', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 5 loose threads in Tunnel Dash', goal: 5, reward: 25 },
+    { id: 'dtb', game: 'Tunnel Dash', hash: 'dash', text: 'Bounce on 4 couch cushions in Tunnel Dash', goal: 4, reward: 25 },
+    { id: 'dtc', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 4 paint cans in Tunnel Dash', goal: 4, reward: 25 },
     { id: 'dtp', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 4 mouse traps in Tunnel Dash', goal: 4, reward: 25 },
     { id: 'dy', game: 'Tunnel Dash', hash: 'dash', text: 'Hop 4 yarn balls in Tunnel Dash', goal: 4, reward: 25 },
     { id: 'dms', game: 'Tunnel Dash', hash: 'dash', text: 'Complete a Tunnel Dash mission', goal: 1, reward: 25 },
+    { id: 'ddy', game: 'Tunnel Dash', hash: 'dash', text: 'Finish today’s Tunnel Dash daily run', goal: 1, reward: 25 },
     { id: 'db', game: 'Tunnel Dash', hash: 'dash', text: 'Outrun a Tunnel Dash boss chase', goal: 1, reward: 35 },
     { id: 'wh', game: 'Pop-Up Pals', hash: 'whack', text: 'Tap 80 ferrets and clocks in Pop-Up Pals', goal: 80, reward: 20 },
     { id: 'wb', game: 'Pop-Up Pals', hash: 'whack', text: 'Beat 2 boss ferrets in Pop-Up Pals', goal: 2, reward: 25 },
@@ -6742,6 +7152,8 @@ body.cbshapes .cbm { display: block; }
     { id: 'ddc', game: 'Dook Dash', hash: 'dook', text: 'Make 4 close calls in Dook Dash', goal: 4, reward: 25 },
     { id: 'ddt', game: 'Dook Dash', hash: 'dook', text: 'Turn a corner in Dook Dash', goal: 1, reward: 30 },
     { id: 'ddb', game: 'Dook Dash', hash: 'dook', text: 'Pick up 5 boosts in Dook Dash', goal: 5, reward: 20 },
+    { id: 'ddy2', game: 'Dook Dash', hash: 'dook', text: 'Finish today’s Dook Dash daily run', goal: 1, reward: 25 },
+    { id: 'ddtw', game: 'Dook Dash', hash: 'dook', text: 'Ride out 3 world twists in Dook Dash', goal: 3, reward: 25 },
     { id: 'ddtr', game: 'Dook Dash', hash: 'dook', text: 'Run 100 m in Dook Dash with a trail on', goal: 1, reward: 25 },
     { id: 'ddg', game: 'Dook Dash', hash: 'dook', text: 'Finish a Dook Dash daily goal', goal: 1, reward: 25 },
     { id: 'hf', game: 'Hide the Raisin', hash: 'hide', text: 'Find 10 raisins in Hide the Raisin', goal: 10, reward: 20 },
@@ -6751,7 +7163,7 @@ body.cbshapes .cbm { display: block; }
     { id: 'md', game: 'Daily medals', hash: 'me', text: 'Earn a daily medal in any game', goal: 1, reward: 25 },
     { id: 'th', game: 'Theme week', hash: 'me', text: 'Play 3 games of this week’s theme', goal: 3, reward: 20 }
   ];
-  var QSTAT = { sw: 'sw', sp: 'sp', sd: 'sd', dm: 'dm', dr: 'dr', dl: 'dl', dms: 'dms', db: 'db', wh: 'wh', wb: 'wb', wd: 'wd', wr: 'wr', gc: 'gc', gp: 'gp', gb: 'gb', kl: 'kl', kp: 'kp', hf: 'hf', hd: 'hd', gd: 'gd', tf: 'tf', th: 'th', ddr: 'ddr', ddm: 'ddm', ddc: 'ddc', ddt: 'ddt', ddb: 'ddb', ddg: 'ddg', dt: 'dt', ddtr: 'ddtr', dtp: 'dtp' };
+  var QSTAT = { ddy2: 'ddy2', ddy: 'ddy', ddtw: 'ddtw', dto: 'dto', dth: 'dth', dtb: 'dtb', dtc: 'dtc', gtb: 'gtb', sw: 'sw', sp: 'sp', sd: 'sd', dm: 'dm', dr: 'dr', dl: 'dl', dms: 'dms', db: 'db', wh: 'wh', wb: 'wb', wd: 'wd', wr: 'wr', gc: 'gc', gp: 'gp', gb: 'gb', kl: 'kl', kp: 'kp', hf: 'hf', hd: 'hd', gd: 'gd', tf: 'tf', th: 'th', ddr: 'ddr', ddm: 'ddm', ddc: 'ddc', ddt: 'ddt', ddb: 'ddb', ddg: 'ddg', dt: 'dt', ddtr: 'ddtr', dtp: 'dtp' };
   var QS = { date: '', base: {}, claimed: {}, swept: false, streak: 0, last: '' };
   (function () {
     var v = load('fa-quests');
@@ -6810,6 +7222,7 @@ body.cbshapes .cbm { display: block; }
     updateQuestBadge();
   }
 
+  function dkd() { try { var j = JSON.parse(localStorage.getItem('fa-dddaily') || 'null'); if (j && typeof j === 'object') return { date: j.date || '', best: j.best || 0, plays: j.plays || 0, streak: j.streak || 0, last: j.last || '' }; } catch (e) {} return { date: '', best: 0, plays: 0, streak: 0, last: '' }; }
   function ddDay() {
     try {
       var j = JSON.parse(localStorage.getItem('dookdash-save') || 'null');
@@ -6822,6 +7235,8 @@ body.cbshapes .cbm { display: block; }
     var hit = c.list.map(function (q) { return !!QS.claimed[q.id] || qProg(q) >= q.goal; }), n = hit.filter(Boolean).length;
     if (SD.date === today && SD.done) parts.push('Sock Match ' + SD.best + ' moves' + (SD.stars ? ' ' + starStr(SD.stars) : '') + (medalToday('socks') ? ' ' + medalToday('socks') : ''));
     if (WD.date === today && WD.plays > 0) parts.push('Pop-Up Pals ' + nf(WD.best) + (medalToday('whack') ? ' ' + medalToday('whack') : ''));
+    var dkx = dkd(); if (dkx.date === today && dkx.plays > 0) parts.push('Dook Dash daily ' + nf(dkx.best) + (medalToday('dook') ? ' ' + medalToday('dook') : ''));
+    if (DDY.date === today && DDY.plays > 0) parts.push('Tunnel Dash daily ' + nf(DDY.best) + (medalToday('dash') ? ' ' + medalToday('dash') : ''));
     if (GD.date === today && GD.done) parts.push('Ferret Gems daily ' + GMEDALS[GD.best] + (GD.best ? '' : ''));
     if (HD.date === today && HD.plays > 0) parts.push('Hide the Raisin ' + nf(HD.best) + (medalToday('hide') ? ' ' + medalToday('hide') : ''));
     if (dd && dd.done > 0) parts.push('Dook Dash goals ' + dd.done + '/' + dd.n);
@@ -6872,6 +7287,7 @@ body.cbshapes .cbm { display: block; }
     Object.keys(SP.stars).forEach(function (k) { spStars += SP.stars[k]; });
     Object.keys(GP.stars).forEach(function (k) { starTotal += GP.stars[k]; });
     var tg = achTotalGames();
+    var GTL = SHOP_ITEMS.filter(function (i) { return i.kind === 'gtrail' && i.key !== 'none'; }), GTN = GTL.length, GTO = GTL.filter(itemOwned).length;
     var TRL = SHOP_ITEMS.filter(function (i) { return i.kind === 'trail' && i.key !== 'none'; }), TRN = TRL.length, TRO = TRL.filter(itemOwned).length;
     function A(cat, id, name, desc, val, goal, reward) { return { cat: cat, id: id, name: name, desc: desc, val: val, goal: goal, reward: reward }; }
     return [
@@ -6887,6 +7303,7 @@ body.cbshapes .cbm { display: block; }
       A('Sock Match', 'sp500', 'Pair collector', 'Find 500 pairs.', S1.pairs, 500, 40),
       A('Sock Match', 's3', 'Triple star sorter', 'Earn 3 stars on 10 sock wins.', S1.threeStars, 10, 40),
       A('Sock Match', 'sl15', 'Laundry master', 'Clear sock level 15.', SP.cleared, 15, 50),
+      A('Sock Match', 'stumble', 'Dryer watcher', 'See 20 socks tumble out of the dryer.', S1.tumbles || 0, 20, 30),
       A('Sock Match', 'sd7', 'A week of socks', 'Finish 7 daily sock boards.', S1.dailies, 7, 40),
       A('Tunnel Dash', 'd1k', 'Long haul', 'Run 1,000 m in one go.', D1.longest, 1000, 30),
       A('Tunnel Dash', 'd3k', 'Marathon ferret', 'Run 3,000 m in one go.', D1.longest, 3000, 70),
@@ -6894,11 +7311,23 @@ body.cbshapes .cbm { display: block; }
       A('Tunnel Dash', 'dleap', 'Gap jumper', 'Leap 50 gaps.', D1.leaps, 50, 25),
       A('Tunnel Dash', 'dcloset', 'Closet crawler', 'Reach the Craft closet 5 times.', D1.closets, 5, 40),
       A('Tunnel Dash', 'dtrap', 'Trap hopper', 'Hop 40 mouse traps.', D1.traps || 0, 40, 30),
+      A('Tunnel Dash', 'dcan', 'Paint-can hopper', 'Hop 40 paint cans.', D1.cans || 0, 40, 30),
+      A('Tunnel Dash', 'dgarage', 'Garage explorer', 'Reach the Garage 5 times.', D1.garages || 0, 5, 45),
+      A('Tunnel Dash', 'dtum', 'Spin cycle', 'Ride out 30 Laundry room tumbles.', D1.tumbles || 0, 30, 30),
+      A('Tunnel Dash', 'djet', 'Dry ferret', 'Dodge 50 water jets.', D1.jets || 0, 50, 30),
+      A('Tunnel Dash', 'ddark', 'Night owl', 'Survive 20 Attic lights-outs.', D1.darks || 0, 20, 30),
+      A('Tunnel Dash', 'dbounce', 'Cushion bouncer', 'Bounce on 40 couch cushions.', D1.bounces || 0, 40, 30),
+      A('Tunnel Dash', 'dthread', 'Thread dodger', 'Hop 50 loose threads.', D1.threads || 0, 50, 30),
+      A('Tunnel Dash', 'doil', 'Slick hopper', 'Hop 50 oil slicks.', D1.oils || 0, 50, 30),
       A('Tunnel Dash', 'drush', 'Rush hour', 'Grab 10 Raisin rushes.', D1.rushes || 0, 10, 30),
       A('Tunnel Dash', 'dattic', 'Attic explorer', 'Reach the Attic 5 times.', D1.attics || 0, 5, 45),
+      A('Tunnel Dash', 'droomba', 'Roomba rider', 'Outrun 3 Roomba runs.', D1.roombas || 0, 3, 60),
+      A('Tunnel Dash', 'dbroom', 'Sweep survivor', 'Outrun 3 Broom sweeps.', D1.brooms || 0, 3, 60),
       A('Tunnel Dash', 'dpaw', 'Paw dodger', 'Outrun 3 Cat Swats.', D1.paws || 0, 3, 60),
       A('Tunnel Dash', 'dyarn', 'Yarn hopper', 'Hop 40 yarn balls.', D1.yarns, 40, 30),
       A('Tunnel Dash', 'dcp', 'Checkpoint chaser', 'Reach 20 checkpoints.', D1.checkpoints, 20, 30),
+      A('Tunnel Dash', 'ddaily', 'Daily dasher', 'Finish 7 Tunnel Dash daily runs.', D1.dailies || 0, 7, 50),
+      A('Tunnel Dash', 'ddgold', 'Daily gold', 'Earn a gold medal on a Tunnel Dash daily run.', (D1.bestDaily || 0) >= BAL.dash.dailyG ? 1 : 0, 1, 60),
       A('Tunnel Dash', 'dboss', 'Boss dodger', 'Outrun a boss chase.', D1.bossWins, 1, 30),
       A('Tunnel Dash', 'dboss5', 'Giant vacuum slayer', 'Outrun 5 boss chases.', D1.bossWins, 5, 70),
       A('Tunnel Dash', 'dmis', 'Mission minded', 'Complete 10 missions.', D1.missions, 10, 40),
@@ -6907,10 +7336,15 @@ body.cbshapes .cbm { display: block; }
       A('Pop-Up Pals', 'wcombo', 'Combo king', 'Reach a combo of 20.', W1.maxCombo, 20, 30),
       A('Pop-Up Pals', 'wend', 'Last ferret standing', 'Score 150 in Pals Endless.', W1.endlessBest, 150, 40),
       A('Pop-Up Pals', 'wdaily', 'Daily whacker', 'Finish 5 daily Pals rounds.', W1.dailies, 5, 30),
+      A('Pop-Up Pals', 'whappy', 'Happy hour hero', 'Tap 100 ferrets during Happy hours.', W1.happyHits || 0, 100, 30),
       A('Pop-Up Pals', 'wboss', 'Boss beater', 'Beat 5 boss ferrets.', W1.bosses, 5, 40),
       A('Ferret Gems', 'gl20', 'Gem apprentice', 'Clear gems level 20.', GP.cleared, 20, 40),
       A('Ferret Gems', 'gl50', 'Gem master', 'Clear gems level 50.', GP.cleared, 50, 100),
       A('Ferret Gems', 'gstar', 'Star gazer', 'Earn 60 stars in Ferret Gems.', starTotal, 60, 50),
+      A('Ferret Gems', 'gtrail', 'Burst collector', 'Own all ' + GTN + ' Gem match trails.', GTO, GTN, 40),
+      A('Ferret Gems', 'gtburst', 'Confetti storm', 'Make 100 matches with a match trail on.', G1.trailBursts || 0, 100, 30),
+      A('Ferret Gems', 'gbig', 'Big bang', 'Set off 10 big bursts: a chain of 3+ or a special combo.', G1.bigBursts || 0, 10, 30),
+      A('Ferret Gems', 'glucky', 'Lucky streak', 'Clear 25 lucky gems.', G1.lucky || 0, 25, 30),
       A('Ferret Gems', 'gchain', 'Chain reaction', 'Make a chain of 6.', G1.maxChain, 6, 30),
       A('Ferret Gems', 'gfree', 'Sock rescuer', 'Free 50 tangled socks.', G1.freed, 50, 30),
       A('Ferret Gems', 'gdaily5', 'Puzzle of the day', 'Clear 5 Ferret Gems daily puzzles.', G1.dailies || 0, 5, 30),
@@ -6923,6 +7357,7 @@ body.cbshapes .cbm { display: block; }
       A('Ferret Gems', 'gburst', 'Paw burster', 'Make 20 paw bursts.', G1.bursts, 20, 30),
       A('Hammock Stack', 'k10', 'Cosy stack', 'Stack 10 hammocks in one tower.', ST.stack.tallest, 10, 25),
       A('Hammock Stack', 'k25', 'Sky-high nap', 'Stack 25 hammocks in one tower.', ST.stack.tallest, 25, 60),
+      A('Hammock Stack', 'kgust', 'Windproof', 'Land 20 drops during a gust.', ST.stack.gusts || 0, 20, 30),
       A('Hammock Stack', 'kperf', 'Perfectly snug', 'Land 8 perfect drops in a row.', ST.stack.bestStreak, 8, 40),
       A('Hide the Raisin', 'hr10', 'Sharp eyes', 'Reach round 10 in Hide the Raisin.', ST.hide.bestRound, 10, 30),
       A('Hide the Raisin', 'twin8', 'Twin sense', 'Reach round 8 in Twin socks.', ST.hide.bestTwin || 0, 8, 40),
@@ -6937,6 +7372,8 @@ body.cbshapes .cbm { display: block; }
       A('Dook Dash', 'ddtrail', 'Dook trailblazer', 'Own all ' + (DD.trailsAll || 6) + ' Dook Dash trails.', DD.trails || 0, DD.trailsAll || 6, 40),
       A('Dook Dash', 'ddtrun', 'Dook trail runner', 'Run 100 m with a trail on, 10 times.', DD.trailRuns || 0, 10, 30),
       A('Dook Dash', 'ddturbo', 'Turbo tail', 'Pick up 10 Turbo boosts.', DD.turbos || 0, 10, 40),
+      A('Dook Dash', 'dddaily', 'Daily digger', 'Finish 7 Dook Dash daily runs.', DD.dailies || 0, 7, 50),
+      A('Dook Dash', 'ddweather', 'Weather ferret', 'Ride out 30 world twists in Dook Dash.', DD.twists || 0, 30, 30),
       A('Dook Dash', 'ddkitchen', 'Kitchen hand', 'Run 300 m in the Kitchen, 5 times.', DD.kitchen || 0, 5, 35),
       A('Dook Dash', 'ddbeach', 'Beach bum', 'Run 300 m on the Beach, 5 times.', DD.beach || 0, 5, 35),
       A('Dook Dash', 'ddturn', 'Corner cutter', 'Turn 10 corners in Dook Dash.', DD.turns, 10, 40),
@@ -6946,6 +7383,7 @@ body.cbshapes .cbm { display: block; }
       A('Daily quests', 'q10', 'Chore ferret', 'Claim 10 daily quests.', ST.quests.claimed, 10, 30),
       A('Daily quests', 'q3', 'Clean sweep', 'Finish all three quests on 3 different days.', ST.quests.sweeps, 3, 40),
       A('Daily quests', 'qs5', 'Dependable ferret', 'Reach a 5-day quest streak.', ST.quests.bestStreak, 5, 60),
+      A('Hide the Raisin', 'hspin', 'Dizzy detective', 'Find the raisin after 10 merry-go-rounds.', ST.hide.spinsFound || 0, 10, 30),
       A('Hide the Raisin', 'hstreak', 'Never fooled', 'Find the raisin 8 times in a row.', ST.hide.bestStreak, 8, 40)
     ];
   }
@@ -7009,6 +7447,7 @@ body.cbshapes .cbm { display: block; }
         { h: 'Cards and twists', items: [
           { t: 'Golden pairs', d: 'A card with a gold edge is a golden pair. Matching it gives back 2 moves. They appear from level 5 and on the daily board.' },
           { t: 'Smelly decoys', d: 'A decoy has no pair, and flipping one costs 2 moves. One shows up from level 3, two from level 8, and one on the daily board.' },
+          { t: 'Dryer tumble', d: 'After every fifth try, one face-down card tumbles face up for about a second. It is a free look, so remember where it was. It happens in every mode.' },
           { t: 'The mischief ferret', d: 'Every few misses the ferret sneaks in and swaps two face-down cards. He joins from level 2 and on the daily board.' }
         ] },
         { h: 'Help', items: [
@@ -7036,6 +7475,7 @@ body.cbshapes .cbm { display: block; }
           { t: 'Shoes and gaps', d: 'Jump them. Gaps show up from the Garden hose onwards.' },
           { t: 'Low pipes', d: 'Yellow pipes need a duck. They start after the first 100 m.' },
           { t: 'Vacuums', d: 'Steer around them. Sliding vacuums drift between lanes, so watch which way the arrows point.' },
+          { t: 'Daily run', d: 'Press Daily run for today\u2019s course: the hazards, twists and bosses come from the date, so everyone gets the same one. Run at least 100 m for it to count. The first daily run each day pays 15 coins plus 3 for every day of your streak (up to 6 extra days), and your best score earns a bronze, silver or gold medal at 300, 600 and 1000 points.' },
           { t: 'Boss chase', d: 'At 600 m, and every 700 m after, a giant vacuum starts a chase. Red lanes flash with a warning and then it sucks them clean, so be in a safe lane when it fires. Chases get longer, faster and sometimes cover two lanes. Outrun one for coins and a pickup.', sel: '#dash-go', label: 'Start a run' }
         ] },
         { h: 'Pickups', items: [
@@ -7047,10 +7487,19 @@ body.cbshapes .cbm { display: block; }
           { t: 'Heart', d: 'Gives back a life, up to 5.' }
         ] },
         { h: 'The tunnel', items: [
-          { t: 'Biomes', d: 'Laundry room, Garden hose, Couch fort, Craft closet and Attic, in a loop, changing every 400 m. Each leans on different hazards.' },
+          { t: 'Biomes', d: 'Laundry room, Garden hose, Couch fort, Craft closet, Attic and Garage, in a loop, changing every 400 m. Each leans on different hazards.' },
+          { t: 'Roomba run', d: 'The third boss in the cycle. A robot vacuum sweeps the lanes one after another, left to right or right to left. After a lane fires it is safe, so step into the lane that just went off.' },
+          { t: 'Broom sweep', d: 'The fourth boss in the cycle, before it all repeats. A broom covers two lanes, then shifts to cover a different pair. The lane you were safe in is hit second, so you have to cross to the far side.' },
           { t: 'Cat Swat', d: 'Every second boss is a giant cat paw. It swats one lane, then a neighbouring lane half a second later, so move straight after the first swat.' },
           { t: 'Yarn balls', d: 'Roll sideways across the Craft closet. Jump them, or dodge, but they drift, so jumping is safer.' },
           { t: 'Mouse traps', d: 'Snap shut in the Attic. Jump them like shoes: a hit costs a life.' },
+          { t: 'Tumble (Laundry room)', d: 'Every so often the dryer spins. After a one-second warning, left and right swap for ' + BAL.dash.tumbleSecs + ' seconds. Jumps and ducks stay the same.' },
+          { t: 'Water jets (Garden hose)', d: 'A lane flashes blue, then a jet sprays it. Leave the lane in time or you are pushed sideways. It never costs a life.' },
+          { t: 'Lights out (Attic)', d: 'One lane flickers, then goes dark for ' + BAL.dash.darkSecs + ' seconds. Hazards in it are only faint shapes, so move out or remember what you saw.' },
+          { t: 'Couch cushions', d: 'Purple cushions in the Couch fort. Run onto one for a high bounce that clears everything under you, plus ' + BAL.dash.bounceBonus + ' bonus raisins. Cushions never hurt.' },
+          { t: 'Loose threads', d: 'Trailing across lanes in the Craft closet. Hop them, or get snagged: for ' + BAL.dash.snagSecs + ' seconds you cannot jump, though you can still change lanes.' },
+          { t: 'Oil slicks', d: 'Dark puddles in the Garage. Hop them. Drive through one and you skid for ' + BAL.dash.skidSecs + ' seconds: no life lost, but your lane changes lag a moment, so plan ahead.' },
+          { t: 'Paint cans', d: 'Tipped over in the Garage, from 2000 m. Jump them like shoes: a hit costs a life.' },
           { t: 'Checkpoints', d: 'Every 500 m is a checkpoint that restores a life if you have fewer than three.' },
           { t: 'The ghost', d: 'The faint ferret is your best run. Try to stay ahead of it.' }
         ] },
@@ -7060,7 +7509,7 @@ body.cbshapes .cbm { display: block; }
           { t: 'Dash shield and spare heart', d: 'Buy them in the Ferret shop. A shield starts your next run shielded, and a spare heart starts it with four lives.', go: 'shop' }
         ] },
         { h: 'Progress', items: [
-          { t: 'Badges and titles', d: 'Long haul, Marathon ferret, Raisin hoarder, Gap jumper, Checkpoint chaser, Mission minded, Boss dodger, Giant vacuum slayer, Trail blazer, Trail runner, Trap hopper, Rush hour and Attic explorer are badges. Tunnel Veteran and Boss Dodger are titles.', go: 'ach' }
+          { t: 'Badges and titles', d: 'Long haul, Marathon ferret, Raisin hoarder, Gap jumper, Checkpoint chaser, Mission minded, Boss dodger, Giant vacuum slayer, Trail blazer, Trail runner, Trap hopper, Paint-can hopper, Slick hopper, Cushion bouncer, Thread dodger, Spin cycle, Dry ferret, Night owl, Rush hour, Attic explorer and Garage explorer are badges. Tunnel Veteran and Boss Dodger are titles.', go: 'ach' }
         ] }
       ]
     },
@@ -7080,6 +7529,7 @@ body.cbshapes .cbm { display: block; }
           { t: 'Sneaky blue ferrets', d: 'Worth 2. They hop to another hole up to twice before they hide.' },
           { t: 'Blue clocks', d: 'Add 2 seconds in timed rounds, or a heart in Endless.' },
           { t: 'Vacuums', d: 'Leave them alone. A tap costs 2 points and breaks your combo.' },
+          { t: 'Happy hour', d: 'Every 11 to 17 seconds the holes glow gold and everything you whack scores double for 5 seconds, on top of your combo. It will not start in the last 6 seconds.' },
           { t: 'Boss ferrets', d: 'Purple, with a crown. They take 3 taps and are worth 10, and add 3 seconds in timed rounds.' },
           { t: 'The mischief ferret', d: 'Throws a blanket over a hole for 3 seconds, and you cannot tap it.' }
         ] },
@@ -7121,7 +7571,9 @@ body.cbshapes .cbm { display: block; }
           { t: 'Shuffle (20), +5 moves (30), Paw hammer (15), Color sweep (25), Cross zap (35)', d: 'Coin boosters for Levels mode. The hammer smashes any piece, the sweep clears every piece of one kind, and the cross zap clears the row and column of the piece you tap.' },
           { t: 'Gem booster pack', d: 'Buy it in the Ferret shop for one of each booster. Packs you own are used before any coins.', go: 'shop' },
           { t: 'Hint', d: 'Highlights a move that makes a match.' },
-          { t: 'Gem sets and board themes', d: 'The Ferret shop sells new gem colours and board looks.', go: 'shop' }
+          { t: 'Gem sets and board themes', d: 'The Ferret shop sells new gem colours and board looks.', go: 'shop' },
+          { t: 'Lucky gem', d: 'Every four moves, if none is on the board, one plain gem glows gold. Clear it in any match, blast or booster for 100 points and 1 coin, up to 3 coins a game. It stays until you clear it.' },
+          { t: 'Match trails', d: 'A cosmetic burst of paws, bubbles, leaves, stars, hearts or confetti flies out of every gem you clear. Chains of 3 or more and special combos make a bigger burst. It is only for show and turns off with Reduce motion.', go: 'shop' }
         ] },
         { h: 'Progress', items: [
           { t: 'Badges and titles', d: 'Gem apprentice, Gem master, Star gazer, Frozen frontier, Ice breaker and Locksmith are all badges. Gem Whisperer and Frost Walker are titles.', go: 'ach' }
@@ -7136,7 +7588,8 @@ body.cbshapes .cbm { display: block; }
           { t: 'Dropping', d: 'Tap the picture, or press Space or Enter, to drop the swinging hammock (Down arrow works too). Only the part that overlaps the hammock below stays. The overhang falls away, so the next one is narrower.', sel: '#stack-go', label: 'Start stacking' },
           { t: 'Perfect drops', d: 'Land almost dead centre and nothing is trimmed. Three perfects in a row make the hammock a little wider again, up to its starting width.' },
           { t: 'Toppling', d: 'Miss the pile completely and the tower topples and the game ends.' },
-          { t: 'Speed', d: 'The swing gets faster with every layer, up to a limit.' }
+          { t: 'Speed', d: 'The swing gets faster with every layer, up to a limit.' },
+          { t: 'Gusts', d: 'Every 6th layer, from layer 6, a gust blows and that hammock swings 45 percent faster. White streaks and a GUST! banner warn you. Land it to count toward the Windproof badge.' }
         ] },
         { h: 'Rewards', items: [
           { t: 'Coins', d: 'You earn 1 coin for every 3 layers, up to 25 per game, into the shared wallet.', go: 'shop' },
@@ -7157,6 +7610,7 @@ body.cbshapes .cbm { display: block; }
         { h: 'Scoring and help', items: [
           { t: 'Scoring', d: 'A right guess scores 10 for every sock on the table plus 5 per streak step, up to 8 steps. A wrong guess breaks the streak.' },
           { t: 'Peek (10 coins)', d: 'Lifts the right sock again for a moment, once per round, before you pick.' },
+          { t: 'Merry-go-round', d: 'Every third round, from round 3, the shuffle ends with a merry-go-round: every sock shifts one place to the right, and the last one wraps to the front. You are warned when the round starts. Follow the raisin through the shift.' },
           { t: 'Raisin peek', d: 'Buy it in the Ferret shop. Peeks you own are used before any coins are spent.', go: 'shop' }
         ] },
         { h: 'Rewards', items: [
@@ -7176,6 +7630,7 @@ body.cbshapes .cbm { display: block; }
         ] },
         { h: 'Progress', items: [
           { t: 'Coins, upgrades and hats', d: 'Spend coins on upgrades and hats from the game’s own start screen.' },
+          { t: 'Daily run', d: 'Press Daily run on the start screen for today\u2019s course: the world, hazards and twists come from the date, so everyone gets the same one. Run at least 100 m for it to count. The first daily run each day pays 30 coins plus 10 for each day of your streak (up to 6 extra days), and your best score earns a bronze, silver or gold medal at 500, 1000 and 1800 points.' },
           { t: 'Daily goals', d: 'Goals refresh daily and keep a streak. Dook Dash shows its detailed stats on its start screen.' }
         ] }
       ]
@@ -7235,7 +7690,7 @@ body.cbshapes .cbm { display: block; }
     try { window.scrollTo(0, 0); } catch (e) {}
     names.forEach(function (n) { $('#' + n).hidden = n !== name; });
     $('#back').hidden = name === 'home';
-    if (name !== 'dash') { if (dst === 'playing') { $('#dash-go').textContent = 'Start'; resetDash(); } }
+    if (name !== 'dash') { if (dst === 'playing') { $('#dash-go').textContent = 'Start'; $('#dash-daily').textContent = 'Daily run'; resetDash(); } }
     else if (dst !== 'playing') { resetDash(); }
     if (name !== 'whack') stopW();
     if (name !== 'socks') pauseTimer();
@@ -7368,5 +7823,3 @@ body.cbshapes .cbm { display: block; }
   })();
 })();
 </script>
-
-</body></html>
